@@ -1,3 +1,6 @@
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/gilesjohnr/es/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gilesjohnr/es/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
 # **es**: an R package for analyzing environmental sampling data
 
