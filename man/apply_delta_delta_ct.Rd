@@ -33,7 +33,10 @@ must be provided. The result is a data.frame containing a 'delta_delta_ct' colum
 \dontrun{
 
 df_example <- data.frame(location_id = c(rep(1,9), rep(2,9), rep(3,9)),
-                         sample_date = as.Date(rep(c(rep('2024-01-01',3), rep('2024-01-02',3), rep('2024-01-03',3)), 3)),
+                         sample_date = as.Date(rep(c(rep('2024-01-01',3),
+                                                     rep('2024-01-02',3),
+                                                     rep('2024-01-03',3)),
+                                                   3)),
                          target_name = rep(c('gene1', 'gene2', 'housekeeping'), 9),
                          ct_value = as.numeric(runif(27, min=5, max=40)))
 
@@ -42,7 +45,10 @@ df_result <- apply_delta_delta_ct(df = df_example,
                                   reference_names = c('housekeeping', 'housekeeping'),
                                   amplification_efficiency = 0.95)
 
-merge(df_example, df_result, by=c('location_id', 'sample_date', 'target_name'), all.x=TRUE)
+merge(df_example,
+      df_result,
+      by=c('location_id', 'sample_date', 'target_name'),
+      all.x=TRUE)
 
 }
 }
