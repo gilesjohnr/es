@@ -7,7 +7,7 @@ Authors@R: c(person("John R", "Giles", role=c("aut", "cre"), email="john.giles@g
 Maintainer: John R Giles <john.giles@gatesfoundation.org>
 Description: Tools for analyzing output from Taqman Array Cards and other sources of environmental sampling data
 License: CC0 1.0 Universal
-URL: https://github.com/gilesjohnr/es
+URL: https://github.com/gilesjohnr/es, https://gilesjohnr.github.io/es/
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Encoding: UTF-8
@@ -30,4 +30,3 @@ Suggests:
   knitr, 
   rmarkdown
 VignetteBuilder: knitr
-
