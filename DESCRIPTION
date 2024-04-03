@@ -1,0 +1,33 @@
+Package: es
+Type: Package
+Title: Tools for analyzing environmental sampling data
+Version: 0.0.1
+Date: 2024-02-22
+Authors@R: c(person("John R", "Giles", role=c("aut", "cre"), email="john.giles@gatesfoundation.org"))
+Maintainer: John R Giles <john.giles@gatesfoundation.org>
+Description: Tools for analyzing output from Taqman Array Cards and other sources of environmental sampling data
+License: CC0 1.0 Universal
+URL: https://github.com/gilesjohnr/es
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+Encoding: UTF-8
+LazyData: true
+Imports:
+  stringr,
+  glue,
+  data.table,
+  progress,
+  pbapply,
+  sp
+Depends: 
+  R (>= 3.5.0),
+  stats, 
+  graphics,
+  grDevices,
+  utils,
+  methods
+Suggests: 
+  knitr, 
+  rmarkdown
+VignetteBuilder: knitr
+
