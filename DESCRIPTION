@@ -6,8 +6,8 @@ Date: 2024-02-22
 Author: c(person("John R", "Giles", role=c("aut", "cre"), email="john.giles@gatesfoundation.org"))
 Maintainer: John R Giles <john.giles@gatesfoundation.org>
 Description: Tools for analyzing environmental sampling data.
-License: CC BY 4.0 + file LICENSE
 URL: https://gilesjohnr.github.io/es/
+License: CC BY 4.0
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Encoding: UTF-8
