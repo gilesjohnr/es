@@ -1,1 +1,2 @@
 exportPattern("^[[:alpha:]]+")
+importFrom("stats", "complete.cases", "lm", "median", "predict")

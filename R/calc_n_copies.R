@@ -70,7 +70,7 @@ calc_n_copies <- function(ct_values,
                sel_ct_value_cols <- grep("ct_value", colnames(sc))
                ct_value_mean <- rep(NA, nrow(sc))
 
-               for (j in 1:nrow(sc)) ct_value_mean[j] <- esdata::logmean(sc[j, sel_ct_value_cols])
+               for (j in 1:nrow(sc)) ct_value_mean[j] <- es::logmean(sc[j, sel_ct_value_cols])
 
                mod <- lm(log(quantity) ~ ct_value_mean, data=data.frame(quantity=sc$quantity, ct_value_mean=ct_value_mean))
                pt_est <- predict(mod, newdata=data.frame(ct_value_mean=tmp_ct_value), type='response')

@@ -3,17 +3,16 @@ Type: Package
 Title: Tools for analyzing environmental sampling data
 Version: 0.0.1
 Date: 2024-02-22
-Authors@R: c(person("John R", "Giles", role=c("aut", "cre"), email="john.giles@gatesfoundation.org"))
+Author: c(person("John R", "Giles", role=c("aut", "cre"), email="john.giles@gatesfoundation.org"))
 Maintainer: John R Giles <john.giles@gatesfoundation.org>
-Description: Tools for analyzing output from Taqman Array Cards and other sources of environmental sampling data
-License: CC BY 4.0
-URL: https://github.com/gilesjohnr/es, https://gilesjohnr.github.io/es/
+Description: Tools for analyzing environmental sampling data.
+License: CC0
+URL: https://gilesjohnr.github.io/es/
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Encoding: UTF-8
 LazyData: true
 Imports:
-  stringr,
   glue,
   data.table,
   HDInterval,
@@ -24,8 +23,7 @@ Depends:
   stats, 
   graphics,
   grDevices,
-  utils,
-  methods
+  utils
 Suggests: 
   knitr, 
   rmarkdown

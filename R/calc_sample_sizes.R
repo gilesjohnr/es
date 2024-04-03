@@ -17,8 +17,8 @@
 calc_sample_sizes <- function(d) {
 
      cols_required <- c('target_name', 'ct_value')
-     cond <- all(cols_required %in% colnames(df))
-     if (!cond) stop(glue::glue("'df' must contain columns: {paste(cols_required, collapse=', ')}"))
+     cond <- all(cols_required %in% colnames(d))
+     if (!cond) stop(glue::glue("Object 'd' must contain columns: {paste(cols_required, collapse=', ')}"))
 
      pathogen_names <- unique(d$target_name)
      pathogen_names <- sort(unique(pathogen_names))
