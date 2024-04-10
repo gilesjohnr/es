@@ -60,32 +60,44 @@
 <h2 id="required-data">Required data<a class="anchor" aria-label="anchor" href="#required-data"></a>
 </h2>
 <p>The tools here are intended to do the heavy lifting when combining data from multiple sources and calculating relevant quantities. However, the use must start by putting their data into the following standard format:</p>
-<p>For viral load calculations, information on standard curves are also required:</p>
+<ol style="list-style-type: decimal">
+<li><p>A standardized ES data format</p></li>
+<li><p>For viral load calculations, information on standard curves are also required.</p></li>
+</ol>
 </div>
 <div class="section level2">
 <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a>
 </h2>
 <p>The package also includes methods for calculating basic quantities from qPCR data such as:</p>
-<ul>
-<li><p>Viral load</p></li>
-<li><p>Delta delta Ct</p></li>
+<ol style="list-style-type: decimal">
+<li><p>Calculate viral load (requires standard curve data)</p></li>
+<li><p>Calculate delta delta Ct (requires a reference target)</p></li>
 <li>
-<p>Metadata:</p>
+<p>Retrieve metadata:</p>
 <ul>
-<li>Climate variables</li>
-<li>Topography</li>
-<li>Catchement population sizes</li>
+<li>Climate variables: precip, evaporative stress index (ESI), temp <a href="https://www.nature.com/articles/sdata201566" class="external-link uri">https://www.nature.com/articles/sdata201566</a>
+</li>
+<li>Elevation</li>
+<li>Topography (slope, aspect, CTI)</li>
+<li>Catchments</li>
+<li>Population sizes (catchment, admin unit, within x km buffer)</li>
+<li>Flood potential</li>
+<li>Soil moisture</li>
+<li>Land use type?</li>
+<li>Economic data: Poverty, World Bank variables</li>
+<li>Administrative units</li>
 </ul>
 </li>
-<li><p>Summary sampling statistics</p></li>
-<li><p>Cross correlations</p></li>
-<li><p>Timeseries models</p></li>
-</ul>
+<li><p>Calculate summary sampling statistics</p></li>
+<li><p>Estimate cross correlations</p></li>
+<li><p>Estimate time series models</p></li>
+<li><p>Estimate models of pathogen presence based on multiple gene targets</p></li>
+</ol>
 </div>
 <div class="section level2">
 <h2 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
 </h2>
-<p>The package launches an Rshiny app blah blah</p>
+<p>The package launches an Rshiny app…</p>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
