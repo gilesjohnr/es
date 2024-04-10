@@ -11,8 +11,9 @@ This package provides reproducible functions for parsing and compiling data sets
 
 The tools here are intended to do the heavy lifting when combining data from multiple sources and calculating relevant quantities. However, the use must start by putting their data into the following standard format:
 
-For viral load calculations, information on standard curves are also required:
-
+  1. A standardized ES data format
+  
+  2. For viral load calculations, information on standard curves are also required.
 
 
 
@@ -20,25 +21,35 @@ For viral load calculations, information on standard curves are also required:
 
 The package also includes methods for calculating basic quantities from qPCR data such as:
 
-  * Viral load
+  1. Calculate viral load (requires standard curve data)
   
-  * Delta delta Ct
+  2. Calculate delta delta Ct (requires a reference target)
   
-  * Metadata: 
-     - Climate variables
-     - Topography
-     - Catchement population sizes
+  3. Retrieve metadata: 
   
-  * Summary sampling statistics
+     - Climate variables: precip, evaporative stress index (ESI), temp
+     https://www.nature.com/articles/sdata201566
+     - Elevation
+     - Topography (slope, aspect, CTI)
+     - Catchments
+     - Population sizes (catchment, admin unit, within x km buffer)
+     - Flood potential
+     - Soil moisture
+     - Land use type?
+     - Economic data: Poverty, World Bank variables
+     - Administrative units
   
-  * Cross correlations
+  4. Calculate summary sampling statistics
   
-  * Timeseries models
+  5. Estimate cross correlations
   
+  6. Estimate time series models
+  
+  7. Estimate models of pathogen presence based on multiple gene targets
 
 ## Visualization
 
-The package launches an Rshiny app blah blah
+The package launches an Rshiny app...
 
 ## Examples
 

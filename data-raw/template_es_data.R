@@ -13,7 +13,7 @@ sel <- which(d$sample_date >= as.Date("2021-01-01"))
 d <- d[sel,]
 
 # Shift dates
-d$sample_date <- d$sample_date + 3000
+d$sample_date <- d$sample_date - 300
 
 # Choose 3 locations
 example_locations <- c(1,2,3)
