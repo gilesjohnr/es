@@ -37,10 +37,16 @@
     <loc>/reference/dot-init_pb.html</loc>
   </url>
   <url>
+    <loc>/reference/get_elevation_data.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_esi_data.html</loc>
   </url>
   <url>
     <loc>/reference/get_precip_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_river_discharge_data.html</loc>
   </url>
   <url>
     <loc>/reference/get_temp_data.html</loc>

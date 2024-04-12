@@ -22,7 +22,11 @@ Imports:
   pbapply,
   zoo,
   openmeteo,
-  chirps
+  chirps,
+  elevatr,
+  raster,
+  sp,
+  sf
 Depends: 
   R (>= 3.5.0),
   stats, 
