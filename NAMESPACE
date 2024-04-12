@@ -1,4 +1,3 @@
 exportPattern("^[[:alpha:]]+")
-importFrom("stats", "complete.cases", "lm", "median", "predict")
+importFrom("stats", "complete.cases", "lm", "median", "predict", "aggregate", "na.omit")
 importFrom("foreach", "foreach", "%:%", "%do%")
-importFrom("stats", "aggregate")
