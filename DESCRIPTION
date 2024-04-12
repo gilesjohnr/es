@@ -20,7 +20,7 @@ Imports:
   HDInterval,
   progress,
   pbapply,
-  chirps
+  openmeteo
 Depends: 
   R (>= 3.5.0),
   stats, 

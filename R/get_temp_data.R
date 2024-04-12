@@ -1,50 +1,48 @@
-#' Get precipitation data
+#' Get temperature data
 #'
 #' This function takes information of where and when a set of environmental samples were
-#' collected and retrieves precipitation data (in millimeters) for those locations and times. Data come from
+#' collected and retrieves temperature data (measured in accumulated degree-days) for those locations and times. Data come from
 #' the Open-Meteo Historical Weather API ([https://open-meteo.com/en/docs/historical-weather-api](https://open-meteo.com/en/docs/historical-weather-api))
-#' via the [`openmeteo`](https://cran.r-project.org/web/packages/openmeteo/index.html) R package.
-#' Additionally, the optional `intervals` argument specifies a set of intervals over which the function
-#' will calculate the cumulative sum of precipitation in millimeters (mm) for the previous X number of
-#' days for each location.
+#' via the [`openmeteo`](https://cran.r-project.org/web/packages/openmeteo/index.html) R package. The optional `intervals` argument
+#' specifies a set of intervals over which the function will calculate the accumulated temperature in the form of Accumulated Thermal Units (ATUs) for each interval.
 #'
 #' @param lat A numeric vector giving the latitude of the sampling sites in Decimal Degrees.
 #' @param lon A numeric vector giving the longitude of the sampling sites in Decimal Degrees.
 #' @param dates A character or date vector of dates giving the date when each sample was
 #' collected (format is YYYY-MM-DD)
-#' @param intervals An integer vector giving a set of time intervals over which to sum the
-#' precipitation data. Default is NULL where the interval is 0 (returns the precipitation value at time t). If `intervals`=3
-#' then the cumulative precipitation over the preceding 3 days is returned.
+#' @param intervals An integer vector giving a set of time intervals over to calculate accumulated degree-days. Default
+#' is NULL where the interval is 0 (returns the daily temperature in degrees Celsius at time t). If `intervals`=3 then the accumulated
+#' degree-days for the preceding 3 days is returned.
 #'
 #' @returns data.frame
 #'
 #' @examples
 #' \dontrun{
 #'
-#' d <- get_precip_data(lon = c(-56.0281, -54.9857),
-#'                      lat = c(-2.9094, -2.8756),
-#'                      dates = c("2017-12-01", "2017-12-31"),
-#'                      intervals = c(1,3,7))
+#' d <- get_temp_data(lon = c(30.0281, -52.9857),
+#' lat = c(15.9094, -25.8756),
+#' dates = c("2020-08-01", "2020-12-31"),
+#' intervals = c(1,5,10))
 #'
 #' head(d)
 #'
 #' ggplot2::ggplot(d, aes(x = date)) +
-#'      geom_line(aes(y = daily_precipitation_sum_7, col='Cumulative sum 7 days')) +
-#'      geom_line(aes(y = daily_precipitation_sum_3, col='Cumulative sum 3 days')) +
-#'      geom_line(aes(y = daily_precipitation_sum_1, col='Cumulative sum 1 day')) +
-#'      geom_line(aes(y = daily_precipitation_sum)) +
+#'      geom_line(aes(y = temp_daily_atu_10, col='Accumulated temperature 10 days')) +
+#'      geom_line(aes(y = temp_daily_atu_5, col='Accumulated temperature 5 days')) +
+#'      geom_line(aes(y = temp_daily_atu_1, col='Accumulated temperature 1 day')) +
+#'      geom_line(aes(y = temp_daily_atu)) +
 #'      facet_grid(rows=vars(id)) +
-#'      labs(x="", y = "Precipitation (mm)") +
+#'      labs(x="", y = "Accumulated Thermal Units (ATUs)") +
 #'      theme_bw() +
 #'      theme(legend.position = 'bottom',
 #'            legend.title = element_blank())
 #'
 #' }
 
-get_precip_data <- function(lon,
-                            lat,
-                            dates,
-                            intervals=NULL
+get_temp_data <- function(lon,
+                          lat,
+                          dates,
+                          intervals=NULL
 ){
 
      # Checks
@@ -68,9 +66,9 @@ get_precip_data <- function(lon,
      # Download precip data from Climate Hazards Group server
      message(glue::glue("Total locations = {n_locations}"))
      message(glue::glue("Date range = {paste(c(min(dates), max(dates)), collapse=' -- ')}"))
-     message("Downloading precipitation data from the Historical Weather API...")
+     message("Downloading temperature data from the Historical Weather API...")
 
-     data_precip <- data.frame()
+     data_temp <- data.frame()
 
      for (i in 1:nrow(unique_latlon)) {
 
@@ -78,11 +76,17 @@ get_precip_data <- function(lon,
                location = c(unique_latlon$lat[i], unique_latlon$lon[i]),
                start = date_range[1],
                end = date_range[2],
-               daily = "precipitation_sum"
+               hourly = "temperature_2m"
           )
 
-          data_precip <- rbind(
-               data_precip,
+          tmp <- aggregate(tmp[,'hourly_temperature_2m'],
+                           list(date=format(tmp$datetime, '%Y-%m-%d')),
+                           mean)
+
+          colnames(tmp)[colnames(tmp) == 'hourly_temperature_2m'] <- 'temp_daily_atu'
+
+          data_temp <- rbind(
+               data_temp,
                data.frame(id=i,
                           lat = lat[i],
                           lon = lon[i],
@@ -101,43 +105,45 @@ get_precip_data <- function(lon,
           message(glue::glue("Calculating cumulative sums from the following intervals: {paste(intervals, collapse = ', ')}"))
 
           return_j <- function(x) {
-               colnames(x) <- paste('daily_precipitation_sum', intervals, sep='_')
+               colnames(x) <- paste('temp_daily_atu', intervals, sep='_')
                return(x)
           }
 
           return_k <- function(x) as.data.frame(x)
 
           tmp <-
-               foreach(i=unique(data_precip$id), .combine='rbind') %:%
+               foreach(i=unique(data_temp$id), .combine='rbind') %:%
                foreach(j=intervals, .combine='cbind', .final=return_j) %:%
                foreach(k=1:n_dates, .combine='c', .final=return_k) %do% {
 
-                    x <- data_precip[data_precip$id == i,]
+                    x <- data_temp[data_temp$id == i,]
 
                     if (k > j) {
 
-                         precip_sum <- sum(x[(k-j):k, 'daily_precipitation_sum'], na.rm=TRUE)
+                         temp_atu <- sum(x[(k-j):k, 'temp_daily_atu'], na.rm=TRUE)
 
                     } else {
 
-                         precip_sum <- NA
+                         temp_atu <- NA
 
                     }
 
-                    precip_sum
+                    temp_atu
                }
 
 
-          data_precip <- cbind(data_precip, as.data.frame(tmp))
+          data_temp <- cbind(data_temp, as.data.frame(tmp))
 
      }
 
      # Clean up
-     sel_cols <- which(!(colnames(data_precip) %in% c('id', 'lon', 'lat', 'date')))
-     sel_rows <- which(data_precip$date < min(dates))
-     data_precip[sel_rows, sel_cols] <- NA
-     data_precip <- data_precip[complete.cases(data_precip),]
+     sel_cols <- which(!(colnames(data_temp) %in% c('id', 'lon', 'lat', 'date')))
+     sel_rows <- which(data_temp$date < min(dates))
+     data_temp[sel_rows, sel_cols] <- NA
+     data_temp <- data_temp[complete.cases(data_temp),]
 
-     return(as.data.frame(data_precip))
+     data_temp$date <- as.Date(data_temp$date)
+
+     return(as.data.frame(data_temp))
 
 }
