@@ -41,10 +41,10 @@ d <- get_precip_data(lon = c(-56.0281, -54.9857),
 head(d)
 
 ggplot2::ggplot(d, aes(x = date)) +
-     geom_line(aes(y = daily_precipitation_sum_7, col='Cumulative sum 7 days')) +
-     geom_line(aes(y = daily_precipitation_sum_3, col='Cumulative sum 3 days')) +
-     geom_line(aes(y = daily_precipitation_sum_1, col='Cumulative sum 1 day')) +
-     geom_line(aes(y = daily_precipitation_sum)) +
+     geom_line(aes(y = precip_daily_sum_7, col='Cumulative sum 7 days')) +
+     geom_line(aes(y = precip_daily_sum_3, col='Cumulative sum 3 days')) +
+     geom_line(aes(y = precip_daily_sum_1, col='Cumulative sum 1 day')) +
+     geom_line(aes(y = precip_daily_sum)) +
      facet_grid(rows=vars(id)) +
      labs(x="", y = "Precipitation (mm)") +
      theme_bw() +

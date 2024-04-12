@@ -29,10 +29,10 @@
 #' head(d)
 #'
 #' ggplot2::ggplot(d, aes(x = date)) +
-#'      geom_line(aes(y = daily_precipitation_sum_7, col='Cumulative sum 7 days')) +
-#'      geom_line(aes(y = daily_precipitation_sum_3, col='Cumulative sum 3 days')) +
-#'      geom_line(aes(y = daily_precipitation_sum_1, col='Cumulative sum 1 day')) +
-#'      geom_line(aes(y = daily_precipitation_sum)) +
+#'      geom_line(aes(y = precip_daily_sum_7, col='Cumulative sum 7 days')) +
+#'      geom_line(aes(y = precip_daily_sum_3, col='Cumulative sum 3 days')) +
+#'      geom_line(aes(y = precip_daily_sum_1, col='Cumulative sum 1 day')) +
+#'      geom_line(aes(y = precip_daily_sum)) +
 #'      facet_grid(rows=vars(id)) +
 #'      labs(x="", y = "Precipitation (mm)") +
 #'      theme_bw() +
@@ -101,7 +101,7 @@ get_precip_data <- function(lon,
           message(glue::glue("Calculating cumulative sums from the following intervals: {paste(intervals, collapse = ', ')}"))
 
           return_j <- function(x) {
-               colnames(x) <- paste('daily_precipitation_sum', intervals, sep='_')
+               colnames(x) <- paste('precip_daily_sum', intervals, sep='_')
                return(x)
           }
 
@@ -137,6 +137,7 @@ get_precip_data <- function(lon,
      sel_rows <- which(data_precip$date < min(dates))
      data_precip[sel_rows, sel_cols] <- NA
      data_precip <- data_precip[complete.cases(data_precip),]
+     colnames(data_precip)[colnames(data_precip) == 'daily_precipitation_sum'] <- 'precip_daily_sum'
 
      return(as.data.frame(data_precip))
 
