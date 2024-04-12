@@ -14,10 +14,13 @@ Encoding: UTF-8
 LazyData: true
 Imports:
   glue,
+  foreach,
   data.table,
+  dplyr,
   HDInterval,
   progress,
-  pbapply
+  pbapply,
+  chirps
 Depends: 
   R (>= 3.5.0),
   stats, 
