@@ -38,6 +38,13 @@
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/metadata_functions.html">Adding metadata to environmental sampling observations</a>
+    <a class="dropdown-item" href="articles/template_es_data.html">Templates for input data sets</a>
+  </div>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -68,10 +75,18 @@
 <div class="section level2">
 <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a>
 </h2>
-<p>The package also includes methods for calculating basic quantities from qPCR data such as:</p>
+<div class="section level4">
+<h4 id="derivative-quantities">Derivative quantities<a class="anchor" aria-label="anchor" href="#derivative-quantities"></a>
+</h4>
 <ol style="list-style-type: decimal">
 <li><p>Calculate viral load (requires standard curve data)</p></li>
 <li><p>Calculate delta delta Ct (requires a reference target)</p></li>
+</ol>
+</div>
+<div class="section level4">
+<h4 id="adding-metadata">Adding metadata<a class="anchor" aria-label="anchor" href="#adding-metadata"></a>
+</h4>
+<ol start="3" style="list-style-type: decimal">
 <li>
 <p>Retrieve metadata:</p>
 <ul>
@@ -94,10 +109,13 @@
 <li><p>Estimate models of pathogen presence based on multiple gene targets</p></li>
 </ol>
 </div>
+</div>
 <div class="section level2">
 <h2 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
 </h2>
-<p>The package launches an Rshiny app…</p>
+<ol start="8" style="list-style-type: decimal">
+<li>Launch Rshiny application</li>
+</ol>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>

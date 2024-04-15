@@ -19,12 +19,14 @@ The tools here are intended to do the heavy lifting when combining data from mul
 
 ## Methods
 
-The package also includes methods for calculating basic quantities from qPCR data such as:
+#### Derivative quantities
 
   1. Calculate viral load (requires standard curve data)
   
   2. Calculate delta delta Ct (requires a reference target)
   
+#### Adding metadata
+
   3. Retrieve metadata: 
   
      - Climate variables: precip, evaporative stress index (ESI), temp
@@ -49,7 +51,7 @@ The package also includes methods for calculating basic quantities from qPCR dat
 
 ## Visualization
 
-The package launches an Rshiny app...
+  8. Launch Rshiny application
 
 ## Examples
 
