@@ -2,7 +2,7 @@
 title: "Adding metadata to environmental sampling observations"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Adding metadata to environmental sampling observations}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

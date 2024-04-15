@@ -24,7 +24,6 @@ Imports:
   openmeteo,
   chirps,
   elevatr,
-  raster,
   sp,
   sf
 Depends: 
