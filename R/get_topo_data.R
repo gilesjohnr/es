@@ -53,20 +53,17 @@ get_topo_data <- function(lon,
      pts_dem <- xy
      pts_dem$dem <- raster::extract(rast_dem, xy)
 
-     tmp <- as.data.frame(rast_dem, xy=TRUE)
-     colnames(tmp)[3] <- 'DEM'
-
 
      message('Calculating slope raster')
      rast_slope <- raster::terrain(x = rast_dem,
                                    opt = 'slope',
-                                   unit = 'degrees',
+                                   unit = 'tangent',
                                    neighbors = 8)
 
      message('Extracting slope at points')
      pts_slope <- xy
      pts_slope$slope <- raster::extract(rast_slope, xy)
-
+     pts_slope$slope <- pts_slope$slope*100
 
      message('Calculating aspect raster')
      rast_aspect <- raster::terrain(x = rast_dem,
@@ -106,7 +103,7 @@ get_topo_data <- function(lon,
                      legend.key.width=unit(30,'pt'))
 
 
-          tmp <- as.data.frame(rast_dem, xy=TRUE)
+          tmp <- raster::as.data.frame(rast_dem, xy=TRUE)
           colnames(tmp)[3] <- 'DEM'
 
           plot_dem <-
@@ -117,7 +114,7 @@ get_topo_data <- function(lon,
                ggplot2::ggtitle('DEM')
 
 
-          tmp <- as.data.frame(rast_slope, xy=TRUE)
+          tmp <- raster::as.data.frame(rast_slope, xy=TRUE)
           colnames(tmp)[3] <- 'slope'
 
           plot_slope <-
@@ -128,7 +125,7 @@ get_topo_data <- function(lon,
                ggplot2::ggtitle('Slope')
 
 
-          tmp <- as.data.frame(rast_aspect, xy=TRUE)
+          tmp <- raster::as.data.frame(rast_aspect, xy=TRUE)
           colnames(tmp)[3] <- 'aspect'
 
           plot_aspect <-
