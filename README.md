@@ -29,17 +29,21 @@ The tools here are intended to do the heavy lifting when combining data from mul
 
   3. Retrieve metadata: 
   
-     - Climate variables: precip, evaporative stress index (ESI), temp
-     https://www.nature.com/articles/sdata201566
+     - Precipitation
+     - Temperature
+     - Evaporative Stress Index (ESI)
      - Elevation
-     - Topography (slope, aspect, CTI)
+     - Topography (slope, aspect)
+     - Topographical Wetness Index (TWI)
+     - Flow Accumulation
+     - Discharge of nearest river
      - Catchments
-     - Population sizes (catchment, admin unit, within x km buffer)
+     - Population sizes (catchment, admin unit, within buffer)
      - Flood potential
-     - Soil moisture
-     - Land use type?
-     - Economic data: Poverty, World Bank variables
+     - ESA land use type (10m)
      - Administrative units
+     - World Bank variables: poverty, access to electricity
+     
   
   4. Calculate summary sampling statistics
   

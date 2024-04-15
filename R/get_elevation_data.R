@@ -36,7 +36,7 @@ get_elevation_data <- function(lon,
      message(glue::glue("Total locations = {n_locations}"))
      message("Downloading elevation data from AWS API via elevatr package ...")
 
-     wgs_proj_string <- sf::st_crs(sp::CRS('+init=epsg:4326 +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0'))
+     wgs_proj_string <- sf::st_crs(sp::CRS('+proj=longlat +datum=WGS84'))
 
      data_elev <- elevatr::get_elev_point(locations = unique_lonlat,
                                           prj = wgs_proj_string,

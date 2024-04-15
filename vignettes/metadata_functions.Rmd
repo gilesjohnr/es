@@ -26,7 +26,7 @@ x <- data.frame(wrapper_func=as.character(),
                 api=as.character())
 
 x[1, 'wrapper_func'] <- "[get_precip_data](https://gilesjohnr.github.io/es/reference/get_precip_data.html)"
-x[1, 'description'] <- "Cumulative millimeters of rainfall"
+x[1, 'description'] <- "Cumulative daily millimeters of rainfall"
 x[1, 'wrapped_pkg'] <- "[openmeteo](https://cran.r-project.org/web/packages/openmeteo/index.html)"
 x[1, 'wrapped_func'] <- "[weather_history](https://rdrr.io/cran/openmeteo/man/weather_history.html)" 
 x[1, 'api'] <- "[Open-Meteo Historical Weather API](https://open-meteo.com/en/docs/historical-weather-api)"
@@ -54,6 +54,13 @@ x[5, 'description'] <- "Digital Elevation Model (DEM) giving the height in meter
 x[5, 'wrapped_pkg'] <- "[elevatr](https://cran.r-project.org/web/packages/elevatr/index.html)"
 x[5, 'wrapped_func'] <- "[get_elev_point](https://www.rdocumentation.org/packages/elevatr/versions/0.99.0/topics/get_elev_point)"
 x[5, 'api'] <- "[Amazon Web Services Terrain Tiles](https://registry.opendata.aws/terrain-tiles/)"
+
+
+x[6, 'wrapper_func'] <- "[get_topo_data](https://gilesjohnr.github.io/es/reference/get_topo_data.html)"
+x[6, 'description'] <- "Slope is steepness of a point/cell in degrees. Aspect is the compass direction the slope faces."
+x[6, 'wrapped_pkg'] <- "[elevatr](https://cran.r-project.org/web/packages/elevatr/index.html), [raster](https://cran.r-project.org/web/packages/raster/index.html)"
+x[6, 'wrapped_func'] <- "[get_elev_raster](https://www.rdocumentation.org/packages/elevatr/versions/0.99.0/topics/get_elev_raster), [terrain](https://www.rdocumentation.org/packages/raster/versions/3.6-26/topics/terrain)"
+x[6, 'api'] <- "[Amazon Web Services Terrain Tiles](https://registry.opendata.aws/terrain-tiles/)"
 
 knitr::kable(
      x,

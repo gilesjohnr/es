@@ -17,6 +17,9 @@ Imports:
   foreach,
   data.table,
   dplyr,
+  ggplot2,
+  ggrepel,
+  gridExtra,
   HDInterval,
   progress,
   pbapply,
@@ -24,6 +27,7 @@ Imports:
   openmeteo,
   chirps,
   elevatr,
+  raster,
   sp,
   sf
 Depends: 
