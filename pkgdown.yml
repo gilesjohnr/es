@@ -1,6 +1,8 @@
 pandoc: 3.1.11
 pkgdown: 2.0.8
 pkgdown_sha: ~
-articles: {}
-last_built: 2024-04-12T21:53Z
+articles:
+  metadata_functions: metadata_functions.html
+  template_es_data: template_es_data.html
+last_built: 2024-04-15T19:23Z
 
