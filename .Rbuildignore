@@ -9,4 +9,5 @@
 ^data-raw$
 ^doc$
 ^Meta$
-^tmp$
+^es_output.*$
+
