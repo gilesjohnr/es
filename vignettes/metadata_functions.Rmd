@@ -61,6 +61,7 @@ x[6, 'wrapped_pkg'] <- "[elevatr](https://cran.r-project.org/web/packages/elevat
 x[6, 'wrapped_func'] <- "[get_elev_raster](https://www.rdocumentation.org/packages/elevatr/versions/0.99.0/topics/get_elev_raster), [terrain](https://www.rdocumentation.org/packages/raster/versions/3.6-26/topics/terrain)"
 x[6, 'api'] <- "[Amazon Web Services Terrain Tiles](https://registry.opendata.aws/terrain-tiles/)"
 
+
 knitr::kable(
      x,
      col.names = c("`es` wrapper", 

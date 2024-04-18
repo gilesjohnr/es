@@ -137,17 +137,24 @@ get_hydro_data <- function(lon,
 
      whitebox::wbt_d8_pointer(
           dem = file.path(tmp_path, 'dem_filled_breached.tif'),
-          output = file.path(tmp_path, 'flow_acc_pointer.tif'),
+          output = file.path(tmp_path, 'dem_pointer.tif'),
           verbose_mode = FALSE
      )
 
      whitebox::wbt_raster_streams_to_vector(
           streams = file.path(tmp_path, 'streams.tif'),
-          d8_pntr = file.path(tmp_path, 'flow_acc_pointer.tif'),
+          d8_pntr = file.path(tmp_path, 'dem_pointer.tif'),
           output = file.path(tmp_path, 'streams.shp'),
           verbose_mode = FALSE
      )
 
+     whitebox::wbt_hillshade(
+          dem = file.path(tmp_path, 'dem.tif'),
+          output = file.path(tmp_path, 'hillshade.tif'),
+          azimuth = 315,
+          altitude = 30,
+          verbose_mode = FALSE
+     )
 
      message('Reloading rasters')
 
@@ -197,7 +204,7 @@ get_hydro_data <- function(lon,
           km_to_nearest_stream = round(dist_to_stream, 2)
      )
 
-     Sys.sleep(0.5)
+
      message('Done.')
 
      if (save_data) {
