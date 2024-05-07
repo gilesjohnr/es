@@ -29,7 +29,11 @@ Imports:
   elevatr,
   raster,
   sp,
-  sf
+  sf,
+  geodata,
+  rworldmap,
+  terra,
+  tidyterra
 Depends: 
   R (>= 3.5.0),
   stats, 

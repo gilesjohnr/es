@@ -71,7 +71,7 @@ for (i in unique(d$location_id)) {
 
           tmp <- d[d$location_id == i & d$target_name == j,]
 
-          mod <- mgcv::gam(formula = ct_value ~ s(as.numeric(sample_date)), data=tmp, family = 'gaussian')
+          mod <- mgcv::gam(formula = ct_value ~ s(as.numeric(sample_date)), data=tmp, family = 'Gamma')
           pred <- predict(mod, newdata = tmp, type='response', se.fit=T)
           tmp$fit <- pred$fit
           tmp$se_fit <- pred$se.fit

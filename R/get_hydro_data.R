@@ -33,6 +33,8 @@ get_hydro_data <- function(lon,
      check <- length(lat) == length(lon)
      if (!check) stop('lat and lon args must be equal in length')
 
+     if (!is.logical(save_data)) stop('save_data must be logical')
+
      # Get distinct coordinate sets
      xy <- data.frame(x=lon, y=lat)
      xy <- dplyr::distinct(xy)
@@ -186,7 +188,7 @@ get_hydro_data <- function(lon,
           }
 
 
-     # distance to nearest stream in meters
+     # distance to nearest stream in km
      dist_to_stream <- sf::st_distance(x = sf::st_as_sf(xy, coords = c("x","y")), y = shp_streams)
      dist_to_stream <- apply(dist_to_stream, 1, min)
      dist_to_stream <- dist_to_stream/0.008 # Approx km

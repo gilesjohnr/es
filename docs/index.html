@@ -139,7 +139,13 @@
 </h2>
 <p>Use the <code>devtools</code> package to install the development version of <code>es</code> from the GitHub repository. R version &gt;= 3.5.0 recommended.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'devtools'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"whitebox"</span>, dependencies<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">whitebox</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/whitebox/man/install_whitebox.html" class="external-link">install_whitebox</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">whitebox</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/whitebox/man/wbt_version.html" class="external-link">wbt_version</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'devtools'</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ropenscilabs/geojsonlint"</span>, dependencies<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">'wpgp/wopr'</span>, dependencies<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"gilesjohnr/es"</span>, dependencies<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">

@@ -66,7 +66,13 @@ For a full demo of the package please see the vignettes located HERE.
 
 Use the `devtools` package to install the development version of `es` from the GitHub repository. R version >= 3.5.0 recommended.
 ```r
+install.packages("whitebox", dependencies=TRUE)
+whitebox::install_whitebox()
+whitebox::wbt_version()
+
 install.packages('devtools')
+devtools::install_github("ropenscilabs/geojsonlint", dependencies=TRUE)
+devtools::install_github('wpgp/wopr', dependencies=TRUE)
 devtools::install_github("gilesjohnr/es", dependencies=TRUE)
 ```
 
