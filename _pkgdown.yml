@@ -1,6 +1,8 @@
 url: ~
 template:
   bootstrap: 5
+  params:
+    ganalytics: G-HQPXKPQH2C
 
 articles:
 - title: Vignettes
