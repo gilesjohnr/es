@@ -51,66 +51,13 @@ get_admin_data <- function(lon,
      wgs_proj_string <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
      albers_proj_string <- "+proj=aea +lat_1=29.5 +lat_2=42.5"
 
-
-     # Get admins
-
-     get_country <-  function(lon, lat){
-
-          countries <- rworldmap::getMap(resolution = 'high') # requires rworldxtra
-
-          pts = sp::SpatialPoints(cbind(x=lon, y=lat),
-                                  sp::CRS(sp::proj4string(countries)))
-
-          tmp <- sp::over(pts, countries)
-
-          data.frame(
-               lon = lon,
-               lat = lat,
-               admin_0_iso = as.character(tmp$ISO3),
-               admin_0_name = as.character(tmp$ADMIN)
-          )
-
-     }
-
-     tmp <- get_country(lon = xy$x, lat = xy$y)
+     # Get country for pts
+     tmp <- es::coords_to_iso3(lon = xy$x, lat = xy$y)
      pts_admin_0_iso <- unique(tmp$admin_0_iso)
      pts_admin_0_name <- unique(tmp$admin_0_name)
 
-     #if (length(unique(tmp$admin_0_iso)) > 1) stop('unique countries > 1')
-     message("Getting administrative shapefiles for...")
 
-     for (i in 1:length(pts_admin_0_iso)) {
-
-          message(pts_admin_0_name[i])
-
-          if (pts_admin_0_iso[i] %in% c('FRA', 'RWA')) {
-               message("trying level 5...")
-               admins <- geodata::gadm(country=pts_admin_0_iso[i], level=5, resolution=1, version='latest', path=tmp_path)
-          } else {
-               admins <- NULL
-          }
-
-          if (is.null(admins)) {
-               message("trying level 4...")
-               admins <- geodata::gadm(country=pts_admin_0_iso[i], level=4, resolution=1, version='latest', path=tmp_path)
-          }
-
-          if (is.null(admins)) {
-               message("trying level 3...")
-               admins <- geodata::gadm(country=pts_admin_0_iso[i], level=3, resolution=1, version='latest', path=tmp_path)
-          }
-
-          if (is.null(admins)) {
-               message("trying level 2...")
-               admins <- geodata::gadm(country=pts_admin_0_iso[i], level=2, resolution=1, version='latest', path=tmp_path)
-          }
-
-          if (is.null(admins)) {
-               message("trying level 1...")
-               admins <- geodata::gadm(country=pts_admin_0_iso[i], level=1, resolution=1, version='latest', path=tmp_path)
-          }
-
-     }
+     es::download_gadm_data(iso3 = pts_admin_0_iso, output_path = tmp_path)
 
      tmp <- lapply(list.files(file.path(tmp_path, 'gadm'), full.names = TRUE),
                    FUN=function(x) terra::unwrap(readRDS(x)))
