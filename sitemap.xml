@@ -34,7 +34,16 @@
     <loc>/reference/calc_sample_sizes.html</loc>
   </url>
   <url>
+    <loc>/reference/coords_to_iso3.html</loc>
+  </url>
+  <url>
     <loc>/reference/dot-init_pb.html</loc>
+  </url>
+  <url>
+    <loc>/reference/download_gadm_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/download_wopr_data.html</loc>
   </url>
   <url>
     <loc>/reference/get_admin_data.html</loc>
@@ -62,6 +71,9 @@
   </url>
   <url>
     <loc>/reference/logmean.html</loc>
+  </url>
+  <url>
+    <loc>/reference/query_wopr_api.html</loc>
   </url>
   <url>
     <loc>/reference/template_es_data.html</loc>
