@@ -1,26 +1,54 @@
-#' Get population counts for a local area
+#' Get catchment population counts for a set of sampling sites
 #'
+#' This function takes vectors of sampling site longitude and latitude and calculates the total population
+#' residing within the drainage catchment of each coordinate pair. Raster data giving population counts per grid cell
+#' and a Digital Elevation Model (DEM) are required. By default, the function delineates streams based on the
+#' provided DEM. However, an optional shapefile (such as an urban sewer network) can be specified using the
+#' \code{path_stream_shp} argument and will be used instead of the natural stream network calculated from the DEM.
+#' Note that the delineation of catchments along streams (or sewer networks) still depends on the directional flow
+#' from the provided DEM. Intermediate spatial variables are written to the directory specified in \code{path_output}.
 #'
+#' @param lat A numeric vector giving the latitudes of the sampling sites in Decimal Degrees.
+#' @param lon A numeric vector giving the longitudes of the sampling sites in Decimal Degrees.
+#' @param path_pop_raster The file path to a raster object providing population counts in each grid cell.
+#' See \code{download_worldpop_data} for methods to download population raster data.
+#' @param path_dem_raster The file path to a Digital Elevation Model (DEM) raster. See \code{download_elevation_data}
+#' for methods to download DEM raster data.
+#' @param path_stream_shp An optional file path to a stream or sewer network shapefile. If NULL (the default), streams are delineated
+#' based on flow accumulation in the provided DEM.
+#' @param path_output The file path of an output directory where spatial data will be saved.
 #'
-#' @param lat A numeric vector giving the latitude of the sampling sites in Decimal Degrees.
-#' @param lon A numeric vector giving the longitude of the sampling sites in Decimal Degrees.
-#' @param path_output A character string giving the file path of an output directory to save downloaded data.
-#'
-#'
-#' @returns data.frame
+#' @return A \code{data.frame} containing the catchment area and population counts for each sampling site.
 #'
 #' @examples
 #' \dontrun{
 #'
-#' download_wopr_data(iso3 = 'FRA', output_path = getwd())
+#' dir.create(file.path(getwd(), 'tmp'))
+#'
+#' download_worldpop_data(iso3 = 'BGD',
+#'                        year = 2020,
+#'                        constrained = FALSE,
+#'                        UN_adjusted = FALSE,
+#'                        output_path = file.path(getwd(), 'tmp'))
+#'
+#' download_elevation_data(lon = template_es_data$lon,
+#'                         lat = template_es_data$lat,
+#'                         output_path = file.path(getwd(), 'tmp'))
+#'
+#' get_population_catchment(lon = template_es_data$lon,
+#'                          lat = template_es_data$lat,
+#'                          path_pop_raster = file.path(getwd(), 'tmp/bgd_ppp_2020.tif'),
+#'                          path_dem_raster = file.path(getwd(), 'tmp/dem.tif'),
+#'                          path_output = file.path(getwd(), 'tmp'))
 #'
 #' }
 
+
 get_population_catchment <- function(lon,
                                      lat,
-                                     path_population_raster,
+                                     path_pop_raster,
                                      path_dem_raster,
-                                     path_streams_shapefile=NULL,
+                                     path_stream_shp=NULL,
                                      path_output
 ) {
 
@@ -38,9 +66,12 @@ get_population_catchment <- function(lon,
      message(glue::glue("Total locations = {n_locations}"))
      message("NOTE: Sets of points with very large extents may be prohibitively slow.")
 
-     rast_pop <- raster::raster(path_population_raster)
+     if (!whitebox::check_whitebox_binary(silent = TRUE)) stop('Cannont find WhitebocTools install binaries. Install WhiteboxTools and try again.')
+
+     rast_pop <- raster::raster(path_pop_raster)
      rast_dem <- raster::raster(path_dem_raster)
 
+     Sys.sleep(0.25)
 
      whitebox::wbt_fill_depressions(
           dem = path_dem_raster,
@@ -58,7 +89,7 @@ get_population_catchment <- function(lon,
 
      Sys.sleep(0.25)
 
-     if (is.null(path_streams_shapefile)) {
+     if (is.null(path_stream_shp)) {
 
           whitebox::wbt_d8_flow_accumulation(
                input = "dem_pointer.tif",
@@ -96,14 +127,15 @@ get_population_catchment <- function(lon,
 
      } else {
 
-          shp_streams <- sf::st_read(path_streams_shapefile, quiet=TRUE)
+          shp_streams <- sf::st_read(path_stream_shp, quiet=TRUE)
+          message(glue::glue('Using provided stream network at {path_stream_shp}'))
 
      }
 
 
      # Define outlets (sampling sites) and where they link to drainage network
 
-     outlets <- sf::st_as_sf(xy, coords = c("x", "y"), crs=CRS(wgs_proj_string))
+     outlets <- sf::st_as_sf(xy, coords = c("x", "y"), crs=sp::CRS(wgs_proj_string))
 
      sf::st_write(outlets,
                   dsn = file.path(path_output, "outlets.shp"),

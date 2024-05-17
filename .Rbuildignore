@@ -8,6 +8,6 @@
 ^LICENSE\.md$
 ^data-raw$
 ^doc$
+^tmp$
 ^Meta$
 ^es_output.*$
-

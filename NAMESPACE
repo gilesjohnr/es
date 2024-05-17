@@ -6,3 +6,5 @@ importFrom("ggplot2", "ggplot", "scale_fill_viridis_c", "coord_equal", "theme",
            "aes", "geom_point")
 importFrom("sp", "CRS")
 importFrom("utils", "download.file")
+importFrom("RCurl", "getURL")
+importFrom("XML", "getHTMLLinks")

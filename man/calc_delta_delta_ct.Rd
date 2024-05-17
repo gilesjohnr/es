@@ -28,7 +28,7 @@ Scalar
 }
 \description{
 This function calculates relative gene expression using the delta delta Ct method described in
-\url{https://www.sciencedirect.com/science/article/abs/pii/S1046202301912629?via\%3Dihub}{Livak & Schmittgen (2001)}.
+\href{https://www.sciencedirect.com/science/article/abs/pii/S1046202301912629?via\%3Dihub}{Livak and Schmittgen (2001)}.
 }
 \examples{
 \dontrun{
