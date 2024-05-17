@@ -1,12 +1,30 @@
-url: ~
+url: https://gilesjohnr.github.io/es/
 template:
   bootstrap: 5
   params:
     ganalytics: G-HQPXKPQH2C
-
 articles:
 - title: Vignettes
-  navbar: ~
+  navbar: Vignettes
   contents:
   - template_es_data
   - metadata_functions
+reference:
+- title: Data Standards
+  contents: starts_with("template_")
+- title: Derivative Quantities
+  contents:
+  - calc_n_copies
+  - calc_delta_delta_ct
+  - apply_delta_delta_ct
+- title: Metadata
+  contents: starts_with("get_")
+- title: Analytics
+  contents: calc_sample_sizes
+- title: Utilities
+  contents:
+  - download_elevation_data
+  - download_admin_data
+  - download_worldpop_data
+  - coords_to_iso3
+  - logmean

@@ -26,6 +26,7 @@ get_elevation_data <- function(lon,
      # Checks
      check <- length(lat) == length(lon)
      if (!check) stop('lat and lon args must be equal in length')
+     if (!is.numeric(lon) | !is.numeric(lat)) stop('lat and lon args must be numeric')
 
      # Get distinct coordinate sets
      unique_lonlat <- data.frame(x=lon, y=lat)

@@ -4,7 +4,7 @@
 #' collected and retrieves a suite of topographical and hydrological variables for each unique
 #' location. The variables include: elevation, slope, aspect, Topographical Wetness Index (TWI),
 #' flow accumulation, total flow accumulation within 500m, and distance to the nearest stream.
-#' The DEM is acquired via [`elevatr::get_elev_raster`](https://www.rdocumentation.org/packages/elevatr/versions/0.99.0/topics/get_elev_raster)
+#' If a DEM is not provided, then a DEM is acquired via [`elevatr::get_elev_raster`](https://www.rdocumentation.org/packages/elevatr/versions/0.99.0/topics/get_elev_raster)
 #' and the suite of variables are calculated using functions from the ['WhiteboxTools'](https://cran.r-project.org/web/packages/whitebox/index.html)
 #' R frontend.
 #'
@@ -32,7 +32,7 @@ get_hydro_data <- function(lon,
      # Checks
      check <- length(lat) == length(lon)
      if (!check) stop('lat and lon args must be equal in length')
-
+     if (!is.numeric(lon) | !is.numeric(lat)) stop('lat and lon args must be numeric')
      if (!is.logical(save_data)) stop('save_data must be logical')
 
      # Get distinct coordinate sets
@@ -176,7 +176,7 @@ get_hydro_data <- function(lon,
      pts_acc <- raster::extract(rast_acc, xy)
 
 
-     # Total flow accumulation within 100m of sample location
+     # Total flow accumulation within 500m of sample location
      pts_acc_500m <-
           foreach::foreach(i=1:nrow(xy), .combine='c') %do% {
 

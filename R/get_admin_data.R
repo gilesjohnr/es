@@ -26,6 +26,7 @@ get_admin_data <- function(lon,
 
      check <- length(lat) == length(lon) & length(lat)
      if (!check) stop('lat and lon must be equal in length')
+     if (!is.numeric(lon) | !is.numeric(lat)) stop('lat and lon args must be numeric')
 
      if (!is.logical(save_data)) stop('save_data must be logical')
 
@@ -56,8 +57,7 @@ get_admin_data <- function(lon,
      pts_admin_0_iso <- unique(tmp$admin_0_iso)
      pts_admin_0_name <- unique(tmp$admin_0_name)
 
-
-     es::download_gadm_data(iso3 = pts_admin_0_iso, output_path = tmp_path)
+     es::download_admin_data(iso3 = pts_admin_0_iso, output_path = tmp_path)
 
      tmp <- lapply(list.files(file.path(tmp_path, 'gadm'), full.names = TRUE),
                    FUN=function(x) terra::unwrap(readRDS(x)))

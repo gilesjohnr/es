@@ -21,6 +21,10 @@ coords_to_iso3 <-  function(lon,
                             lat
 ){
 
+     check <- length(lat) == length(lon)
+     if (!check) stop('lat and lon args must be equal in length')
+     if (!is.numeric(lon) | !is.numeric(lat)) stop('lat and lon args must be numeric')
+
      countries <- rworldmap::getMap(resolution = 'high')
 
      pts = sp::SpatialPoints(cbind(x=lon, y=lat),

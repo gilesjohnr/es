@@ -14,13 +14,16 @@
 #' @examples
 #' \dontrun{
 #'
-#' download_gadm_data(iso3 = c('FRA', 'ITA'), output_path = getwd())
+#' download_admin_data(iso3 = c('FRA', 'ITA'), output_path = getwd())
 #'
 #' }
 
-download_gadm_data <- function(iso3,
-                               output_path
+download_admin_data <- function(iso3,
+                                output_path
 ) {
+
+     if (!is.character(iso3)) stop('iso3 code(s) must be character')
+     if (!dir.exists(output_path)) stop('output_path does not exist')
 
      message("Getting administrative shapefiles for...")
 

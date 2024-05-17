@@ -1,6 +1,7 @@
 #' Calculate delta delta Ct
 #'
-#' This function calculates relative gene expression using the delta delta Ct method described in \url{https://www.sciencedirect.com/science/article/abs/pii/S1046202301912629?via%3Dihub}{Livak & Schmittgen (2001)}.
+#' This function calculates relative gene expression using the delta delta Ct method described in
+#' \url{https://www.sciencedirect.com/science/article/abs/pii/S1046202301912629?via%3Dihub}{Livak & Schmittgen (2001)}.
 #'
 #' @param ct_target_t A scalar providing the Ct value of the target gene for an observation at time t
 #' @param ct_reference_t A scalar providing the Ct value of the reference gene for an observation at time t

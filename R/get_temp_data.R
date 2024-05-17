@@ -48,6 +48,7 @@ get_temp_data <- function(lon,
      # Checks
      check <- length(lat) == length(lon) & length(lat) == length(dates)
      if (!check) stop('lat, lon, and dates must be equal in length')
+     if (!is.numeric(lon) | !is.numeric(lat)) stop('lat and lon args must be numeric')
 
      dates <- as.Date(dates, format='%Y-%m-%d')
      if (all(is.na(dates))) stop('Cannot identify date format')

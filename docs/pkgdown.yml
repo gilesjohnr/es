@@ -1,8 +1,11 @@
 pandoc: 3.1.12.3
-pkgdown: 2.0.7
+pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
   metadata_functions: metadata_functions.html
   template_es_data: template_es_data.html
-last_built: 2024-05-08T18:50Z
+last_built: 2024-05-16T01:32Z
+urls:
+  reference: https://gilesjohnr.github.io/es/reference
+  article: https://gilesjohnr.github.io/es/articles
 
