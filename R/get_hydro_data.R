@@ -180,8 +180,8 @@ get_hydro_data <- function(lon,
      pts_acc_500m <-
           foreach::foreach(i=1:nrow(xy), .combine='c') %do% {
 
-               tmp <- sp::SpatialPoints(xy[i,], proj4string=CRS(wgs_proj_string))
-               tmp <- sp::spTransform(tmp, CRS(albers_proj_string))
+               tmp <- sp::SpatialPoints(xy[i,], proj4string=sp::CRS(wgs_proj_string))
+               tmp <- sp::spTransform(tmp, sp::CRS(albers_proj_string))
                tmp <- raster::buffer(tmp, 500)
                exactextractr::exact_extract(rast_acc_aea, tmp, 'sum')
 

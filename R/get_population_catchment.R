@@ -1,4 +1,4 @@
-#' Get catchment population counts for a set of sampling sites
+#' Get population counts within catchments of sampling sites
 #'
 #' This function takes vectors of sampling site longitude and latitude and calculates the total population
 #' residing within the drainage catchment of each coordinate pair. Raster data giving population counts per grid cell
@@ -62,12 +62,9 @@ get_population_catchment <- function(lon,
      xy <- dplyr::distinct(xy)
      n_locations <- nrow(xy)
 
-     # Download precip data from Climate Hazards Group server
-     message(glue::glue("Total locations = {n_locations}"))
-     message("NOTE: Sets of points with very large extents may be prohibitively slow.")
+     if (!whitebox::check_whitebox_binary(silent = TRUE)) stop('Cannont find WhiteboxTools binaries. Install WhiteboxTools and try again.')
 
-     if (!whitebox::check_whitebox_binary(silent = TRUE)) stop('Cannont find WhitebocTools install binaries. Install WhiteboxTools and try again.')
-
+     wgs_proj_string <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
      rast_pop <- raster::raster(path_pop_raster)
      rast_dem <- raster::raster(path_dem_raster)
 

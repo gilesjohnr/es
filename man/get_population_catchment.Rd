@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_population_catchment.R
 \name{get_population_catchment}
 \alias{get_population_catchment}
-\title{Get catchment population counts for a set of sampling sites}
+\title{Get population counts within catchments of sampling sites}
 \usage{
 get_population_catchment(
   lon,
