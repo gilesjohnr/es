@@ -62,7 +62,7 @@ are acquired from <a href="https://gadm.org/" class="external-link">https://gadm
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_admin_data</span><span class="op">(</span><span class="va">lon</span>, <span class="va">lat</span>, save_data <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_admin_data</span><span class="op">(</span><span class="va">lon</span>, <span class="va">lat</span>, <span class="va">path_admin_data</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -75,8 +75,8 @@ are acquired from <a href="https://gadm.org/" class="external-link">https://gadm
 <dd><p>A numeric vector giving the latitude of the sampling sites in Decimal Degrees.</p></dd>
 
 
-<dt>save_data</dt>
-<dd><p>Logical indicating whether to save the shapefiles used to identify administrative units. Default is <code>FALSE</code> where the temp directory is deleted.</p></dd>
+<dt>path_admin_data</dt>
+<dd><p>The file path to the admin data. Note that the function expects .rds format output from the <code>download_admin_data</code> function.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -90,9 +90,11 @@ are acquired from <a href="https://gadm.org/" class="external-link">https://gadm
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="download_admin_data.html">download_admin_data</a></span><span class="op">(</span>iso3 <span class="op">=</span> <span class="st">"BGD"</span>, path_output <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">get_admin_data</span><span class="op">(</span>lon <span class="op">=</span> <span class="va">template_es_data</span><span class="op">$</span><span class="va">lon</span>,</span></span>
 <span class="r-in"><span>               lat <span class="op">=</span> <span class="va">template_es_data</span><span class="op">$</span><span class="va">lat</span>,</span></span>
-<span class="r-in"><span>               save_data <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>               path_admin_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">'gadm/gadm41_BGD_4_pk.rds'</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
