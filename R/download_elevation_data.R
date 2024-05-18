@@ -7,7 +7,7 @@
 #'
 #' @param lat A numeric vector giving the latitude of the sampling sites in Decimal Degrees.
 #' @param lon A numeric vector giving the longitude of the sampling sites in Decimal Degrees.Can accept a vector of multiple ISO codes.
-#' @param output_path A character string giving the file path of an output directory to save downloaded data.
+#' @param path_output A character string giving the file path of an output directory to save downloaded data.
 #'
 #' @returns NULL
 #'
@@ -16,20 +16,20 @@
 #'
 #' download_elevation_data(lon = template_es_data$lon,
 #'                         lat = template_es_data$lat,
-#'                         output_path = getwd())
+#'                         path_output = getwd())
 #'
 #' }
 
 download_elevation_data <- function(lon,
                                     lat,
-                                    output_path
+                                    path_output
 ){
 
      # Checks
      check <- length(lat) == length(lon)
      if (!check) stop('lat and lon args must be equal in length')
      if (!is.numeric(lon) | !is.numeric(lat)) stop('lat and lon args must be numeric')
-     if (!dir.exists(output_path)) stop('output_path does not exist')
+     if (!dir.exists(path_output)) stop('path_output does not exist')
 
      # Get distinct coordinate sets
      xy <- data.frame(x=lon, y=lat)
@@ -46,7 +46,7 @@ download_elevation_data <- function(lon,
                                           clip = 'bbox',
                                           verbose = FALSE)
 
-     full_path <- file.path(output_path, 'dem.tif')
+     full_path <- file.path(path_output, 'dem.tif')
      raster::writeRaster(rast_dem, filename=full_path, overwrite=TRUE)
      message(glue::glue("DEM is here: {full_path}"))
      return(full_path)

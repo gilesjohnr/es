@@ -9,7 +9,7 @@ download_worldpop_data(
   year,
   constrained = FALSE,
   UN_adjusted = FALSE,
-  output_path
+  path_output
 )
 }
 \arguments{
@@ -24,14 +24,14 @@ Default is FALSE.}
 \item{UN_adjusted}{Logical indicating whether to get population counts that are adjusted to match United Nations national population estimates
 (details \href{https://hub.worldpop.org/project/categories?id=3}{HERE}). Default is FALSE.}
 
-\item{output_path}{A character string giving the file path of an output directory to save downloaded data.}
+\item{path_output}{A character string giving the file path of an output directory to save downloaded data.}
 }
 \description{
 This function takes a single ISO country code and downloads the appropriate population count raster data (100m grid cell resolution)
 from the WorldPop FTP data server. Note that these data are spatial disaggregations of census data using random forest models described in
 \href{https://www.tandfonline.com/doi/full/10.1080/20964471.2019.1625151}{Lloyd et al. 2019} and available for manual download at
 \url{https://hub.worldpop.org/geodata/listing?id=29}. Downloaded data sets are
-saved to the \code{output_path} directory in .tif format.
+saved to the \code{path_output} directory in .tif format.
 }
 \examples{
 \dontrun{
@@ -40,7 +40,7 @@ download_worldpop_data(iso3='TWN',
                        year=2020,
                        constrained=FALSE,
                        UN_adjusted=FALSE,
-                       output_path=getwd())
+                       path_output=getwd())
 
 }
 }

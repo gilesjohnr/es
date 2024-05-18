@@ -29,11 +29,11 @@
 #'                        year = 2020,
 #'                        constrained = FALSE,
 #'                        UN_adjusted = FALSE,
-#'                        output_path = file.path(getwd(), 'tmp'))
+#'                        path_output = file.path(getwd(), 'tmp'))
 #'
 #' download_elevation_data(lon = template_es_data$lon,
 #'                         lat = template_es_data$lat,
-#'                         output_path = file.path(getwd(), 'tmp'))
+#'                         path_output = file.path(getwd(), 'tmp'))
 #'
 #' get_population_catchment(lon = template_es_data$lon,
 #'                          lat = template_es_data$lat,
@@ -68,7 +68,7 @@ get_population_catchment <- function(lon,
      rast_pop <- raster::raster(path_pop_raster)
      rast_dem <- raster::raster(path_dem_raster)
 
-     Sys.sleep(0.25)
+     s <- 0.25
 
      whitebox::wbt_fill_depressions(
           dem = path_dem_raster,
@@ -76,7 +76,7 @@ get_population_catchment <- function(lon,
           wd = path_output
      )
 
-     Sys.sleep(0.25)
+     Sys.sleep(s)
 
      whitebox::wbt_d8_pointer(
           dem = "dem_filled.tif",
@@ -84,7 +84,7 @@ get_population_catchment <- function(lon,
           wd = path_output
      )
 
-     Sys.sleep(0.25)
+     Sys.sleep(s)
 
      if (is.null(path_stream_shp)) {
 
@@ -95,7 +95,7 @@ get_population_catchment <- function(lon,
                wd = path_output
           )
 
-          Sys.sleep(0.25)
+          Sys.sleep(s)
 
           whitebox::wbt_extract_streams(
                flow_accum =  "flow_acc.tif",
@@ -105,7 +105,7 @@ get_population_catchment <- function(lon,
                wd = path_output
           )
 
-          Sys.sleep(0.25)
+          Sys.sleep(s)
 
           whitebox::wbt_raster_streams_to_vector(
                streams = 'streams.tif',
@@ -115,7 +115,7 @@ get_population_catchment <- function(lon,
                verbose_mode = FALSE
           )
 
-          Sys.sleep(0.25)
+          Sys.sleep(s)
 
           shp_streams <- sf::st_read(file.path(path_output, 'streams.shp'), quiet=TRUE)
           sf::st_crs(shp_streams) <- sf::st_crs(sp::CRS(wgs_proj_string))
@@ -140,7 +140,7 @@ get_population_catchment <- function(lon,
                   quiet = TRUE)
 
 
-     Sys.sleep(0.25)
+     Sys.sleep(s)
 
      whitebox::wbt_jenson_snap_pour_points(
           pour_pts = "outlets.shp",
@@ -150,11 +150,11 @@ get_population_catchment <- function(lon,
           wd = path_output
      )
 
-     Sys.sleep(0.25)
+     Sys.sleep(s)
 
      outlets_snapped <- sf::st_read(file.path(path_output, "outlets_snapped.shp"), quiet = TRUE)
 
-     Sys.sleep(0.25)
+     Sys.sleep(s)
 
      # Delineate catchments
      catchments <- sf::st_sfc(crs = sf::st_crs(sp::CRS(wgs_proj_string)))

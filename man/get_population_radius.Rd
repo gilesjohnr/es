@@ -35,7 +35,7 @@ download_worldpop_data(iso3 = 'BGD',
                        year = 2020,
                        constrained = FALSE,
                        UN_adjusted = FALSE,
-                       output_path = file.path(getwd(), 'tmp'))
+                       path_output = file.path(getwd(), 'tmp'))
 
 get_population_radius(lon = template_es_data$lon,
                       lat = template_es_data$lat,

@@ -4,15 +4,17 @@
 \alias{get_hydro_data}
 \title{Get hydrological data}
 \usage{
-get_hydro_data(lon, lat, save_data = FALSE)
+get_hydro_data(lon, lat, path_dem_raster = NULL, path_output)
 }
 \arguments{
 \item{lon}{A numeric vector giving the longitude of the sampling sites in Decimal Degrees.}
 
 \item{lat}{A numeric vector giving the latitude of the sampling sites in Decimal Degrees.}
 
-\item{save_data}{Logical indicating whether to save the intermediate raster layers used to
-calculate the hydrological variables at each point. Default is \code{FALSE} where the temp directory is deleted.}
+\item{path_dem_raster}{The file path to a Digital Elevation Model (DEM) raster. See \code{download_elevation_data}
+for methods to download DEM raster data. If NULL, a DEM is downloaded automatically using this function.}
+
+\item{path_output}{The file path of an output directory where spatial data will be saved.}
 }
 \value{
 data.frame
@@ -29,9 +31,11 @@ R frontend.
 \examples{
 \dontrun{
 
+dir.create(file.path(getwd(), 'tmp'))
+
 get_hydro_data(lon = template_es_data$lon,
                lat = template_es_data$lat,
-               save_data = FALSE)
+               path_output = file.path(getwd(), 'tmp'))
 
 }
 }

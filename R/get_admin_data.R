@@ -6,63 +6,41 @@
 #'
 #' @param lat A numeric vector giving the latitude of the sampling sites in Decimal Degrees.
 #' @param lon A numeric vector giving the longitude of the sampling sites in Decimal Degrees.
-#' @param save_data Logical indicating whether to save the shapefiles used to identify administrative units. Default is `FALSE` where the temp directory is deleted.
+#' @param path_admin_data The file path to the admin data. Note that the function expects .rds format output from the \code{download_admin_data} function.
 #'
 #' @returns data.frame
 #'
 #' @examples
 #' \dontrun{
 #'
+#' download_admin_data(iso3 = "BGD", path_output = getwd())
+#'
 #' get_admin_data(lon = template_es_data$lon,
 #'                lat = template_es_data$lat,
-#'                save_data = FALSE)
+#'                path_admin_data = file.path(getwd(), 'gadm/gadm41_BGD_4_pk.rds'))
 #'
 #' }
 
 get_admin_data <- function(lon,
                            lat,
-                           save_data=FALSE
+                           path_admin_data
 ){
 
      check <- length(lat) == length(lon) & length(lat)
      if (!check) stop('lat and lon must be equal in length')
      if (!is.numeric(lon) | !is.numeric(lat)) stop('lat and lon args must be numeric')
 
-     if (!is.logical(save_data)) stop('save_data must be logical')
-
-
      # Get distinct coordinate sets
      xy <- data.frame(x=lon, y=lat)
      xy <- dplyr::distinct(xy)
      xy <- data.frame(id=1:nrow(xy), xy)
-     n_locations <- nrow(xy)
-
-     # Download precip data from Climate Hazards Group server
-     message(glue::glue("Total locations = {n_locations}"))
-     message("NOTE: Sets of points with very large extents may be prohibitively slow.")
-
-     # Create temp dir
-     tmp_root <- getwd()
-     tmp_time <- as.character(round(Sys.time(), 0))
-     tmp_time <- paste(unlist(strsplit(tmp_time, '[:/ -]')), collapse='_')
-     tmp_path <- file.path(tmp_root, paste0('es_output_', tmp_time))
-     if (!dir.exists(tmp_path)) dir.create(tmp_path)
 
      # Set PROJ4 strings
      wgs_proj_string <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
-     albers_proj_string <- "+proj=aea +lat_1=29.5 +lat_2=42.5"
 
-     # Get country for pts
-     tmp <- es::coords_to_iso3(lon = xy$x, lat = xy$y)
-     pts_admin_0_iso <- unique(tmp$admin_0_iso)
-     pts_admin_0_name <- unique(tmp$admin_0_name)
-
-     es::download_admin_data(iso3 = pts_admin_0_iso, output_path = tmp_path)
-
-     tmp <- lapply(list.files(file.path(tmp_path, 'gadm'), full.names = TRUE),
-                   FUN=function(x) terra::unwrap(readRDS(x)))
-
-     admin_polygons <- do.call(tidyterra::bind_spat_rows, tmp)
+     # Get admins
+     message("Loading admin data...")
+     admin_polygons <- terra::unwrap(readRDS(path_admin_data))
      admin_polygons <- sf::st_as_sf(admin_polygons)
 
      message("Extracting admin info at point locations...")
@@ -82,19 +60,7 @@ get_admin_data <- function(lon,
      if ('NAME_4' %in% colnames(pts)) out$admin_4_name <- pts$NAME_4
      if ('NAME_5' %in% colnames(pts)) out$admin_5_name <- pts$NAME_5
 
-
-     if (save_data) {
-
-          message(glue::glue("Intermediate shapefiles are in temp drive {tmp_path}"))
-
-     } else {
-
-          message("Removing intermediate shapefiles...")
-          system(command=glue::glue("rm -rf {tmp_path}"))
-
-     }
-
-     message('Done.')
+     message("Done.")
      return(out)
 
 }

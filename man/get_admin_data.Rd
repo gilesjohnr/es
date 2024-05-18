@@ -4,14 +4,14 @@
 \alias{get_admin_data}
 \title{Get administrative data for a set of points}
 \usage{
-get_admin_data(lon, lat, save_data = FALSE)
+get_admin_data(lon, lat, path_admin_data)
 }
 \arguments{
 \item{lon}{A numeric vector giving the longitude of the sampling sites in Decimal Degrees.}
 
 \item{lat}{A numeric vector giving the latitude of the sampling sites in Decimal Degrees.}
 
-\item{save_data}{Logical indicating whether to save the shapefiles used to identify administrative units. Default is \code{FALSE} where the temp directory is deleted.}
+\item{path_admin_data}{The file path to the admin data. Note that the function expects .rds format output from the \code{download_admin_data} function.}
 }
 \value{
 data.frame
@@ -24,9 +24,11 @@ are acquired from \url{https://gadm.org/} via the \href{https://rdrr.io/github/r
 \examples{
 \dontrun{
 
+download_admin_data(iso3 = "BGD", path_output = getwd())
+
 get_admin_data(lon = template_es_data$lon,
                lat = template_es_data$lat,
-               save_data = FALSE)
+               path_admin_data = file.path(getwd(), 'gadm/gadm41_BGD_4_pk.rds'))
 
 }
 }

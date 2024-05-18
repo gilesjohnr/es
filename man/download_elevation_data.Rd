@@ -4,14 +4,14 @@
 \alias{download_elevation_data}
 \title{Download DEM from AWS Terrain Tiles}
 \usage{
-download_elevation_data(lon, lat, output_path)
+download_elevation_data(lon, lat, path_output)
 }
 \arguments{
 \item{lon}{A numeric vector giving the longitude of the sampling sites in Decimal Degrees.Can accept a vector of multiple ISO codes.}
 
 \item{lat}{A numeric vector giving the latitude of the sampling sites in Decimal Degrees.}
 
-\item{output_path}{A character string giving the file path of an output directory to save downloaded data.}
+\item{path_output}{A character string giving the file path of an output directory to save downloaded data.}
 }
 \description{
 This function takes the coordinates of sampling sites (longitude and latitude) and downloads a Digital Elevation Model (DEM)
@@ -24,7 +24,7 @@ Shuttle Radar Topography Mission (SRTM) DEM, which is accessible through the Ama
 
 download_elevation_data(lon = template_es_data$lon,
                         lat = template_es_data$lat,
-                        output_path = getwd())
+                        path_output = getwd())
 
 }
 }

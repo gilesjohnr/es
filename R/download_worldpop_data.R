@@ -4,7 +4,7 @@
 #' from the WorldPop FTP data server. Note that these data are spatial disaggregations of census data using random forest models described in
 #' [Lloyd et al. 2019](https://www.tandfonline.com/doi/full/10.1080/20964471.2019.1625151) and available for manual download at
 #' [https://hub.worldpop.org/geodata/listing?id=29](https://hub.worldpop.org/geodata/listing?id=29). Downloaded data sets are
-#' saved to the \code{output_path} directory in .tif format.
+#' saved to the \code{path_output} directory in .tif format.
 #'
 #' @param iso3 A three-letter capitalized character string. Must follow the ISO-3166 Alpha-3 country code
 #' standard ([https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)). Can accept a vector of multiple ISO codes.
@@ -13,7 +13,7 @@
 #' Default is FALSE.
 #' @param UN_adjusted Logical indicating whether to get population counts that are adjusted to match United Nations national population estimates
 #' (details [HERE](https://hub.worldpop.org/project/categories?id=3)). Default is FALSE.
-#' @param output_path A character string giving the file path of an output directory to save downloaded data.
+#' @param path_output A character string giving the file path of an output directory to save downloaded data.
 #'
 #' @returns NULL
 #'
@@ -24,7 +24,7 @@
 #'                        year=2020,
 #'                        constrained=FALSE,
 #'                        UN_adjusted=FALSE,
-#'                        output_path=getwd())
+#'                        path_output=getwd())
 #'
 #' }
 
@@ -32,7 +32,7 @@ download_worldpop_data <- function(iso3,
                                    year,
                                    constrained=FALSE,
                                    UN_adjusted=FALSE,
-                                   output_path
+                                   path_output
 ){
 
      # Checks
@@ -42,8 +42,8 @@ download_worldpop_data <- function(iso3,
      if (length(year) != 1) stop('one year at a time')
      if (!is.logical(constrained)) stop('constrained must be logical')
      if (!is.logical(UN_adjusted)) stop('UN_adjusted must be logical')
-     if (!is.character(output_path)) stop('output_path code(s) must be a character string')
-     if (!dir.exists(output_path)) stop('output_path does not exist')
+     if (!is.character(path_output)) stop('path_output code(s) must be a character string')
+     if (!dir.exists(path_output)) stop('path_output does not exist')
 
      message("Checking availability of the country and year...")
 
@@ -79,9 +79,9 @@ download_worldpop_data <- function(iso3,
      # Set full url path to the data
      url_data <- glue::glue("{url_iso}{iso3}/{file_name}")
 
-     # Download to output_path
+     # Download to path_output
      download.file(url = url_data,
-                   destfile = file.path(output_path, file_name),
+                   destfile = file.path(path_output, file_name),
                    method='auto',
                    quiet = FALSE,
                    mode = "wb",
@@ -89,7 +89,7 @@ download_worldpop_data <- function(iso3,
                    extra = getOption("download.file.extra"))
 
      message('Done.')
-     message(glue::glue("Data saved here: {output_path}/{file_name}"))
-     return(file.path(output_path, file_name))
+     message(glue::glue("Data saved here: {path_output}/{file_name}"))
+     return(file.path(path_output, file_name))
 
 }

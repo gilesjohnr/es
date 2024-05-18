@@ -4,13 +4,13 @@
 \alias{download_admin_data}
 \title{Download administrative boundaries from GADM}
 \usage{
-download_admin_data(iso3, output_path)
+download_admin_data(iso3, path_output)
 }
 \arguments{
 \item{iso3}{A three-letter capitalized character string. Must follow the ISO-3166 Alpha-3 country code
 standard (\url{https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3}). Can accept a vector of multiple ISO codes.}
 
-\item{output_path}{A character string giving the file path of an output directory to save downloaded data.}
+\item{path_output}{A character string giving the file path of an output directory to save downloaded data.}
 }
 \description{
 This function takes a single ISO country code, or vector of multiple ISO country codes, and downloads the corresponding
@@ -21,7 +21,7 @@ units are returned (level 4 for most countries).
 \examples{
 \dontrun{
 
-download_admin_data(iso3 = c('FRA', 'ITA'), output_path = getwd())
+download_admin_data(iso3 = c('FRA', 'ITA'), path_output = getwd())
 
 }
 }
