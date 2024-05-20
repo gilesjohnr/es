@@ -76,11 +76,26 @@ x[6, 'api'] <- "DEM from [Amazon Web Services Terrain Tiles](https://registry.op
 # get_admin_data
 
 x[7, 'wrapper_func'] <- "[get_admin_data](https://gilesjohnr.github.io/es/reference/get_admin_data.html)"
-x[7, 'description'] <- "names of all administrative areas for each sampling site"
+x[7, 'description'] <- "Names of all administrative areas for each sampling site"
 x[7, 'wrapped_pkg'] <- "[geodata](https://cran.r-project.org/web/packages/geodata/index.html)"
 x[7, 'wrapped_func'] <- "[gadm](https://rdrr.io/github/rspatial/geodata/man/gadm.html)"
 x[7, 'api'] <- "Shapefiles from [GADM maps and data](https://gadm.org/)"
 
+# get_population_catchment
+
+x[8, 'wrapper_func'] <- "[get_population_catchment](https://gilesjohnr.github.io/es/reference/get_population_catchment.html)"
+x[8, 'description'] <- "Area of drainage catchments (sq km) and total population within each"
+x[8, 'wrapped_pkg'] <- "[WhiteboxTools R frontend](https://www.whiteboxgeo.com/wbt-frontends/) "
+x[8, 'wrapped_func'] <- "[wbt_d_inf_flow_accumulation](https://rdrr.io/rforge/whitebox/man/wbt_d_inf_flow_accumulation.html), [wbt_watershed](https://rdrr.io/cran/whitebox/man/wbt_watershed.html)"
+x[8, 'api'] <- "User supplied elevation and population rasters."
+
+# get_population_radius
+
+x[9, 'wrapper_func'] <- "[get_population_radius](https://gilesjohnr.github.io/es/reference/get_population_radius.html)"
+x[9, 'description'] <- "Total population within a given radius"
+x[9, 'wrapped_pkg'] <- "[raster](https://cran.r-project.org/web/packages/raster/index.html), [exactextractr](https://cran.r-project.org/web/packages/exactextractr/index.html) "
+x[9, 'wrapped_func'] <- "[buffer](https://rdrr.io/rforge/whitebox/man/wbt_d_inf_flow_accumulation.html), [exactextractr](https://rdrr.io/cran/exactextractr/man/exact_extract.html)"
+x[9, 'api'] <- "User supplied population raster."
 
 knitr::kable(
      x,

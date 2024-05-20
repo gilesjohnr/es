@@ -78,6 +78,7 @@ get_hydro_data <- function(lon,
      message('Calculating hydrological variables...')
 
      s <- 0.25
+     Sys.sleep(s)
 
      # DEM modifications
 

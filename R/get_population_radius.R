@@ -60,7 +60,7 @@ get_population_radius <- function(lon,
 
      # Get population raster, crop to points and project to planar coords
      rast_pop <- raster::raster(path_pop_raster)
-     rast_pop_crop <- raster::crop(x=rast_pop, y=sf::st_buffer(pts, dist = radius*3))
+     rast_pop_crop <- raster::crop(x=rast_pop, y=sf::st_buffer(pts, dist = radius*5))
      rast_pop_crop_aea <- raster::projectRaster(rast_pop_crop, crs=CRS(albers_proj_string))
 
 

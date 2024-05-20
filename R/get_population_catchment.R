@@ -199,7 +199,7 @@ get_population_catchment <- function(lon,
           lon = xy$x,
           lat = xy$y,
           catchment_area_km2 = round(catchments$catchment_area_km2, 2),
-          catchment_population = round(catchments$catchment_population, 0)
+          population_catchment = round(catchments$catchment_population, 0)
      )
 
      return(out)
