@@ -96,13 +96,13 @@ source APIs using wrappers of functions from other R packages. These
 methods should generalized to most locations and dates assuming that the
 data are available (e.g. very recent dates may not be uploaded to
 climate APIs yet). The list of metadata functions are:</p>
-<table style="width:100%;" class="table">
+<table class="table">
 <colgroup>
 <col width="9%">
-<col width="38%">
+<col width="37%">
 <col width="12%">
 <col width="23%">
-<col width="15%">
+<col width="17%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">
@@ -177,13 +177,38 @@ Terrain Tiles</a>
 </tr>
 <tr class="odd">
 <td align="left"><a href="https://gilesjohnr.github.io/es/reference/get_admin_data.html">get_admin_data</a></td>
-<td align="left">names of all administrative areas for each sampling
+<td align="left">Names of all administrative areas for each sampling
 site</td>
 <td align="left"><a href="https://cran.r-project.org/web/packages/geodata/index.html" class="external-link">geodata</a></td>
 <td align="left"><a href="https://rdrr.io/github/rspatial/geodata/man/gadm.html" class="external-link">gadm</a></td>
 <td align="left">Shapefiles from <a href="https://gadm.org/" class="external-link">GADM maps
 and data</a>
 </td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://gilesjohnr.github.io/es/reference/get_population_catchment.html">get_population_catchment</a></td>
+<td align="left">Area of drainage catchments (sq km) and total
+population within each</td>
+<td align="left"><a href="https://www.whiteboxgeo.com/wbt-frontends/" class="external-link">WhiteboxTools R
+frontend</a></td>
+<td align="left">
+<a href="https://rdrr.io/rforge/whitebox/man/wbt_d_inf_flow_accumulation.html" class="external-link">wbt_d_inf_flow_accumulation</a>,
+<a href="https://rdrr.io/cran/whitebox/man/wbt_watershed.html" class="external-link">wbt_watershed</a>
+</td>
+<td align="left">User supplied elevation and population rasters.</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="https://gilesjohnr.github.io/es/reference/get_population_radius.html">get_population_radius</a></td>
+<td align="left">Total population within a given radius</td>
+<td align="left">
+<a href="https://cran.r-project.org/web/packages/raster/index.html" class="external-link">raster</a>,
+<a href="https://cran.r-project.org/web/packages/exactextractr/index.html" class="external-link">exactextractr</a>
+</td>
+<td align="left">
+<a href="https://rdrr.io/rforge/whitebox/man/wbt_d_inf_flow_accumulation.html" class="external-link">buffer</a>,
+<a href="https://rdrr.io/cran/exactextractr/man/exact_extract.html" class="external-link">exactextractr</a>
+</td>
+<td align="left">User supplied population raster.</td>
 </tr>
 </tbody>
 </table></main>
