@@ -2,9 +2,10 @@ pandoc: 3.1.11
 pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
+  calc_local_population: calc_local_population.html
   metadata_functions: metadata_functions.html
   template_es_data: template_es_data.html
-last_built: 2024-05-20T20:13Z
+last_built: 2024-05-23T19:36Z
 urls:
   reference: https://gilesjohnr.github.io/es/reference
   article: https://gilesjohnr.github.io/es/articles
