@@ -39,6 +39,8 @@ articles:
   contents:
   - template_es_data
   - metadata_functions
+  - get_climate_data
+  - calc_hydro_variables
   - calc_local_population
 news:
   releases:
