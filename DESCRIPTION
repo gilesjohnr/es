@@ -17,10 +17,8 @@ Imports:
   foreach,
   data.table,
   dplyr,
-  ggplot2,
   HDInterval,
   progress,
-  pbapply,
   zoo,
   openmeteo,
   chirps,
@@ -33,7 +31,6 @@ Imports:
   geodata,
   rworldmap,
   terra,
-  tidyterra,
   stars,
   RCurl,
   XML

@@ -12,7 +12,7 @@ apply_delta_delta_ct(
 )
 }
 \arguments{
-\item{df}{A data.frame of class \code{esdata}.}
+\item{df}{A data.frame containing the following columns: 'location_id', 'sample_date', 'target_name', and 'ct_value'.}
 
 \item{target_names}{Character vector giving the names of the target genes.}
 
@@ -26,7 +26,7 @@ data.frame
 \description{
 This function will calculate the delta delta Ct metric for all applicable observations in a data.frame
 by applying the \code{calc_delta_delta_ct} function. The data.frame must have the following columns:
-'location_id', 'sample_date', 'target_name', and 'ct_value'. The relevant target_names and and associated reference_names
+'location_id', 'sample_date', 'target_name', and 'ct_value'. The relevant target_names and associated reference_names
 must be provided. The result is a data.frame containing a 'delta_delta_ct' column which can be merge into the source data.frame.
 }
 \examples{

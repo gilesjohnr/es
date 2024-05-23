@@ -52,6 +52,8 @@ get_population_catchment <- function(lon,
                                      path_output
 ) {
 
+     requireNamespace('whitebox')
+
      check <- length(lat) == length(lon) & length(lat)
      if (!check) stop('lat and lon must be equal in length')
      if (!is.numeric(lon) | !is.numeric(lat)) stop('lat and lon args must be numeric')
@@ -68,7 +70,7 @@ get_population_catchment <- function(lon,
      rast_pop <- raster::raster(path_pop_raster)
      rast_dem <- raster::raster(path_dem_raster)
 
-     s <- 0.25
+     s <- 1
 
      whitebox::wbt_fill_depressions(
           dem = path_dem_raster,

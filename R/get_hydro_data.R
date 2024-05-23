@@ -33,6 +33,8 @@ get_hydro_data <- function(lon,
                            path_output
 ){
 
+     requireNamespace('whitebox')
+
      # Checks
      check <- length(lat) == length(lon)
      if (!check) stop('lat and lon args must be equal in length')
@@ -77,7 +79,7 @@ get_hydro_data <- function(lon,
 
      message('Calculating hydrological variables...')
 
-     s <- 0.25
+     s <- 1
      Sys.sleep(s)
 
      # DEM modifications

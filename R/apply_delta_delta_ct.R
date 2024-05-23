@@ -2,10 +2,10 @@
 #'
 #' This function will calculate the delta delta Ct metric for all applicable observations in a data.frame
 #' by applying the \code{calc_delta_delta_ct} function. The data.frame must have the following columns:
-#' 'location_id', 'sample_date', 'target_name', and 'ct_value'. The relevant target_names and and associated reference_names
+#' 'location_id', 'sample_date', 'target_name', and 'ct_value'. The relevant target_names and associated reference_names
 #' must be provided. The result is a data.frame containing a 'delta_delta_ct' column which can be merge into the source data.frame.
 #'
-#' @param df A data.frame of class \code{esdata}.
+#' @param df A data.frame containing the following columns: 'location_id', 'sample_date', 'target_name', and 'ct_value'.
 #' @param target_names Character vector giving the names of the target genes.
 #' @param reference_names Character vector giving the names of the reference genes associated with each target gene.
 #' @param amplification_efficiency A scalar between 0 and 1 giving the assumed PCR amplification efficiency for all samples in the equation. Defaults to 1, which assumes 100% efficiency.
@@ -48,9 +48,20 @@ apply_delta_delta_ct <- function(df,
      cond <- all(cols_required %in% colnames(df))
      if (!cond) stop(glue::glue("'df' must contain columns: {paste(cols_required, collapse=', ')}"))
 
+     if (!is.data.frame(df)) stop('df must be data.frame')
+     if (!is.character(target_names)) stop('target_names must be character')
+     if (!is.character(reference_names)) stop('reference_names must be character')
+     if (!is.numeric(amplification_efficiency)) stop('amplification_efficiency must be numeric')
+     if (!(amplification_efficiency <= 1 & amplification_efficiency >= 0)) stop ('amplification_efficiency must be between 0 and 1')
+
+     sel <- target_names %in% df$target_name & !(reference_names == "NA" | is.na(reference_names))
+     target_names <- target_names[sel]
+     reference_names <- reference_names[sel]
+
+     df <- as.data.frame(df)
      df <- df[,colnames(df) %in% cols_required]
 
-     df_delta <- pbapply::pblapply(split(df, factor(df$location_id)), function(df_loc){
+     df_delta <- lapply(split(df, factor(df$location_id)), function(df_loc){
 
           x <- as.data.frame(data.table::dcast(data = data.table::as.data.table(df_loc),
                                                formula = location_id + sample_date ~ target_name,
@@ -67,15 +78,15 @@ apply_delta_delta_ct <- function(df,
           for (i in 1:length(target_names)) {
 
                sel_target_col <- which(colnames(x) == target_names[i])
-               sel_reference_col <- grep(reference_names[i], colnames(x))
-               t0 <-  which(x$sample_date == min(x$sample_date[!is.na(x$sample_date) & !is.na(x[,sel_target_col])]))
+               sel_reference_col <- which(colnames(x) == reference_names[i])
+               t0 <- which(x$sample_date == min(x$sample_date[!is.na(x$sample_date) & !is.na(x[,sel_target_col])]))
 
                for (t in 1:nrow(out)) {
 
                     out[t, sel_target_col] <- calc_delta_delta_ct(ct_target_t = x[t, sel_target_col],
-                                                                  ct_reference_t = logmean(x[t, sel_reference_col]),
+                                                                  ct_reference_t = x[t, sel_reference_col],
                                                                   ct_target_t0 = x[t0, sel_target_col],
-                                                                  ct_reference_t0 = logmean(x[t0, sel_reference_col]),
+                                                                  ct_reference_t0 = x[t0, sel_reference_col],
                                                                   amplification_efficiency = amplification_efficiency)
 
                }

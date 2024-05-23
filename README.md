@@ -37,13 +37,9 @@ The tools here are intended to do the heavy lifting when combining data from mul
      - Topographical Wetness Index (TWI)
      - Flow Accumulation
      - Discharge of nearest river
-     - Catchments
-     - Population sizes (catchment, admin unit, within buffer)
-     - Flood potential
-     - ESA land use type (10m)
+     - Drainage catchments (based on streams or user provided sewer network)
+     - Population sizes (within catchments or a user defined radius around sampling sites)
      - Administrative units
-     - World Bank variables: poverty, access to electricity
-     
   
   4. Calculate summary sampling statistics
   
@@ -71,8 +67,6 @@ whitebox::install_whitebox()
 whitebox::wbt_version()
 
 install.packages('devtools')
-devtools::install_github("ropenscilabs/geojsonlint", dependencies=TRUE)
-devtools::install_github('wpgp/wopr', dependencies=TRUE)
 devtools::install_github("gilesjohnr/es", dependencies=TRUE)
 ```
 

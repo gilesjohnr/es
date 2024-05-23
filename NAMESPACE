@@ -1,9 +1,6 @@
 exportPattern("^[[:alpha:]]+")
 importFrom("stats", "complete.cases", "lm", "median", "predict", "aggregate", "na.omit")
 importFrom("foreach", "foreach", "%:%", "%do%")
-importFrom("ggplot2", "ggplot", "scale_fill_viridis_c", "coord_equal", "theme",
-           "theme_void", "element_text", "element_blank", "unit", "geom_raster",
-           "aes", "geom_point")
 importFrom("sp", "CRS")
 importFrom("utils", "download.file")
 importFrom("RCurl", "getURL")
