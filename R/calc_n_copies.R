@@ -41,20 +41,11 @@ calc_n_copies <- function(ct_values,
           tmp_ct_value <- ct_values[i]
           tmp_target_name <- target_names[i]
 
-          # Find the concise name or unique name in standard curves
-          if (tmp_target_name %in% standard_curves$target_name_concise) {
-
-               sel <- standard_curves$target_name_concise == tmp_target_name
-
-          } else if (tmp_target_name %in% standard_curves$target_name_unique) {
-
-               sel <- standard_curves$target_name_unique == tmp_target_name
-
-          }
+          # Find the target name in standard curves
+          sel <- standard_curves$target_name == tmp_target_name
 
           # Make note when target not found in standard curves
-          cond <- tmp_target_name %in% standard_curves$target_name_concise |
-               tmp_target_name %in% standard_curves$target_name_unique
+          cond <- tmp_target_name %in% standard_curves$target_name
 
           if (!cond) {
 

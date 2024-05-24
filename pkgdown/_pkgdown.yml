@@ -1,4 +1,5 @@
 url: https://gilesjohnr.github.io/es/
+
 template:
   bootstrap: 5
   pkgdown-nav-height: 80px
@@ -7,13 +8,40 @@ template:
     border-radius: 0.5rem
     btn-border-radius: 0.25rem
     danger: "#A6081A"
+
 params:
      ganalytics: G-HQPXKPQH2C
+
 navbar:
   bg: primary
-  structure:
-    left:  [intro, reference, articles, tutorials, news]
-    right: [search, github]
+  toc: true
+  left:
+  - icon: fa-home
+    href: index.html
+  - text: Functions
+    href: reference/index.html
+  - text: Vignettes
+    href: articles/index.html
+    menu:
+      - text: 1. Data templates
+        href: articles/template_es_data.html
+      - text: 2. Metadata
+        href: articles/metadata_functions.html
+      - text: 3. Derivative quantities
+        href: articles/derivative_quantities.html
+      - text: 4. Climate data
+        href: articles/get_climate_data.html
+      - text: 5. Hydrological variables
+        href: articles/calc_hydro_variables.html
+      - text: 6. Local population
+        href: articles/calc_local_population.html
+  - text: News
+    href: news/index.html
+  right:
+  - icon: fa-github
+    href: https://github.com/gilesjohnr/es
+    aria-label: GitHub
+
 reference:
 - title: Data Standards
   contents: starts_with("template_")
@@ -33,15 +61,18 @@ reference:
   - download_worldpop_data
   - coords_to_iso3
   - logmean
+
 articles:
 - title: Vignettes
   navbar: Vignettes
   contents:
   - template_es_data
   - metadata_functions
+  - derivative_quantities
   - get_climate_data
   - calc_hydro_variables
   - calc_local_population
+
 news:
   releases:
   - text: "Version 0.0.1"
