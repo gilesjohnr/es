@@ -1,0 +1,100 @@
+---
+title: "Deriving variables from Ct values"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Deriving variables from Ct values}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+bibliography: references.bib
+citation_package: natbib
+nocite: '@*'
+link-citations: true
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>"
+)
+```
+
+Studies utilizing environmental sampling for disease surveillance often employ Quantitative Real-Time Polymerase Chain Reaction (qPCR) to detect pathogens in samples. In qPCR, the measurement is given as the cycle threshold (Ct) value, which is the number of PCR cycles required for the fluorescent signal to exceed a predefined threshold, indicating the presence of the pathogen's target nucleic acid (see [Thermo Fisher's qPCR basics](https://www.thermofisher.com/us/en/home/life-science/pcr/real-time-pcr/real-time-pcr-learning-center/real-time-pcr-basics.html)). The Ct value is often used to determine the presence or absence of a pathogen in a sample, where the pathogen is deemed absent if amplification reaches 40 cycles with no fluorescent signal [@caraguel2011]. Although qPCR can be a powerful method for pathogen detection, the Ct value can also estimate the overall *quantity* of pathogen genetic material in a sample. However, the starting amount of target nucleic acid in a sample can be influenced by many external factors [@rabaan2021; @bustin2005] makes the normalization of these data a challenge. To help address some of these challenges, we have included both an absolute and a relative quantification method in the `es` package with the following functions:
+
+1.  `calc_n_copies()` which calculates the number of gene target copies using standard curve quantification described by @pfaffl2012, and
+
+2.  `calc_delta_delta_ct()` which calculates the relative fold change in gene target quantity compared to a reference gene target described by @livak2001.
+
+Our hope is that transforming the Ct value into these derivative quantities can help make environmental sampling data more interpretable and to normalize its variance in a manner that is less vulnerable to confounding. The examples below show how to calculate these quantities given that your data match the template data shown in the `template_es_data` and `template_standard_curve` objects.
+
+## Calculating the number of gene copies
+
+Calculating the number of target gene copies in a sample is a form of absolute quantification. While it is still susceptible to external confounders that influence the starting amount of nucleic acid and any inhibitors to amplification that might be present [@bustin2005], this a count variable that is more interpretable than raw Ct values and allows for further adjustment and normalization. To calculate the number of target gene copies, a standardization assay is required which relates known concentrations of each gene target to their expected Ct values for the specific PCR machine and reagents used, these data are referred to as the 'standard curve' [@pfaffl2012].
+
+Assuming the PCR machine's amplification efficiency is 100%, the number of gene copies is expected to double with each cycle [@ruijter2009] resulting in a logarithmic relationship between Ct values and gene copies, where the number of target gene copies decreases exponentially as the number of PCR cycles increases linearly.
+
+<center>
+![](../man/figures/plot_ct_n_copies.png){width="95%"}
+</center>
+
+Due the logarithmic relationship of PCR kinetics we use a log-linear model to relate known gene target quantities from the standard curve to the Ct values observed in the qPCR performed on our study samples:
+
+$$
+\log(\text{number gene copies}_i) \sim \alpha + \beta_i \cdot \text{Ct value}_i + \epsilon.
+$$
+
+<center>
+![](../man/figures/plot_n_copies.png){width="65%"}
+</center>
+
+The code below shows how to how to use the `calc_n_copies()` function on the `template_es_data` and `template_standard_curve` objects to calculate the number of target gene copies.
+
+```{r, eval=FALSE}
+df <- es::template_es_data
+head(df)
+
+date location_id  lat   lon target_name ct_value
+1 2020-03-07           1 23.8 90.37    target_0       NA
+2 2020-03-07           1 23.8 90.37    target_0       NA
+3 2020-03-07           1 23.8 90.37    target_0       NA
+4 2020-03-07           1 23.8 90.37    target_0 29.95670
+5 2020-03-07           1 23.8 90.37    target_1 31.60111
+6 2020-03-07           1 23.8 90.37    target_1 32.20208
+
+sc <- es::template_standard_curve
+head(sc)
+
+target_name n_copies ct_value
+1    target_0    1e+01 31.54740
+2    target_0    1e+02 26.95023
+3    target_0    1e+03 22.39630
+4    target_0    1e+04 21.47894
+5    target_0    1e+05 16.04474
+6    target_1    1e+01 31.85645
+
+result <- es::calc_n_copies(ct_values = df$ct_value,
+                            target_names = df$target_name,
+                            standard_curves = sc)
+
+df$n_copies <- result
+head(df)
+
+date location_id  lat   lon target_name ct_value n_copies
+1 2020-03-07           1 23.8 90.37    target_0       NA       NA
+2 2020-03-07           1 23.8 90.37    target_0       NA       NA
+3 2020-03-07           1 23.8 90.37    target_0       NA       NA
+4 2020-03-07           1 23.8 90.37    target_0 29.95670 21.59581
+5 2020-03-07           1 23.8 90.37    target_1 31.60111 32.99040
+6 2020-03-07           1 23.8 90.37    target_1 32.20208 21.93164
+```
+
+Note that the response variable for the number of target gene copies is convenient in that it is more interpretable that the Ct value method, however it is an absolute quantification method that may need further normalization to adjust for environmental confounders. This variable can also be used to create a relative quantity but relating it to an endogenous reference gene or using a relative quantification like $\Delta\Delta$Ct make help with interpretation.
+
+<center>
+![](../man/figures/plot_predicted_n_copies.png){width="70%"}
+</center>
+
+## Calculating the relative change in gene expression
+
+Description of $\Delta\Delta$Ct method here [@livak2001].
+
+## References

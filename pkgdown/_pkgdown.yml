@@ -47,21 +47,20 @@ reference:
   contents: starts_with("template_")
 - title: Derivative Quantities
   contents:
-  - calc_n_copies
-  - calc_delta_delta_ct
   - apply_delta_delta_ct
+  - calc_delta_delta_ct
+  - calc_n_copies
 - title: Metadata
   contents: starts_with("get_")
 - title: Analytics
   contents: calc_sample_sizes
 - title: Utilities
   contents:
-  - download_elevation_data
-  - download_admin_data
-  - download_worldpop_data
   - coords_to_iso3
+  - download_admin_data
+  - download_elevation_data
+  - download_worldpop_data
   - logmean
-
 articles:
 - title: Vignettes
   navbar: Vignettes
