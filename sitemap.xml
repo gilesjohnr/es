@@ -13,6 +13,9 @@
     <loc>https://gilesjohnr.github.io/es/articles/calc_local_population.html</loc>
   </url>
   <url>
+    <loc>https://gilesjohnr.github.io/es/articles/derivative_quantities.html</loc>
+  </url>
+  <url>
     <loc>https://gilesjohnr.github.io/es/articles/get_climate_data.html</loc>
   </url>
   <url>
@@ -65,6 +68,9 @@
   </url>
   <url>
     <loc>https://gilesjohnr.github.io/es/reference/get_esi_data.html</loc>
+  </url>
+  <url>
+    <loc>https://gilesjohnr.github.io/es/reference/get_geoboundaries_api_data.html</loc>
   </url>
   <url>
     <loc>https://gilesjohnr.github.io/es/reference/get_hydro_data.html</loc>

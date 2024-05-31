@@ -43,34 +43,41 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
+  <a class="nav-link" href="../index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Functions</a>
 </li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <h6 class="dropdown-header" data-toc-skip>Vignettes</h6>
-    <a class="dropdown-item" href="../articles/template_es_data.html">Templates for input data sets</a>
-    <a class="dropdown-item" href="../articles/metadata_functions.html">Adding metadata to environmental sampling observations</a>
-    <a class="dropdown-item" href="../articles/get_climate_data.html">Getting climate data</a>
-    <a class="dropdown-item" href="../articles/calc_hydro_variables.html">Calculating hydrological variables</a>
-    <a class="dropdown-item" href="../articles/calc_local_population.html">Calculating local population size</a>
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-vignettes">Vignettes</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-vignettes">
+    <a class="dropdown-item" href="../articles/template_es_data.html">1. Data templates</a>
+    <a class="dropdown-item" href="../articles/metadata_functions.html">2. Metadata</a>
+    <a class="dropdown-item" href="../articles/derivative_quantities.html">3. Derivative quantities</a>
+    <a class="dropdown-item" href="../articles/get_climate_data.html">4. Climate data</a>
+    <a class="dropdown-item" href="../articles/calc_hydro_variables.html">5. Hydrological variables</a>
+    <a class="dropdown-item" href="../articles/calc_local_population.html">6. Local population</a>
   </div>
 </li>
-<li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-news">News</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-news">
-    <h6 class="dropdown-header" data-toc-skip>Releases</h6>
-    <a class="external-link dropdown-item" href="https://github.com/gilesjohnr/es">Version 0.0.1</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../news/index.html">Changelog</a>
-  </div>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">News</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/gilesjohnr/es" aria-label="GitHub">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -104,11 +111,11 @@ data are available (e.g. very recent dates may not be uploaded to
 climate APIs yet). The list of metadata functions are:</p>
 <table class="table">
 <colgroup>
-<col width="9%">
-<col width="37%">
-<col width="12%">
-<col width="23%">
-<col width="17%">
+<col width="14%">
+<col width="32%">
+<col width="10%">
+<col width="20%">
+<col width="21%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">
@@ -155,11 +162,17 @@ meters per second (<span class="math inline">\(m^3/s\)</span>)</td>
 API</a></td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="https://gilesjohnr.github.io/es/reference/get_elevation_data.html">get_elevation_data</a></td>
+<td align="left">
+<a href="https://gilesjohnr.github.io/es/reference/download_elevation_data.html">download_elevation_data</a>,
+<a href="https://gilesjohnr.github.io/es/reference/get_elevation_data.html">get_elevation_data</a>
+</td>
 <td align="left">Digital Elevation Model (DEM) giving the height in
 meters above sea level, spatial resolution is ~100m</td>
 <td align="left"><a href="https://cran.r-project.org/web/packages/elevatr/index.html" class="external-link">elevatr</a></td>
-<td align="left"><a href="https://www.rdocumentation.org/packages/elevatr/versions/0.99.0/topics/get_elev_point" class="external-link">get_elev_point</a></td>
+<td align="left">
+<a href="https://www.rdocumentation.org/packages/elevatr/versions/0.99.0/topics/get_elev_raster" class="external-link">get_elev_raster</a>,
+<a href="https://www.rdocumentation.org/packages/elevatr/versions/0.99.0/topics/get_elev_point" class="external-link">get_elev_point</a>
+</td>
 <td align="left"><a href="https://registry.opendata.aws/terrain-tiles/" class="external-link">Amazon Web Services
 Terrain Tiles</a></td>
 </tr>
@@ -182,16 +195,27 @@ Terrain Tiles</a>
 </td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="https://gilesjohnr.github.io/es/reference/get_admin_data.html">get_admin_data</a></td>
+<td align="left">
+<a href="https://gilesjohnr.github.io/es/reference/download_admin_data.html">download_admin_data</a>,
+<a href="https://gilesjohnr.github.io/es/reference/get_admin_data.html">get_admin_data</a>
+</td>
 <td align="left">Names of all administrative areas for each sampling
 site</td>
-<td align="left"><a href="https://cran.r-project.org/web/packages/geodata/index.html" class="external-link">geodata</a></td>
-<td align="left"><a href="https://rdrr.io/github/rspatial/geodata/man/gadm.html" class="external-link">gadm</a></td>
-<td align="left">Shapefiles from <a href="https://gadm.org/" class="external-link">GADM maps
-and data</a>
-</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">GeoJSON files from the <a href="https://www.geoboundaries.org/" class="external-link">geoBoundaries API</a> (saved as
+ESRI Shapefiles)</td>
 </tr>
 <tr class="even">
+<td align="left"><a href="https://gilesjohnr.github.io/es/reference/download_worldpop_data.html">download_worldpop_data</a></td>
+<td align="left">WorldPop population raster data</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">GeoTIFF files from the <a href="https://hub.worldpop.org/geodata/listing?id=29" class="external-link">WorldPop FTP
+server</a>
+</td>
+</tr>
+<tr class="odd">
 <td align="left"><a href="https://gilesjohnr.github.io/es/reference/get_population_catchment.html">get_population_catchment</a></td>
 <td align="left">Area of drainage catchments (sq km) and total
 population within each</td>
@@ -203,7 +227,7 @@ frontend</a></td>
 </td>
 <td align="left">User supplied elevation and population rasters.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="https://gilesjohnr.github.io/es/reference/get_population_radius.html">get_population_radius</a></td>
 <td align="left">Total population within a given radius</td>
 <td align="left">
