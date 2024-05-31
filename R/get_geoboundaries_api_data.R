@@ -33,14 +33,13 @@ get_geoboundaries_api_data <- function(iso3,
 
      while (admin_level >= 0) {
 
-          message(paste("Trying admin level", admin_level))
           admin_level_str <- admin_level_map[admin_level + 1]
           api_url <- paste0(base_url, "/", release, "/", iso3, "/", admin_level_str, "/")
           response <- httr::GET(api_url)
 
           if (response$status_code == 200) {
 
-               data <- httr::content(response, "text")
+               data <- suppressMessages(httr::content(response, "text"))
                data_parsed <- jsonlite::fromJSON(data)
                return(data_parsed)
 

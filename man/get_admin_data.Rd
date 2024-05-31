@@ -11,15 +11,15 @@ get_admin_data(lon, lat, path_admin_data)
 
 \item{lat}{A numeric vector giving the latitude of the sampling sites in Decimal Degrees.}
 
-\item{path_admin_data}{The file path to the admin data. Note that the function expects .rds format output from the \code{download_admin_data} function.}
+\item{path_admin_data}{The file path to the admin data. Note that the function expects .shp
+format output from the \code{download_admin_data} function or from another user supplied source.}
 }
 \value{
 data.frame
 }
 \description{
 This function takes a set of longitude and latitude coordinates and retrieves the administrative
-units that each point lies within. The high resolution shapefiles used to determine the administrative boundaries
-are acquired from \url{https://gadm.org/} via the \href{https://rdrr.io/github/rspatial/geodata/man/gadm.html}{\code{geodata::gadm}} function.
+units that each point lies within.
 }
 \examples{
 \dontrun{
@@ -28,7 +28,7 @@ download_admin_data(iso3 = "BGD", path_output = getwd())
 
 get_admin_data(lon = template_es_data$lon,
                lat = template_es_data$lat,
-               path_admin_data = file.path(getwd(), 'gadm/gadm41_BGD_4_pk.rds'))
+               path_admin_data = file.path(getwd(), 'BGD_admin_levels.shp'))
 
 }
 }

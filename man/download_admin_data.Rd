@@ -4,19 +4,10 @@
 \alias{download_admin_data}
 \title{Download administrative boundaries from geoBoundaries API}
 \usage{
-download_admin_data(
-  iso3,
-  admin_level,
-  release,
-  path_output,
-  simplified = FALSE
-)
+download_admin_data(iso3, release, path_output, simplified = FALSE)
 }
 \arguments{
 \item{iso3}{A three-letter capitalized character string. Must follow the ISO-3166 Alpha-3 country code}
-
-\item{admin_level}{An integer specifying the administrative level. It should be between 0 and 5.
-standard (\url{https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3}).}
 
 \item{release}{A character string specifying the release type on the geoBoundaries API. It should be one of 'gbOpen',
 'gbHumanitarian', or 'gbAuthoritative'.  Release types are described at \url{https://www.geoboundaries.org/api.html#api}.}
@@ -38,7 +29,6 @@ desired administrative level is not available the next most detailed administrat
 
 \dontrun{
 download_admin_data(iso3 = 'ITA',
-                    admin_level = 2,
                     release = 'gbOpen',
                     path_output = getwd())
 }
