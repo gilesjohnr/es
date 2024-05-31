@@ -10,13 +10,14 @@
 #' 'gbHumanitarian', or 'gbAuthoritative'.  Release types are described at [https://www.geoboundaries.org/api.html#api](https://www.geoboundaries.org/api.html#api).
 #' @param path_output A character string giving the file path of an output directory to save downloaded data.
 #' @param simplified Logical indicating whether to download simplified administrative boundaries instead of high resolution. Default is FALSE.
+#' @param keep_geojson Logical indicating whether to keep the raw geojson files downloaded from geoBoundaries API. Default is FALSE.
 #'
 #' @returns NULL. Administrative boundaries are downloaded in .geojson format.
 #'
 #' @examples
 #'
 #' \dontrun{
-#' download_admin_data(iso3 = 'ITA',
+#' download_admin_data(iso3 = 'TWN',
 #'                     release = 'gbOpen',
 #'                     path_output = getwd())
 #' }
@@ -25,7 +26,8 @@
 download_admin_data <- function(iso3,
                                 release,
                                 path_output,
-                                simplified=FALSE
+                                simplified=FALSE,
+                                keep_geojson=FALSE
 ) {
 
      if (!is.character(iso3)) stop('iso3 code(s) must be character')
@@ -105,7 +107,7 @@ download_admin_data <- function(iso3,
                   append = FALSE,
                   quiet = TRUE)
 
-     do.call(file.remove, as.list(file_names))
+     if (!keep_geojson) do.call(file.remove, as.list(file_names))
 
      message('Done.')
      message(glue::glue("Data saved here: {path_output_shapefile}"))

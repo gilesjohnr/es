@@ -1,24 +1,10 @@
----
-title: "Adding metadata to environmental sampling observations"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Adding metadata to environmental sampling observations}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-```{r setup, include = FALSE}
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-```
 
-The `es` package contains a number of functions that will add important metadata (e.g. climate variables, elevation, topography, etc) to your environmental sampling observations. This assumes that you have constructed a data frame that matches the [`template_es_data`](https://gilesjohnr.github.io/es/reference/template_es_data.html) data object. A detailed description of the template data can be found [HERE]().
-
-To retrieve metadata for the location and dates in your data frame, the functions listed in the table below will download them from open source APIs using wrappers of functions from other R packages. These methods should generalized to most locations and dates assuming that the data are available (e.g. very recent dates may not be uploaded to climate APIs yet). The list of metadata functions are:
-
-```{r, echo=FALSE}
+## ----echo=FALSE---------------------------------------------------------------
 x <- data.frame(wrapper_func=as.character(),
                 description=as.character(),
                 wrapped_pkg=as.character(),
@@ -116,5 +102,4 @@ knitr::kable(
 )
 
 
-```
 

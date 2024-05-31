@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Templates for input data sets</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Templates for input data sets</h1>
+
+
+
+<p>To use the data and methods provided in the <code>es</code> R
+package, input data must match the formatting shown in the
+<code>template_es_data</code> and <code>standard_curves</code> data
+objects. These objects are installed along with the <code>es</code>
+package and provide a starting point to calculate derivative quantities,
+adding spatial metadata, and launching the visualization application.
+Both template data sources are described in more detail below:</p>
+<div id="template-environmental-sampling-data" class="section level2">
+<h2>Template environmental sampling data</h2>
+<p>The primary data that is required for the methods in the
+<code>es</code> package is shown in the <code>template_es_data</code>
+object. These data have 6 columns and give the time and location of each
+observation and a Cycle Threshold (Ct) value from a qPCR assay. The code
+below shows how to view the data template:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(es)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">head</span>(template_es_data)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>date location_id  lat   lon target_name ct_value</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="dv">1</span> <span class="dv">2020-03-07</span>           <span class="dv">1</span> <span class="fl">23.8</span> <span class="fl">90.37</span>    target_0       <span class="cn">NA</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="dv">2</span> <span class="dv">2020-03-07</span>           <span class="dv">1</span> <span class="fl">23.8</span> <span class="fl">90.37</span>    target_0       <span class="cn">NA</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="dv">3</span> <span class="dv">2020-03-07</span>           <span class="dv">1</span> <span class="fl">23.8</span> <span class="fl">90.37</span>    target_0       <span class="cn">NA</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="dv">4</span> <span class="dv">2020-03-07</span>           <span class="dv">1</span> <span class="fl">23.8</span> <span class="fl">90.37</span>    target_0 <span class="fl">29.94516</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="dv">5</span> <span class="dv">2020-03-07</span>           <span class="dv">1</span> <span class="fl">23.8</span> <span class="fl">90.37</span>    target_1 <span class="fl">31.61178</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="dv">6</span> <span class="dv">2020-03-07</span>           <span class="dv">1</span> <span class="fl">23.8</span> <span class="fl">90.37</span>    target_1 <span class="fl">32.22351</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="fu">str</span>(template_es_data)</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="st">&#39;data.frame&#39;</span><span class="sc">:</span>   <span class="dv">5200</span> obs. of  <span class="dv">6</span> variables<span class="sc">:</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>     <span class="er">$</span> date       <span class="sc">:</span> IDate, format<span class="sc">:</span> <span class="st">&quot;2020-03-07&quot;</span> <span class="st">&quot;2020-03-07&quot;</span> ...</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="sc">$</span> location_id<span class="sc">:</span> int  <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="sc">$</span> lat        <span class="sc">:</span> num  <span class="fl">23.8</span> <span class="fl">23.8</span> <span class="fl">23.8</span> <span class="fl">23.8</span> <span class="fl">23.8</span> <span class="fl">23.8</span> <span class="fl">23.8</span> <span class="fl">23.8</span> <span class="fl">23.8</span> <span class="fl">23.8</span> ...</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="sc">$</span> lon        <span class="sc">:</span> num  <span class="fl">90.4</span> <span class="fl">90.4</span> <span class="fl">90.4</span> <span class="fl">90.4</span> <span class="fl">90.4</span> ...</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="sc">$</span> target_name<span class="sc">:</span> chr  <span class="st">&quot;target_0&quot;</span> <span class="st">&quot;target_0&quot;</span> <span class="st">&quot;target_0&quot;</span> <span class="st">&quot;target_0&quot;</span> ...</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="sc">$</span> ct_value   <span class="sc">:</span> num  <span class="cn">NA</span> <span class="cn">NA</span> <span class="cn">NA</span> <span class="fl">29.9</span> <span class="fl">31.6</span> ...</span></code></pre></div>
+<p>More detailed descriptions of each variable in the
+<code>template_es_data</code> object are shown in the table below:</p>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="18%" />
+<col width="69%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Class</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">date</td>
+<td align="left">Date, IDate</td>
+<td align="left">The date the environmental sample was collected. Format
+is YYY-MM-DD.</td>
+</tr>
+<tr class="even">
+<td align="left">location_id</td>
+<td align="left">Integer, Character</td>
+<td align="left">A unique identifier for each sampling location.</td>
+</tr>
+<tr class="odd">
+<td align="left">lat</td>
+<td align="left">Numeric</td>
+<td align="left">The lattitude of the sampling location in Decimal
+Degrees (DD)</td>
+</tr>
+<tr class="even">
+<td align="left">lon</td>
+<td align="left">Numeric</td>
+<td align="left">The longitude of the sampling location in Decimal
+Degrees (DD)</td>
+</tr>
+<tr class="odd">
+<td align="left">target_name</td>
+<td align="left">Character</td>
+<td align="left">The unique name of each gene target in qPCR assays</td>
+</tr>
+<tr class="even">
+<td align="left">ct_value</td>
+<td align="left">Numeric</td>
+<td align="left">The Cycle Threshold (Ct) value returned by qPCR
+assays</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="template-standard-curve-data" class="section level2">
+<h2>Template standard curve data</h2>
+<p>Standard curve data provide the results from standardized qPCR assays
+which relate Ct values to the number of gene copies for a particular
+target. With these data, the <code>calc_n_copies()</code> function will
+infer the number of gene copies for each of the observed Ct values in a
+data set formatted according to the <code>template_es_data</code>
+object. To view the template standard curve data, see the code
+below:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(es)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">head</span>(template_standard_curve)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  target_name n_copies ct_value</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="dv">1</span>    target_1    <span class="fl">1e+01</span> <span class="fl">31.29322</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="dv">2</span>    target_1    <span class="fl">1e+02</span> <span class="fl">27.73392</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="dv">3</span>    target_1    <span class="fl">1e+03</span> <span class="fl">23.48097</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="dv">4</span>    target_1    <span class="fl">1e+04</span> <span class="fl">18.91412</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="dv">5</span>    target_1    <span class="fl">1e+05</span> <span class="fl">16.68971</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="dv">6</span>    target_2    <span class="fl">1e+01</span> <span class="fl">32.34237</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="fu">str</span>(template_standard_curve)</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="st">&#39;data.frame&#39;</span><span class="sc">:</span>   <span class="dv">15</span> obs. of  <span class="dv">3</span> variables<span class="sc">:</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a> <span class="er">$</span> target_name<span class="sc">:</span> chr  <span class="st">&quot;target_1&quot;</span> <span class="st">&quot;target_1&quot;</span> <span class="st">&quot;target_1&quot;</span> <span class="st">&quot;target_1&quot;</span> ...</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a> <span class="sc">$</span> n_copies   <span class="sc">:</span> num  <span class="fl">1e+01</span> <span class="fl">1e+02</span> <span class="fl">1e+03</span> <span class="fl">1e+04</span> <span class="fl">1e+05</span> <span class="fl">1e+01</span> <span class="fl">1e+02</span> <span class="fl">1e+03</span> <span class="fl">1e+04</span> <span class="fl">1e+05</span> ...</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a> <span class="sc">$</span> ct_value   <span class="sc">:</span> num  <span class="fl">31.3</span> <span class="fl">27.7</span> <span class="fl">23.5</span> <span class="fl">18.9</span> <span class="fl">16.7</span> ...</span></code></pre></div>
+<p>More detailed descriptions of each variable in the
+<code>template_standard_curve</code> object are shown in the table
+below:</p>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="9%" />
+<col width="79%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Class</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">target_name</td>
+<td align="left">Character</td>
+<td align="left">The unique name of each gene target in qPCR assays</td>
+</tr>
+<tr class="even">
+<td align="left">n_copies</td>
+<td align="left">Numeric</td>
+<td align="left">The known number of gene copies for the observation in
+the standardized qPCR assay</td>
+</tr>
+<tr class="odd">
+<td align="left">ct_value</td>
+<td align="left">Numeric</td>
+<td align="left">The Cycle Threshold (Ct) value returned by qPCR
+assays</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

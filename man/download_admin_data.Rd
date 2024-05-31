@@ -4,7 +4,13 @@
 \alias{download_admin_data}
 \title{Download administrative boundaries from geoBoundaries API}
 \usage{
-download_admin_data(iso3, release, path_output, simplified = FALSE)
+download_admin_data(
+  iso3,
+  release,
+  path_output,
+  simplified = FALSE,
+  keep_geojson = FALSE
+)
 }
 \arguments{
 \item{iso3}{A three-letter capitalized character string. Must follow the ISO-3166 Alpha-3 country code}
@@ -15,6 +21,8 @@ download_admin_data(iso3, release, path_output, simplified = FALSE)
 \item{path_output}{A character string giving the file path of an output directory to save downloaded data.}
 
 \item{simplified}{Logical indicating whether to download simplified administrative boundaries instead of high resolution. Default is FALSE.}
+
+\item{keep_geojson}{Logical indicating whether to keep the raw geojson files downloaded from geoBoundaries API. Default is FALSE.}
 }
 \value{
 NULL. Administrative boundaries are downloaded in .geojson format.
@@ -28,7 +36,7 @@ desired administrative level is not available the next most detailed administrat
 \examples{
 
 \dontrun{
-download_admin_data(iso3 = 'ITA',
+download_admin_data(iso3 = 'TWN',
                     release = 'gbOpen',
                     path_output = getwd())
 }
