@@ -2,26 +2,45 @@
 % Please edit documentation in R/download_admin_data.R
 \name{download_admin_data}
 \alias{download_admin_data}
-\title{Download administrative boundaries from GADM}
+\title{Download administrative boundaries from geoBoundaries API}
 \usage{
-download_admin_data(iso3, path_output)
+download_admin_data(
+  iso3,
+  admin_level,
+  release,
+  path_output,
+  simplified = FALSE
+)
 }
 \arguments{
-\item{iso3}{A three-letter capitalized character string. Must follow the ISO-3166 Alpha-3 country code
-standard (\url{https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3}). Can accept a vector of multiple ISO codes.}
+\item{iso3}{A three-letter capitalized character string. Must follow the ISO-3166 Alpha-3 country code}
+
+\item{admin_level}{An integer specifying the administrative level. It should be between 0 and 5.
+standard (\url{https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3}).}
+
+\item{release}{A character string specifying the release type on the geoBoundaries API. It should be one of 'gbOpen',
+'gbHumanitarian', or 'gbAuthoritative'.  Release types are described at \url{https://www.geoboundaries.org/api.html#api}.}
 
 \item{path_output}{A character string giving the file path of an output directory to save downloaded data.}
+
+\item{simplified}{Logical indicating whether to download simplified administrative boundaries instead of high resolution. Default is FALSE.}
+}
+\value{
+NULL. Administrative boundaries are downloaded in .geojson format.
 }
 \description{
-This function takes a single ISO country code, or vector of multiple ISO country codes, and downloads the corresponding
-high resolution administrative boundary shapefiles from \url{https://gadm.org/} via
-the \href{https://rdrr.io/github/rspatial/geodata/man/gadm.html}{\code{geodata::gadm}} function. The most detailed administrative
-units are returned (level 4 for most countries).
+This function takes a single ISO country code and downloads the corresponding
+high resolution administrative boundary \href{https://en.wikipedia.org/wiki/GeoJSON}{GeoJSON} files from the \href{https://www.geoboundaries.org/}{www.geoBoundaries.org} API
+hosted at GitHub \href{https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d}{HERE}. If the
+desired administrative level is not available the next most detailed administrative level is returned.
 }
 \examples{
+
 \dontrun{
-
-download_admin_data(iso3 = c('FRA', 'ITA'), path_output = getwd())
-
+download_admin_data(iso3 = 'ITA',
+                    admin_level = 2,
+                    release = 'gbOpen',
+                    path_output = getwd())
 }
+
 }

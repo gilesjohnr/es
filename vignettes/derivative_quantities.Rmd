@@ -26,7 +26,9 @@ Studies utilizing environmental sampling for disease surveillance often employ Q
 
 Our hope is that transforming the Ct value into these derivative quantities can help make environmental sampling data more interpretable and to normalize its variance in a manner that is less vulnerable to confounding. The examples below show how to calculate these quantities given that your data match the template data shown in the `template_es_data` and `template_standard_curve` objects.
 
-## Calculating the number of gene copies
+\
+
+## Absolute quantification: calculating the number of target gene copies
 
 Calculating the number of target gene copies in a sample is a form of absolute quantification. While it is still susceptible to external confounders that influence the starting amount of nucleic acid and any inhibitors to amplification that might be present [@bustin2005], this a count variable that is more interpretable than raw Ct values and allows for further adjustment and normalization. To calculate the number of target gene copies, a standardization assay is required which relates known concentrations of each gene target to their expected Ct values for the specific PCR machine and reagents used, these data are referred to as the 'standard curve' [@pfaffl2012].
 
@@ -93,8 +95,12 @@ Note that the response variable for the number of target gene copies is convenie
 ![](../man/figures/plot_predicted_n_copies.png){width="70%"}
 </center>
 
-## Calculating the relative change in gene expression
+\
+
+## Relative quantification: calculating the fold change in gene expression
 
 Description of $\Delta\Delta$Ct method here [@livak2001].
+
+\
 
 ## References
