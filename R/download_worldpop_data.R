@@ -15,7 +15,7 @@
 #' (details [HERE](https://hub.worldpop.org/project/categories?id=3)). Default is FALSE.
 #' @param path_output A character string giving the file path of an output directory to save downloaded data.
 #'
-#' @returns NULL
+#' @returns Character string giving path to downloaded data.
 #'
 #' @examples
 #' \dontrun{

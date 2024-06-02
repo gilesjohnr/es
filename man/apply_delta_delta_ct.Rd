@@ -8,7 +8,8 @@ apply_delta_delta_ct(
   df,
   target_names,
   reference_names,
-  amplification_efficiency = 1
+  pae_names = NULL,
+  pae_values = NULL
 )
 }
 \arguments{
@@ -18,7 +19,9 @@ apply_delta_delta_ct(
 
 \item{reference_names}{Character vector giving the names of the reference genes associated with each target gene.}
 
-\item{amplification_efficiency}{A scalar between 0 and 1 giving the assumed PCR amplification efficiency for all samples in the equation. Defaults to 1, which assumes 100\% efficiency.}
+\item{pae_names}{Character vector giving the names of the target genes and reference genes for which the percentile amplification efficiency has been estimated. Default is NULL.}
+
+\item{pae_values}{A numeric scalar giving the estimated PCR amplification efficiency for each of the names in \code{pae_names}. Defaults is NULL, which assumes 100\% efficiency.}
 }
 \value{
 data.frame
@@ -32,23 +35,21 @@ must be provided. The result is a data.frame containing a 'delta_delta_ct' colum
 \examples{
 \dontrun{
 
-df_example <- data.frame(location_id = c(rep(1,9), rep(2,9), rep(3,9)),
-                         sample_date = as.Date(rep(c(rep('2024-01-01',3),
-                                                     rep('2024-01-02',3),
-                                                     rep('2024-01-03',3)),
-                                                   3)),
-                         target_name = rep(c('gene1', 'gene2', 'housekeeping'), 9),
-                         ct_value = as.numeric(runif(27, min=5, max=40)))
+df_example <- template_es_data
+colnames(df_example)[colnames(df_example) == 'date'] <- 'sample_date'
 
-df_result <- apply_delta_delta_ct(df = df_example,
-                                  target_names = c('gene1', 'gene2'),
-                                  reference_names = c('housekeeping', 'housekeeping'),
-                                  amplification_efficiency = 0.95)
+pae <- apply_amplification_efficiency(template_standard_curve)
 
-merge(df_example,
-      df_result,
-      by=c('location_id', 'sample_date', 'target_name'),
-      all.x=TRUE)
+ddct_standard <- apply_delta_delta_ct(df = df_example,
+                                      target_names = c('target_1', 'target_2', 'target_3'),
+                                      reference_names = rep('target_0', 3))
+
+ddct_adjusted <- apply_delta_delta_ct(df = df_example,
+                                      target_names = c('target_1', 'target_2', 'target_3'),
+                                      reference_names = rep('target_0', 3),
+                                      pae_names = pae$target_name,
+                                      pae_values = pae$mean)
 
 }
+
 }

@@ -9,7 +9,7 @@
 #' @param lon A numeric vector giving the longitude of the sampling sites in Decimal Degrees.Can accept a vector of multiple ISO codes.
 #' @param path_output A character string giving the file path of an output directory to save downloaded data.
 #'
-#' @returns NULL
+#' @returns Character string giving path to downloaded data.
 #'
 #' @examples
 #' \dontrun{

@@ -5,23 +5,32 @@
 \title{Calculate delta delta Ct}
 \usage{
 calc_delta_delta_ct(
-  ct_target_t,
-  ct_reference_t,
-  ct_target_t0,
-  ct_reference_t0,
-  amplification_efficiency = 1
+  ct_target_treatment,
+  ct_target_control,
+  ct_reference_treatment,
+  ct_reference_control,
+  pae_target_treatment = 1,
+  pae_target_control = 1,
+  pae_reference_treatment = 1,
+  pae_reference_control = 1
 )
 }
 \arguments{
-\item{ct_target_t}{A scalar providing the Ct value of the target gene for an observation at time t}
+\item{ct_target_treatment}{A numeric scalar providing the Ct value of the target gene for an observation in the treatment group}
 
-\item{ct_reference_t}{A scalar providing the Ct value of the reference gene for an observation at time t}
+\item{ct_target_control}{A numeric scalar providing the Ct value of the target gene for the reference observation in the control group}
 
-\item{ct_target_t0}{A scalar providing the Ct value of the target gene for the reference observation at time t=0}
+\item{ct_reference_treatment}{A numeric scalar providing the Ct value of the reference gene for an observation in the treatment group}
 
-\item{ct_reference_t0}{A scalar providing the Ct value of the reference gene for the reference observation at time t=0}
+\item{ct_reference_control}{A numeric scalar providing the Ct value of the reference gene for the reference observation in the control group}
 
-\item{amplification_efficiency}{A scalar between 0 and 1 giving the assumed PCR amplification efficiency for all samples in the equation. Defaults to 1, which assumes 100\% efficiency.}
+\item{pae_target_treatment}{A numeric scalar providing the percentile amplification efficiency for the target gene and the treatment group. Defaults to 1.}
+
+\item{pae_target_control}{A numeric scalar providing the percentile amplification efficiency for the target gene and the control group. Defaults to 1.}
+
+\item{pae_reference_treatment}{A numeric scalar providing the percentile amplification efficiency for the reference gene and the treatment group. Defaults to 1.}
+
+\item{pae_reference_control}{A numeric scalar providing the percentile amplification efficiency for the reference gene and the control group. Defaults to 1.}
 }
 \value{
 Scalar
@@ -29,15 +38,27 @@ Scalar
 \description{
 This function calculates relative gene expression using the delta delta Ct method described in
 \href{https://www.sciencedirect.com/science/article/abs/pii/S1046202301912629?via\%3Dihub}{Livak and Schmittgen (2001)}.
+Adjusted delta delta Ct values following \href{https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-7-85}{Yuan et al. (2008)}
+can be calculated by providing estimated values for the percentile amplification efficiency in \verb{pae_*} arguments.
 }
 \examples{
 \dontrun{
 
-calc_delta_delta_ct(ct_target_t = 32.5,
-                    ct_reference_t = 25,
-                    ct_target_t0 = 34,
-                    ct_reference_t0 = 30,
-                    amplification_efficiency = 0.95)
+# Traditional method
+calc_delta_delta_ct(ct_target_treatment = 32.5,
+                    ct_reference_treatment = 25,
+                    ct_target_control = 34,
+                    ct_reference_control = 30)
+
+# Adjusted calculation incorporating amplification efficiency
+calc_delta_delta_ct(ct_target_treatment = 32.5,
+                    ct_reference_treatment = 25,
+                    ct_target_control = 34,
+                    ct_reference_control = 30,
+                    pae_target_treatment=0.97,
+                    pae_target_control=0.98,
+                    pae_reference_treatment=0.98,
+                    pae_reference_control=0.99)
 
 }
 }

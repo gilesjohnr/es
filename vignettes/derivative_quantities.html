@@ -486,11 +486,37 @@ interpretation.</p>
 <div id="relative-quantification-calculating-the-fold-change-in-gene-expression" class="section level2">
 <h2>Relative quantification: calculating the fold change in gene
 expression</h2>
-<p>Description of <span class="math inline">\(\Delta\Delta\)</span>Ct
-method here <span class="citation">(<a href="#ref-livak2001">Livak and
-Schmittgen 2001</a>)</span>.</p>
+<p>While absolute quantification of the number of target gene copies is
+nicely interpretable, it does not explicitly account for the starting
+amount of nucleic acid in the sample or amplification efficiency of the
+PCR assay [ref]. Normalization of qPCR data has been a general
+methodological challenge in biology and has motivated much work on
+statistical methods to transform qPCR data [ref, ref]. One method of
+normalization is the <span class="math inline">\(\Delta \Delta
+Ct\)</span> method of calculating the fold change in gene expression of
+the target relative to one or more reference targets [ref]. The <span class="math inline">\(\Delta \Delta Ct\)</span> method is perhaps the
+most robust way to normalize qPCR data and which is particularly
+important for environmental sampling data due to the often uncontrolled
+sources of samples.</p>
+<p>Here we have developed functions that allow for the calculation of
+the standard <span class="math inline">\(\Delta \Delta Ct\)</span>
+described by <span class="citation">Livak and Schmittgen (<a href="#ref-livak2001">2001</a>)</span> and the adjusted <span class="math inline">\(\Delta \Delta Ct\)</span>, which is adjusted for
+the PCR amplification efficiency, described by <span class="citation">Yuan, Wang, and Stewart (<a href="#ref-yuan2008">2008</a>)</span>. We have also included
+functionality to estimate the percentile amplification efficiency for a
+target nucleic acid following the methods in <span class="citation">(<a href="#ref-yuan2008">Yuan, Wang, and Stewart 2008</a>; <a href="#ref-yuan2006">Yuan et al. 2006</a>)</span>.</p>
+<p>The code below shows how to calculate both the standard and adjusted
+<span class="math inline">\(\Delta \Delta Ct\)</span> values for a
+simulated environmental sampling data set shown in the
+<code>template_es_data</code> and <code>template_standard_curve</code>
+data objects.</p>
+<div id="standard-delta-delta-ct" class="section level4">
+<h4>Standard <span class="math inline">\(\Delta \Delta Ct\)</span></h4>
+</div>
+<div id="adjusted-delta-delta-ct" class="section level4">
+<h4>Adjusted <span class="math inline">\(\Delta \Delta Ct\)</span></h4>
 <p><br />
 </p>
+</div>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2 class="unnumbered">References</h2>
@@ -532,6 +558,17 @@ PCR Data.”</span> <em>Nucleic Acids Research</em> 37 (6): e45. <a href="https:
 <div id="ref-thermofisherscientific2024" class="csl-entry">
 Thermo Fisher Scientific. 2024. <span>“Real-Time PCR (qPCR)
 Basics.”</span> <a href="https://www.thermofisher.com/us/en/home/life-science/pcr/real-time-pcr/real-time-pcr-learning-center/real-time-pcr-basics.html">https://www.thermofisher.com/us/en/home/life-science/pcr/real-time-pcr/real-time-pcr-learning-center/real-time-pcr-basics.html</a>.
+</div>
+<div id="ref-yuan2006" class="csl-entry">
+Yuan, Joshua S., Ann Reed, Feng Chen, and C Neal Stewart. 2006.
+<span>“Statistical Analysis of Real-Time PCR Data.”</span> <em>BMC
+Bioinformatics</em> 7 (1): 85. <a href="https://doi.org/10.1186/1471-2105-7-85">https://doi.org/10.1186/1471-2105-7-85</a>.
+</div>
+<div id="ref-yuan2008" class="csl-entry">
+Yuan, Joshua S., Donglin Wang, and C. Neal Stewart. 2008.
+<span>“Statistical Methods for Efficiency Adjusted
+Real<span>-</span>Time PCR Quantification.”</span> <em>Biotechnology
+Journal</em> 3 (1): 112–23. <a href="https://doi.org/10.1002/biot.200700169">https://doi.org/10.1002/biot.200700169</a>.
 </div>
 </div>
 </div>

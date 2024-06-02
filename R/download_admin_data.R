@@ -12,7 +12,7 @@
 #' @param simplified Logical indicating whether to download simplified administrative boundaries instead of high resolution. Default is FALSE.
 #' @param keep_geojson Logical indicating whether to keep the raw geojson files downloaded from geoBoundaries API. Default is FALSE.
 #'
-#' @returns NULL. Administrative boundaries are downloaded in .geojson format.
+#' @returns Character string giving path to downloaded data.
 #'
 #' @examples
 #'

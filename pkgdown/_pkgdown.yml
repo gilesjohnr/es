@@ -47,6 +47,8 @@ reference:
   contents: starts_with("template_")
 - title: Derivative Quantities
   contents:
+  - apply_amplification_efficiency
+  - est_amplification_efficiency
   - apply_delta_delta_ct
   - calc_delta_delta_ct
   - calc_n_copies

@@ -1,5 +1,5 @@
 exportPattern("^[[:alpha:]]+")
-importFrom("stats", "complete.cases", "lm", "median", "predict", "aggregate", "na.omit")
+importFrom("stats", "complete.cases", "lm", "confint", "coef", "median", "predict", "aggregate", "na.omit")
 importFrom("foreach", "foreach", "%:%", "%do%")
 importFrom("sp", "CRS")
 importFrom("utils", "download.file")

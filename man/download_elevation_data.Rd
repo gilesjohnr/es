@@ -13,6 +13,9 @@ download_elevation_data(lon, lat, path_output)
 
 \item{path_output}{A character string giving the file path of an output directory to save downloaded data.}
 }
+\value{
+Character string giving path to downloaded data.
+}
 \description{
 This function takes the coordinates of sampling sites (longitude and latitude) and downloads a Digital Elevation Model (DEM)
 for the surrounding area. The DEM has an approximate spatial resolution of 100 meters. These data are derived from the

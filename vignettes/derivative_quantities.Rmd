@@ -34,9 +34,7 @@ Calculating the number of target gene copies in a sample is a form of absolute q
 
 Assuming the PCR machine's amplification efficiency is 100%, the number of gene copies is expected to double with each cycle [@ruijter2009] resulting in a logarithmic relationship between Ct values and gene copies, where the number of target gene copies decreases exponentially as the number of PCR cycles increases linearly.
 
-<center>
-![](../man/figures/plot_ct_n_copies.png){width="95%"}
-</center>
+<center>![](../man/figures/plot_ct_n_copies.png){width="95%"}</center>
 
 Due the logarithmic relationship of PCR kinetics we use a log-linear model to relate known gene target quantities from the standard curve to the Ct values observed in the qPCR performed on our study samples:
 
@@ -44,9 +42,7 @@ $$
 \log(\text{number gene copies}_i) \sim \alpha + \beta_i \cdot \text{Ct value}_i + \epsilon.
 $$
 
-<center>
-![](../man/figures/plot_n_copies.png){width="65%"}
-</center>
+<center>![](../man/figures/plot_n_copies.png){width="65%"}</center>
 
 The code below shows how to how to use the `calc_n_copies()` function on the `template_es_data` and `template_standard_curve` objects to calculate the number of target gene copies.
 
@@ -91,15 +87,29 @@ date location_id  lat   lon target_name ct_value n_copies
 
 Note that the response variable for the number of target gene copies is convenient in that it is more interpretable that the Ct value method, however it is an absolute quantification method that may need further normalization to adjust for environmental confounders. This variable can also be used to create a relative quantity but relating it to an endogenous reference gene or using a relative quantification like $\Delta\Delta$Ct make help with interpretation.
 
-<center>
-![](../man/figures/plot_predicted_n_copies.png){width="70%"}
-</center>
+<center>![](../man/figures/plot_predicted_n_copies.png){width="70%"}</center>
 
 \
 
 ## Relative quantification: calculating the fold change in gene expression
 
-Description of $\Delta\Delta$Ct method here [@livak2001].
+While absolute quantification of the number of target gene copies is nicely interpretable, it does not explicitly account for the starting amount of nucleic acid in the sample or amplification efficiency of the PCR assay [ref]. Normalization of qPCR data has been a general methodological challenge in biology and has motivated much work on statistical methods to transform qPCR data [ref, ref]. One method of normalization is the $\Delta \Delta Ct$ method of calculating the fold change in gene expression of the target relative to one or more reference targets [ref]. The $\Delta \Delta Ct$ method is perhaps the most robust way to normalize qPCR data and which is particularly important for environmental sampling data due to the often uncontrolled sources of samples.
+
+Here we have developed functions that allow for the calculation of the standard $\Delta \Delta Ct$ described by @livak2001 and the adjusted $\Delta \Delta Ct$, which is adjusted for the PCR amplification efficiency, described by @yuan2008. We have also included functionality to estimate the percentile amplification efficiency for a target nucleic acid following the methods in [@yuan2008; @yuan2006]. 
+
+The code below shows how to calculate both the standard and adjusted $\Delta \Delta Ct$ values for a simulated environmental sampling data set shown in the `template_es_data` and `template_standard_curve` data objects.
+
+#### Standard $\Delta \Delta Ct$
+
+```{r, eval=FALSE}
+
+```
+
+#### Adjusted $\Delta \Delta Ct$
+
+```{r, eval=FALSE}
+
+```
 
 \
 

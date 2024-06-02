@@ -25,7 +25,7 @@ download_admin_data(
 \item{keep_geojson}{Logical indicating whether to keep the raw geojson files downloaded from geoBoundaries API. Default is FALSE.}
 }
 \value{
-NULL. Administrative boundaries are downloaded in .geojson format.
+Character string giving path to downloaded data.
 }
 \description{
 This function takes a single ISO country code and downloads the corresponding

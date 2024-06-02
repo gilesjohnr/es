@@ -33,6 +33,11 @@ calc_n_copies <- function(ct_values,
      # Checks
      if (!length(ct_values) == length(target_names)) stop("lengths of 'ct_values' and 'target_names' must match")
 
+     if (!is.data.frame(standard_curves)) stop("standard_curves must be data.frame")
+     if (!('target_names') %in% colnames(standard_curves)) stop("Expecting 'target_names' to be in standard_curves")
+     if (!('n_copies') %in% colnames(standard_curves)) stop("Expecting 'n_copies' to be in standard_curves")
+     if (!('ct_value') %in% colnames(standard_curves)) stop("Expecting 'ct_value' to be in standard_curves")
+
      out <- rep(NA, length(ct_values))
 
      for (i in 1:length(ct_values)) {

@@ -26,6 +26,9 @@ Default is FALSE.}
 
 \item{path_output}{A character string giving the file path of an output directory to save downloaded data.}
 }
+\value{
+Character string giving path to downloaded data.
+}
 \description{
 This function takes a single ISO country code and downloads the appropriate population count raster data (100m grid cell resolution)
 from the WorldPop FTP data server. Note that these data are spatial disaggregations of census data using random forest models described in
