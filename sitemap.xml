@@ -34,6 +34,9 @@
     <loc>https://gilesjohnr.github.io/es/index.html</loc>
   </url>
   <url>
+    <loc>https://gilesjohnr.github.io/es/reference/apply_amplification_efficiency.html</loc>
+  </url>
+  <url>
     <loc>https://gilesjohnr.github.io/es/reference/apply_delta_delta_ct.html</loc>
   </url>
   <url>
@@ -56,6 +59,9 @@
   </url>
   <url>
     <loc>https://gilesjohnr.github.io/es/reference/download_worldpop_data.html</loc>
+  </url>
+  <url>
+    <loc>https://gilesjohnr.github.io/es/reference/est_amplification_efficiency.html</loc>
   </url>
   <url>
     <loc>https://gilesjohnr.github.io/es/reference/get_admin_data.html</loc>
