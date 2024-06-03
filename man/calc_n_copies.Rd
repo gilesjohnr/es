@@ -26,13 +26,13 @@ to the standard curve data and then using that model to find a point estimate fo
 \examples{
 \dontrun{
 
-compiled_tac <- read.csv('/Users/tac/compiled_tac.csv')
+df <- template_es_data
 
-test <- calc_n_copies(ct_values = compiled_tac$ct_value,
-                      target_names = compiled_tac$target_name,
-                      standard_curves = standard_curves_dhaka)
+test <- calc_n_copies(ct_values = df$ct_value,
+                      target_names = df$target_name,
+                      standard_curves = template_standard_curve)
 
-compiled_tac$n_copies <- test
+df$n_copies <- test
 
 }
 }

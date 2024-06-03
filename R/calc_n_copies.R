@@ -15,13 +15,13 @@
 #' @examples
 #' \dontrun{
 #'
-#' compiled_tac <- read.csv('/Users/tac/compiled_tac.csv')
+#' df <- template_es_data
 #'
-#' test <- calc_n_copies(ct_values = compiled_tac$ct_value,
-#'                       target_names = compiled_tac$target_name,
-#'                       standard_curves = standard_curves_dhaka)
+#' test <- calc_n_copies(ct_values = df$ct_value,
+#'                       target_names = df$target_name,
+#'                       standard_curves = template_standard_curve)
 #'
-#' compiled_tac$n_copies <- test
+#' df$n_copies <- test
 #'
 #' }
 
@@ -31,8 +31,8 @@ calc_n_copies <- function(ct_values,
 ){
 
      if (!is.data.frame(standard_curves)) stop("standard_curves must be data.frame")
-     if (!length(ct_values) == length(target_names)) stop("lengths of 'ct_values' and 'target_names' must match")
-     if (!('target_names') %in% colnames(standard_curves)) stop("Expecting 'target_names' to be in standard_curves")
+     if (!length(ct_values) == length(target_names)) stop("lengths of 'ct_values' and 'target_name' must match")
+     if (!('target_name') %in% colnames(standard_curves)) stop("Expecting 'target_name' to be in standard_curves")
      if (!('n_copies') %in% colnames(standard_curves)) stop("Expecting 'n_copies' to be in standard_curves")
      if (!('ct_value') %in% colnames(standard_curves)) stop("Expecting 'ct_value' to be in standard_curves")
 
