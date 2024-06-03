@@ -224,7 +224,7 @@ head(ddct_adjusted)
 6           1  2020-04-03    target_1       7.632729
 ```
 
-And the code below shows a full example of adding adjusted time-based $\Delta \Delta \text{Ct}$ to a data frame and visualizing the result.
+Finally, the code below shows a full example of adding adjusted time-based $\Delta \Delta \text{Ct}$ to a data frame and visualizing the result.
 
 ```{r, eval=FALSE}
 library(mgcv)

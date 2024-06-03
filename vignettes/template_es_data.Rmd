@@ -80,6 +80,22 @@ knitr::kable(
 )
 ```
 
+And a the plot below shows the temporal distribution of the simulated data in the `template_es_data` object:
+
+```{r, eval=FALSE}
+ggplot(template_es_data, aes(x=sample_date, y=ct_value, color=target_name)) +
+     geom_point(alpha=0.5) +
+     facet_grid(rows=vars(location_id), cols=vars(target_name)) +
+     scale_x_date(date_breaks = "3 month", date_labels = "%b %Y") +
+     theme_bw() +
+     theme(legend.position = 'none') +
+     labs(x = element_blank(),
+          y = "Ct value",
+          title = "Template of simulated environmental sampling data")
+```
+
+<center>![](../man/figures/plot_template_es_data.png){width="100%"}</center>
+
 ## Template standard curve data
 
 Standard curve data provide the results from standardized qPCR assays which relate Ct values to the number of gene copies for a particular target. With these data, the `calc_n_copies()` function will infer the number of gene copies for each of the observed Ct values in a data set formatted according to the `template_es_data` object. To view the template standard curve data, see the code below:
@@ -130,4 +146,18 @@ knitr::kable(
 )
 ```
 
+And the plot below shows the simulated standard curve data in the `template_standard_curve` object:
 
+```{r, eval=FALSE}
+ggplot(template_standard_curve, aes(x=ct_value, y=log(n_copies), color=target_name)) +
+     geom_point(alpha=0.5) +
+     geom_smooth(method = "lm", se = FALSE, size = 0.5, linetype=2) +
+     facet_wrap(vars(target_name)) +
+     theme_bw() +
+     theme(legend.position = 'none') +
+     labs(x = "Ct value",
+          y = "log(number gene copies)",
+          title = "Template standard curve data for each target")
+```
+
+<center>![](../man/figures/plot_template_standard_curve.png){width="70%"}</center>

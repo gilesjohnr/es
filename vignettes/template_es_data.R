@@ -61,6 +61,17 @@ knitr::kable(
 )
 
 ## ----eval=FALSE---------------------------------------------------------------
+#  ggplot(template_es_data, aes(x=sample_date, y=ct_value, color=target_name)) +
+#       geom_point(alpha=0.5) +
+#       facet_grid(rows=vars(location_id), cols=vars(target_name)) +
+#       scale_x_date(date_breaks = "3 month", date_labels = "%b %Y") +
+#       theme_bw() +
+#       theme(legend.position = 'none') +
+#       labs(x = element_blank(),
+#            y = "Ct value",
+#            title = "Template of simulated environmental sampling data")
+
+## ----eval=FALSE---------------------------------------------------------------
 #  library(es)
 #  head(template_standard_curve)
 #    target_name n_copies ct_value
@@ -100,4 +111,15 @@ knitr::kable(
                    "Class", 
                    "Description")
 )
+
+## ----eval=FALSE---------------------------------------------------------------
+#  ggplot(template_standard_curve, aes(x=ct_value, y=log(n_copies), color=target_name)) +
+#       geom_point(alpha=0.5) +
+#       geom_smooth(method = "lm", se = FALSE, size = 0.5, linetype=2) +
+#       facet_wrap(vars(target_name)) +
+#       theme_bw() +
+#       theme(legend.position = 'none') +
+#       labs(x = "Ct value",
+#            y = "log(number gene copies)",
+#            title = "Template standard curve data for each target")
 
