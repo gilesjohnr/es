@@ -35,16 +35,13 @@ must be provided. The result is a data.frame containing a 'delta_delta_ct' colum
 \examples{
 \dontrun{
 
-df_example <- template_es_data
-colnames(df_example)[colnames(df_example) == 'date'] <- 'sample_date'
-
 pae <- apply_amplification_efficiency(template_standard_curve)
 
-ddct_standard <- apply_delta_delta_ct(df = df_example,
+ddct_standard <- apply_delta_delta_ct(df = template_es_data,
                                       target_names = c('target_1', 'target_2', 'target_3'),
                                       reference_names = rep('target_0', 3))
 
-ddct_adjusted <- apply_delta_delta_ct(df = df_example,
+ddct_adjusted <- apply_delta_delta_ct(df = template_es_data,
                                       target_names = c('target_1', 'target_2', 'target_3'),
                                       reference_names = rep('target_0', 3),
                                       pae_names = pae$target_name,

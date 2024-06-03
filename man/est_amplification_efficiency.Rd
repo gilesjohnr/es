@@ -17,6 +17,8 @@ List containing the mean, and low and high of the 95\% confidence interval for t
 \description{
 This function takes a set of serial diluted concentrations of target nucleic acid from a standard curve assay and their associated Ct values and
 estimates the percentile amplification efficiency using a linear model as described in \href{https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-7-85}{Yuan et al. (2008)}.
+Note that the model uses a log base 2 transform which assumes that serial dilutions double with each increase in concentration. The function also
+requires a minimum of 5 observations.
 }
 \examples{
 \dontrun{

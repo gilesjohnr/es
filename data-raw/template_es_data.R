@@ -106,10 +106,9 @@ d$ct_value[sel] <- NA
 
 # Select columns and rename
 d <- d[colnames(d) %in% c('sample_date', 'location_id', 'lat_dd', 'lon_dd', 'target_name', 'ct_value')]
-colnames(d)[colnames(d) == 'sample_date'] <- 'date'
 colnames(d)[colnames(d) == 'lat_dd'] <- 'lat'
 colnames(d)[colnames(d) == 'lon_dd'] <- 'lon'
-d <- d[,c('date', 'location_id', 'lat', 'lon', 'target_name', 'ct_value')]
+d <- d[,c('sample_date', 'location_id', 'lat', 'lon', 'target_name', 'ct_value')]
 
 
 d$target_name[d$target_name == 'MS2'] <- "target_0"
@@ -117,16 +116,16 @@ d$target_name[d$target_name == example_targets[2]] <- "target_1"
 d$target_name[d$target_name == example_targets[3]] <- "target_2"
 d$target_name[d$target_name == example_targets[4]] <- "target_3"
 
+d$sample_date <- d$sample_date - 1000
 
 
 
-
-ggplot(d, aes(x=date, y=ct_value)) +
+ggplot(d, aes(x=sample_date, y=ct_value)) +
      geom_point(alpha=0.5) +
      facet_grid(rows=vars(location_id), cols=vars(target_name)) +
      theme_bw()
 
-d <- d[order(d$date, d$location_id, d$target_name),]
+d <- d[order(d$sample_date, d$location_id, d$target_name),]
 row.names(d) <- NULL
 
 template_es_data <- d

@@ -2,6 +2,8 @@
 #'
 #' This function takes a set of serial diluted concentrations of target nucleic acid from a standard curve assay and their associated Ct values and
 #' estimates the percentile amplification efficiency using a linear model as described in [Yuan et al. (2008)](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-7-85).
+#' Note that the model uses a log base 2 transform which assumes that serial dilutions double with each increase in concentration. The function also
+#' requires a minimum of 5 observations.
 #'
 #' @param n_copies A numeric vector giving the serial diluted concentration of target nucleic acid
 #' @param ct_value A numeric vector giving the measured Ct value for each serial dilution in the standard curve design
