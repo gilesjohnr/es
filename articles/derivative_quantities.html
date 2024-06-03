@@ -113,7 +113,7 @@ pathogen detection, the Ct value can also estimate the overall
 <em>quantity</em> of pathogen genetic material in a sample. However, the
 starting amount of target nucleic acid in a sample can be influenced by
 many external factors <span class="citation">(<a href="#ref-rabaan2021">Rabaan et al. 2021</a>; <a href="#ref-bustin2005">Bustin et al. 2005</a>)</span> which makes the
-normalization of these data a challenge. To help address some of these
+normalization of these data a challenge. To help address these
 challenges, we have included both an absolute and a relative
 quantification method in the <code>es</code> package with the following
 functions:</p>
@@ -122,7 +122,7 @@ functions:</p>
 target copies using standard curve quantification described by <span class="citation">Pfaffl (<a href="#ref-pfaffl2012">2012</a>)</span>,
 and</p></li>
 <li><p><code><a href="../reference/calc_delta_delta_ct.html">calc_delta_delta_ct()</a></code> which calculates the relative
-fold change in gene target quantity compared to a reference gene target
+fold-change in gene target quantity compared to a reference gene target
 described by <span class="citation">Livak and Schmittgen (<a href="#ref-livak2001">2001</a>)</span>.</p></li>
 </ol>
 <p>Our hope is that transforming the Ct value into these derivative
@@ -142,11 +142,12 @@ absolute quantification. While it is still susceptible to external
 confounders that influence the starting amount of nucleic acid and any
 inhibitors to amplification that might be present <span class="citation">(<a href="#ref-bustin2005">Bustin et al.
 2005</a>)</span>, this a count variable that is more interpretable than
-raw Ct values and allows for further adjustment and normalization. To
-calculate the number of target gene copies, a standardization assay is
+raw Ct values and allows for normalization with additional covariates.
+To calculate the number of target gene copies, a standard curve assay is
 required which relates known concentrations of each gene target to their
-expected Ct values for the specific PCR machine and reagents used, these
-data are referred to as the ‘standard curve’ <span class="citation">(<a href="#ref-pfaffl2012">Pfaffl 2012</a>)</span>.</p>
+expected Ct values for the specific target, PCR machine, and reagents
+used <span class="citation">(<a href="#ref-pfaffl2012">Pfaffl
+2012</a>)</span>.</p>
 <p>Assuming the PCR machine’s amplification efficiency is 100%, the
 number of gene copies is expected to double with each cycle <span class="citation">(<a href="#ref-ruijter2009">Ruijter et al.
 2009</a>)</span> resulting in a logarithmic relationship between Ct
@@ -205,59 +206,316 @@ objects to calculate the number of target gene copies.</p>
 <span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="dv">4</span> <span class="dv">2020-03-07</span>           <span class="dv">1</span> <span class="fl">23.8</span> <span class="fl">90.37</span>    target_0 <span class="fl">29.95670</span> <span class="fl">21.59581</span></span>
 <span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a><span class="dv">5</span> <span class="dv">2020-03-07</span>           <span class="dv">1</span> <span class="fl">23.8</span> <span class="fl">90.37</span>    target_1 <span class="fl">31.60111</span> <span class="fl">32.99040</span></span>
 <span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a><span class="dv">6</span> <span class="dv">2020-03-07</span>           <span class="dv">1</span> <span class="fl">23.8</span> <span class="fl">90.37</span>    target_1 <span class="fl">32.20208</span> <span class="fl">21.93164</span></span></code></pre></div>
-<p>Note that the response variable for the number of target gene copies
+<p>Note the prediction for the number of target gene copies shown below
 is convenient in that it is more interpretable that the Ct value method,
 however it is an absolute quantification method that may need further
-normalization to adjust for environmental confounders. This variable can
-also be used to create a relative quantity but relating it to an
-endogenous reference gene or using a relative quantification like <span class="math inline">\(\Delta\Delta\)</span>Ct make help with
-interpretation.</p>
+normalization to adjust for environmental confounders. An alternative is
+to use a relative quantitification method such as <span class="math inline">\(\Delta \Delta \text{Ct}\)</span> described in the
+following section.</p>
 <center>
 <img src="../reference/figures/plot_predicted_n_copies.png" style="width:70.0%">
 </center>
 <p><br></p>
 </div>
 <div class="section level2">
-<h2 id="relative-quantification-calculating-the-fold-change-in-gene-expression">Relative quantification: calculating the fold change in gene
+<h2 id="relative-quantification-calculating-the-fold-change-in-gene-expression">Relative quantification: calculating the fold-change in gene
 expression<a class="anchor" aria-label="anchor" href="#relative-quantification-calculating-the-fold-change-in-gene-expression"></a>
 </h2>
 <p>While absolute quantification of the number of target gene copies is
 nicely interpretable, it does not explicitly account for the starting
-amount of nucleic acid in the sample or amplification efficiency of the
-PCR assay [ref]. Normalization of qPCR data has been a general
+amount of nucleic acid in the sample or the amplification efficiency of
+the PCR assay <span class="citation">(<a href="#ref-bustin2005">Bustin
+et al. 2005</a>)</span>. Normalization of qPCR data has been a general
 methodological challenge in biology and has motivated much work on
-statistical methods to transform qPCR data [ref, ref]. One method of
+statistical methods to transform qPCR data <span class="citation">(<a href="#ref-mar2009">Mar et al. 2009</a>; <a href="#ref-bolstad2003">Bolstad et al. 2003</a>)</span>. One method of
 normalization is the <span class="math inline">\(\Delta \Delta
-Ct\)</span> method of calculating the fold change in gene expression of
-the target relative to one or more reference targets [ref]. The <span class="math inline">\(\Delta \Delta Ct\)</span> method is perhaps the
-most robust way to normalize qPCR data and which is particularly
-important for environmental sampling data due to the often uncontrolled
-sources of samples.</p>
+\text{Ct}\)</span> method of calculating the fold-change in gene
+expression of the target relative to one or more reference targets <span class="citation">(<a href="#ref-livak2001">Livak and Schmittgen
+2001</a>)</span>. The <span class="math inline">\(\Delta \Delta
+\text{Ct}\)</span> method is perhaps the most robust way to normalize
+qPCR data and is particularly important for environmental sampling data
+due to the often uncontrolled sources of samples.</p>
 <p>Here we have developed functions that allow for the calculation of
-the standard <span class="math inline">\(\Delta \Delta Ct\)</span>
-described by <span class="citation">Livak and Schmittgen (<a href="#ref-livak2001">2001</a>)</span> and the adjusted <span class="math inline">\(\Delta \Delta Ct\)</span>, which is adjusted for
-the PCR amplification efficiency, described by <span class="citation">Yuan, Wang, and Stewart (<a href="#ref-yuan2008">2008</a>)</span>. We have also included
+the standard <span class="math inline">\(\Delta \Delta
+\text{Ct}\)</span> described by <span class="citation">Livak and
+Schmittgen (<a href="#ref-livak2001">2001</a>)</span> and the adjusted
+<span class="math inline">\(\Delta \Delta \text{Ct}\)</span>, which is
+adjusted for the PCR amplification efficiency, described by <span class="citation">Yuan, Wang, and Stewart (<a href="#ref-yuan2008">2008</a>)</span>. We have also included
 functionality to estimate the percentile amplification efficiency for a
-target nucleic acid following the methods in <span class="citation">(<a href="#ref-yuan2008">Yuan, Wang, and Stewart 2008</a>; <a href="#ref-yuan2006">Yuan et al. 2006</a>)</span>.</p>
-<p>The code below shows how to calculate both the standard and adjusted
-<span class="math inline">\(\Delta \Delta Ct\)</span> values for a
-simulated environmental sampling data set shown in the
+target nucleic acid using a standard curve assay following the methods
+in <span class="citation">(<a href="#ref-yuan2008">Yuan, Wang, and
+Stewart 2008</a>; <a href="#ref-yuan2006">Yuan et al.
+2006</a>)</span>.</p>
+<p>Our formulation of <span class="math inline">\(\Delta \Delta
+\text{Ct}\)</span> begins with the standard method which can be defined
+as:</p>
+<p><span class="math display">\[
+\begin{align}
+\text{Standard method} &amp; = 2^{-\Delta \Delta \text{Ct}} \\
+-\Delta \Delta \text{Ct} &amp; = -(\Delta \text{Ct}_{\text{treatment}} -
+\Delta \text{Ct}_{\text{control}})\\
+\Delta \text{Ct}_{\text{treatment}} &amp; =
+\text{Ct}_{\text{target,treatment}} -
+\text{Ct}_{\text{reference,treatment}}\\
+\Delta \text{Ct}_{\text{control}} &amp; =
+\text{Ct}_{\text{target,control}} -
+\text{Ct}_{\text{reference,control}}\\
+\tag{1}
+\end{align}
+\]</span></p>
+<p>A major assumption of the standard method is that the amplification
+efficiency of the qPCR assay is 100% efficient. In practice, the
+efficiency of an assay is likely to be slightly less than 1, where a
+only a proportion of sample nucleic acids are replicated in each cycle
+<span class="citation">(<a href="#ref-stolovitzky1996">Stolovitzky and
+Cecchi 1996</a>)</span>, which can have a non-trivial impact on an
+output variable with an exponential component. Therefore, the adjusted
+<span class="math inline">\(\Delta \Delta \text{Ct}\)</span> method
+accounts for an imperfect efficiency amplification efficiency (noted as
+<span class="math inline">\(\phi\)</span> here).</p>
+<p><span class="math display">\[
+\begin{align}
+\text{Adjusted method} &amp; = 2^{-\Delta \Delta \text{Ct}} \\
+-\Delta \Delta \text{Ct} &amp; = -(\Delta \text{Ct}_{\text{treatment}} -
+\Delta \text{Ct}_{\text{control}})\\
+\Delta \text{Ct}_{\text{treatment}} &amp; =
+\text{Ct}_{\text{target,treatment}} \times
+\phi_{\text{target,treatment}} - \text{Ct}_{\text{reference,treatment}}
+\times \phi_{\text{reference,treatment}}\\
+\Delta \text{Ct}_{\text{control}} &amp; =
+\text{Ct}_{\text{target,control}} \times \phi_{\text{target,control}} -
+\text{Ct}_{\text{reference,control}} \times
+\phi_{\text{reference,control}}\\
+\tag{2}
+\end{align}
+\]</span></p>
+<p>Since environmental sampling data typically do not have a control
+group, we use the temporal method in the <code>es</code> package to
+relate all “treatment” observations at time <span class="math inline">\(t\)</span> to the “control” observations at time
+<span class="math inline">\(t=0\)</span>; see Section 1.4 of <span class="citation">Livak and Schmittgen (<a href="#ref-livak2001">2001</a>)</span>. Which means we can write
+Equation 1 above as:</p>
+<p><span class="math display">\[
+\begin{align}
+\text{Standard time-based method} &amp; = 2^{-\Delta \Delta \text{Ct}}
+\\
+-\Delta \Delta \text{Ct} &amp; = -(\Delta \text{Ct}_{t} - \Delta
+\text{Ct}_{t=0})\\
+\Delta \text{Ct}_{t} &amp; = \text{Ct}_{\text{target},t} -
+\text{Ct}_{\text{reference},t}\\
+\Delta \text{Ct}_{t=0} &amp; = \text{Ct}_{\text{target},t=0} -
+\text{Ct}_{\text{reference},t=0}\\
+\tag{3}
+\end{align}
+\]</span></p>
+<p>Further, when we incorporate weighting according to the amplification
+efficiency of each target as described in <span class="citation">Yuan,
+Wang, and Stewart (<a href="#ref-yuan2008">2008</a>)</span> and <span class="citation">Yuan et al. (<a href="#ref-yuan2006">2006</a>)</span>,
+we get the following:</p>
+<p><span class="math display">\[
+\begin{align}
+\text{Adjusted time-based method} &amp; = 2^{-\Delta \Delta \text{Ct}}
+\\
+-\Delta \Delta \text{Ct} &amp; = -(\Delta \text{Ct}_{t} - \Delta
+\text{Ct}_{t=0})\\
+\Delta \text{Ct}_{t} &amp; = \phi_{\text{target}} \big(
+\text{Ct}_{\text{target},t} - \text{Ct}_{\text{reference},t} \big)\\
+\Delta \text{Ct}_{t=0} &amp; = \phi_{\text{reference}} \big(
+\text{Ct}_{\text{target},t=0} - \text{Ct}_{\text{reference},t=0} \big)\\
+\tag{4}
+\end{align}
+\]</span></p>
+<p>where, <span class="math inline">\(\phi_{\text{target}}\)</span> and
+<span class="math inline">\(\phi_{\text{reference}}\)</span> are the
+estimated qPCR amplification efficiency values for the target and
+reference genes respectively. Note that traditionally there would also
+be a <span class="math inline">\(\phi\)</span> value for the treatment
+and control groups, but since environmental sampling data do not have an
+explicit sample treatment we use the same <span class="math inline">\(\phi\)</span> for when time = <span class="math inline">\(t\)</span> and <span class="math inline">\(t=0\)</span>.</p>
+<p>The following code blocks show how to calculate both the standard and
+adjusted <span class="math inline">\(\Delta \Delta \text{Ct}\)</span>
+values for a simulated environmental sampling data set shown in the
 <code>template_es_data</code> and <code>template_standard_curve</code>
-data objects.</p>
-<div class="section level4">
-<h4 id="standard-delta-delta-ct">Standard <span class="math inline">\(\Delta \Delta Ct\)</span><a class="anchor" aria-label="anchor" href="#standard-delta-delta-ct"></a>
-</h4>
-</div>
-<div class="section level4">
-<h4 id="adjusted-delta-delta-ct">Adjusted <span class="math inline">\(\Delta \Delta Ct\)</span><a class="anchor" aria-label="anchor" href="#adjusted-delta-delta-ct"></a>
-</h4>
+data objects. To calculate the standard <span class="math inline">\(\Delta \Delta \text{Ct}\)</span> value (Equation
+1) initially described in <span class="citation">Livak and Schmittgen
+(<a href="#ref-livak2001">2001</a>)</span> we assume a PCR efficiency of
+1 for all targets. The following code does the calculation for a single
+observation.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Standard method</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">calc_delta_delta_ct</span>(<span class="at">ct_target_treatment =</span> <span class="fl">32.5</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>                    <span class="at">ct_reference_treatment =</span> <span class="dv">25</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>                    <span class="at">ct_target_control =</span> <span class="dv">34</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>                    <span class="at">ct_reference_control =</span> <span class="dv">30</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">0.08838835</span></span></code></pre></div>
+<p>And adjusted <span class="math inline">\(\Delta \Delta
+\text{Ct}\)</span> (Equation 2) can be calculated by incorporating the
+arguments with prefix <code>pae_*</code> for percentile amplification
+efficiency.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Adjusted method incorporating amplification efficiency</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">calc_delta_delta_ct</span>(<span class="at">ct_target_treatment =</span> <span class="fl">32.5</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>                    <span class="at">ct_reference_treatment =</span> <span class="dv">25</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>                    <span class="at">ct_target_control =</span> <span class="dv">34</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>                    <span class="at">ct_reference_control =</span> <span class="dv">30</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>                    <span class="at">pae_target_treatment=</span><span class="fl">0.97</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>                    <span class="at">pae_target_control=</span><span class="fl">0.98</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>                    <span class="at">pae_reference_treatment=</span><span class="fl">0.98</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>                    <span class="at">pae_reference_control=</span><span class="fl">0.99</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">0.09440454</span></span></code></pre></div>
+<p>The temporally-controlled standard <span class="math inline">\(\Delta
+\Delta \text{Ct}\)</span> calculation (Equation 3) can be applied to the
+entire data set using the <code><a href="../reference/apply_delta_delta_ct.html">apply_delta_delta_ct()</a></code>
+function.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Standard temporally-controlled method</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>df_example <span class="ot">&lt;-</span> template_es_data</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">colnames</span>(df_example)[<span class="fu">colnames</span>(df_example) <span class="sc">==</span> <span class="st">'date'</span>] <span class="ot">&lt;-</span> <span class="st">'sample_date'</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>ddct_standard <span class="ot">&lt;-</span> <span class="fu">apply_delta_delta_ct</span>(<span class="at">df =</span> df_example,</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>                                      <span class="at">target_names =</span> <span class="fu">c</span>(<span class="st">'target_1'</span>, <span class="st">'target_2'</span>, <span class="st">'target_3'</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>                                      <span class="at">reference_names =</span> <span class="fu">rep</span>(<span class="st">'target_0'</span>, <span class="dv">3</span>))</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="fu">head</span>(ddct_standard)</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>  location_id sample_date target_name delta_delta_ct</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="dv">1</span>           <span class="dv">1</span>  <span class="dv">2020-03-07</span>    target_1       <span class="fl">1.000000</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="dv">2</span>           <span class="dv">1</span>  <span class="dv">2020-03-11</span>    target_1      <span class="fl">17.762262</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="dv">3</span>           <span class="dv">1</span>  <span class="dv">2020-03-23</span>    target_1      <span class="fl">29.642154</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="dv">4</span>           <span class="dv">1</span>  <span class="dv">2020-03-24</span>    target_1      <span class="fl">32.191141</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="dv">5</span>           <span class="dv">1</span>  <span class="dv">2020-03-30</span>    target_1       <span class="fl">5.694505</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="dv">6</span>           <span class="dv">1</span>  <span class="dv">2020-04-03</span>    target_1       <span class="fl">8.620370</span></span></code></pre></div>
+<p>And the adjusted time-based <span class="math inline">\(\Delta \Delta
+\text{Ct}\)</span> calculation (Equation 4) can be calculated after
+using the <code><a href="../reference/apply_amplification_efficiency.html">apply_amplification_efficiency()</a></code> function to get
+efficiency estimates from a standard curve data set.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Adjusted temporally-controlled method</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>df_example <span class="ot">&lt;-</span> template_es_data</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">colnames</span>(df_example)[<span class="fu">colnames</span>(df_example) <span class="sc">==</span> <span class="st">'date'</span>] <span class="ot">&lt;-</span> <span class="st">'sample_date'</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>pae <span class="ot">&lt;-</span> <span class="fu">apply_amplification_efficiency</span>(template_standard_curve)</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>ddct_adjusted <span class="ot">&lt;-</span> <span class="fu">apply_delta_delta_ct</span>(<span class="at">df =</span> df_example,</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>                                      <span class="at">target_names =</span> <span class="fu">c</span>(<span class="st">'target_1'</span>, <span class="st">'target_2'</span>, <span class="st">'target_3'</span>),</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>                                      <span class="at">reference_names =</span> <span class="fu">rep</span>(<span class="st">'target_0'</span>, <span class="dv">3</span>),</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>                                      <span class="at">pae_names =</span> pae<span class="sc">$</span>target_name,</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>                                      <span class="at">pae_values =</span> pae<span class="sc">$</span>mean)</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="fu">head</span>(ddct_adjusted)</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>  location_id sample_date target_name delta_delta_ct</span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="dv">1</span>           <span class="dv">1</span>  <span class="dv">2020-03-07</span>    target_1       <span class="fl">1.000000</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="dv">2</span>           <span class="dv">1</span>  <span class="dv">2020-03-11</span>    target_1      <span class="fl">17.465229</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="dv">3</span>           <span class="dv">1</span>  <span class="dv">2020-03-23</span>    target_1      <span class="fl">26.118476</span></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="dv">4</span>           <span class="dv">1</span>  <span class="dv">2020-03-24</span>    target_1      <span class="fl">29.213109</span></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a><span class="dv">5</span>           <span class="dv">1</span>  <span class="dv">2020-03-30</span>    target_1       <span class="fl">5.485189</span></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="dv">6</span>           <span class="dv">1</span>  <span class="dv">2020-04-03</span>    target_1       <span class="fl">7.632729</span></span></code></pre></div>
+<p>Finally, the code below shows a full example of adding adjusted
+time-based <span class="math inline">\(\Delta \Delta \text{Ct}\)</span>
+to a data frame and visualizing the result.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">mgcv</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Estimate amplification efficiency</span></span>
+<span><span class="va">pae</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_amplification_efficiency.html">apply_amplification_efficiency</a></span><span class="op">(</span><span class="va">template_es_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate standard delta delta Ct</span></span>
+<span><span class="va">ddct_standard</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_delta_delta_ct.html">apply_delta_delta_ct</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">df_example</span>,</span>
+<span>                                      target_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'target_1'</span>, <span class="st">'target_2'</span>, <span class="st">'target_3'</span><span class="op">)</span>,</span>
+<span>                                      reference_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'target_0'</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate adjusted delta delta Ct</span></span>
+<span><span class="va">ddct_adjusted</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/apply_delta_delta_ct.html">apply_delta_delta_ct</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">df_example</span>,</span>
+<span>                                      target_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'target_1'</span>, <span class="st">'target_2'</span>, <span class="st">'target_3'</span><span class="op">)</span>,</span>
+<span>                                      reference_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'target_0'</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>                                      pae_names <span class="op">=</span> <span class="va">pae</span><span class="op">$</span><span class="va">target_name</span>,</span>
+<span>                                      pae_values <span class="op">=</span> <span class="va">pae</span><span class="op">$</span><span class="va">mean</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Combine results</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">ddct_standard</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">ddct_standard</span><span class="op">)</span> <span class="op">==</span> <span class="st">'delta_delta_ct'</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">'delta_delta_ct_standard'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">ddct_adjusted</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">ddct_adjusted</span><span class="op">)</span> <span class="op">==</span> <span class="st">'delta_delta_ct'</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">'delta_delta_ct_adjusted'</span></span>
+<span><span class="va">ddct</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://edzer.github.io/sp/reference/merge.html" class="external-link">merge</a></span><span class="op">(</span><span class="va">ddct_standard</span>, <span class="va">ddct_adjusted</span>, by<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'location_id'</span>, <span class="st">'sample_date'</span>, <span class="st">'target_name'</span><span class="op">)</span>, all<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">ddct</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://edzer.github.io/sp/reference/merge.html" class="external-link">merge</a></span><span class="op">(</span><span class="va">template_es_data</span>, <span class="va">ddct</span>, by<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'location_id'</span>, <span class="st">'sample_date'</span>, <span class="st">'target_name'</span><span class="op">)</span>, all.x<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Fit time series models to delta delta Ct to visualize time trends</span></span>
+<span><span class="va">fit_gam</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>     <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va">mgcv</span><span class="op">)</span></span>
+<span></span>
+<span>     <span class="co"># Fit GAMs with a Gaussian process smoothing term and a Gamma link function</span></span>
+<span>     <span class="va">mod_standard</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="va">delta_delta_ct_standard</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">sample_date</span><span class="op">)</span>, bs <span class="op">=</span> <span class="st">"gp"</span><span class="op">)</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">Gamma</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"inverse"</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">x</span>, method <span class="op">=</span> <span class="st">"REML"</span>, na.action <span class="op">=</span> <span class="va">na.exclude</span><span class="op">)</span></span>
+<span>     <span class="va">mod_adjusted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/gam.html" class="external-link">gam</a></span><span class="op">(</span><span class="va">delta_delta_ct_adjusted</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/mgcv/man/s.html" class="external-link">s</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">sample_date</span><span class="op">)</span>, bs <span class="op">=</span> <span class="st">"gp"</span><span class="op">)</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">Gamma</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"inverse"</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">x</span>, method <span class="op">=</span> <span class="st">"REML"</span>, na.action <span class="op">=</span> <span class="va">na.exclude</span><span class="op">)</span></span>
+<span></span>
+<span>     <span class="co"># Add model predictions to data</span></span>
+<span>     <span class="va">x</span><span class="op">$</span><span class="va">pred_delta_delta_ct_standard</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">mod_standard</span>, newdata <span class="op">=</span> <span class="va">x</span>, type<span class="op">=</span><span class="st">'response'</span>, se.fit<span class="op">=</span><span class="cn">F</span><span class="op">)</span></span>
+<span>     <span class="va">x</span><span class="op">$</span><span class="va">pred_delta_delta_ct_adjusted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">mod_adjusted</span>, newdata <span class="op">=</span> <span class="va">x</span>, type<span class="op">=</span><span class="st">'response'</span>, se.fit<span class="op">=</span><span class="cn">F</span><span class="op">)</span></span>
+<span></span>
+<span>     <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Apply GAMs by location</span></span>
+<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="va">ddct</span><span class="op">[</span><span class="va">ddct</span><span class="op">$</span><span class="va">target_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'target_2'</span><span class="op">)</span>,<span class="op">]</span></span>
+<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/split.html" class="external-link">split</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">$</span><span class="va">location_id</span><span class="op">)</span><span class="op">)</span>, <span class="va">fit_gam</span><span class="op">)</span></span>
+<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">tmp</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Visualize result</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">ddct</span><span class="op">[</span><span class="va">ddct</span><span class="op">$</span><span class="va">target_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'target_0'</span>, <span class="st">'target_2'</span><span class="op">)</span>,<span class="op">]</span>,</span>
+<span>       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sample_date</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">ct_value</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.6</span>, shape <span class="op">=</span> <span class="fl">16</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">target_name</span><span class="op">)</span>, cols <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">location_id</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>panel.grid.major <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">0.25</span>, linetype <span class="op">=</span> <span class="st">'solid'</span>, color <span class="op">=</span> <span class="st">'grey80'</span><span class="op">)</span>,</span>
+<span>           panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>           panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>           axis.line <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">0.5</span>, linetype <span class="op">=</span> <span class="st">'solid'</span>, color <span class="op">=</span> <span class="st">'black'</span><span class="op">)</span>,</span>
+<span>           legend.position <span class="op">=</span> <span class="st">"bottom"</span>,</span>
+<span>           legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>           strip.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"white"</span>, color <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>           axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span>, size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>          y <span class="op">=</span> <span class="st">"Ct value"</span>,</span>
+<span>          subtitle <span class="op">=</span> <span class="st">"Raw Ct values"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html" class="external-link">scale_x_date</a></span><span class="op">(</span>date_breaks <span class="op">=</span> <span class="st">"3 month"</span>, date_labels <span class="op">=</span> <span class="st">"%b %Y"</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sample_date</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">delta_delta_ct_standard</span>, color <span class="op">=</span> <span class="st">'Standard'</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.6</span>, shape <span class="op">=</span> <span class="fl">16</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">delta_delta_ct_adjusted</span>, color <span class="op">=</span> <span class="st">'Adjusted'</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.6</span>, shape <span class="op">=</span> <span class="fl">17</span>, size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">pred_delta_delta_ct_standard</span>, color <span class="op">=</span> <span class="st">'Standard'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">pred_delta_delta_ct_adjusted</span>, color <span class="op">=</span> <span class="st">'Adjusted'</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">target_name</span><span class="op">)</span>, cols <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">location_id</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>panel.grid.major <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">0.25</span>, linetype <span class="op">=</span> <span class="st">'solid'</span>, color <span class="op">=</span> <span class="st">'grey80'</span><span class="op">)</span>,</span>
+<span>          panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>          panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>          axis.line <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">0.5</span>, linetype <span class="op">=</span> <span class="st">'solid'</span>, color <span class="op">=</span> <span class="st">'black'</span><span class="op">)</span>,</span>
+<span>          legend.position <span class="op">=</span> <span class="st">"bottom"</span>,</span>
+<span>          legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>          strip.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"white"</span>, color <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>          axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span>, size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>          y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fl">2</span><span class="op">^</span><span class="op">{</span><span class="op">-</span><span class="va">Delta</span> <span class="op">*</span> <span class="va">Delta</span> <span class="op">*</span> <span class="va">Ct</span><span class="op">}</span><span class="op">)</span>,</span>
+<span>          subtitle <span class="op">=</span> <span class="st">"Comparison of standard and adjusted values"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Standard"</span> <span class="op">=</span> <span class="st">"dodgerblue"</span>, <span class="st">"Adjusted"</span> <span class="op">=</span> <span class="st">"tomato2"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html" class="external-link">scale_x_date</a></span><span class="op">(</span>date_breaks <span class="op">=</span> <span class="st">"3 month"</span>, date_labels <span class="op">=</span> <span class="st">"%b %Y"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">plot_grid</span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, nrow<span class="op">=</span><span class="fl">2</span>, align<span class="op">=</span><span class="st">'v'</span>, rel_heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<center>
+<img src="../reference/figures/plot_ddct.png" style="width:100.0%">
+</center>
 <p><br></p>
-</div>
 </div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-bolstad2003" class="csl-entry">
+Bolstad, B. M., R. A Irizarry, M. Åstrand, and T. P. Speed. 2003.
+<span>“A Comparison of Normalization Methods for High
+Densityoligonucleotide Array Data Based on Variance and Bias.”</span>
+<em>Bioinformatics</em> 19 (2): 185–93. <a href="https://doi.org/10.1093/bioinformatics/19.2.185" class="external-link">https://doi.org/10.1093/bioinformatics/19.2.185</a>.
+</div>
 <div id="ref-bustin2005" class="csl-entry">
 Bustin, S. A., V. Benes, T. Nolan, and M. W. Pfaffl. 2005.
 <span>“Quantitative Real-Time RT-PCR <span></span> a
@@ -276,6 +534,13 @@ Livak, Kenneth J., and Thomas D. Schmittgen. 2001. <span>“Analysis of
 Relative Gene Expression Data Using Real-Time Quantitative PCR and the
 2<span>-</span>ΔΔCT Method.”</span> <em>Methods</em> 25 (4): 402–8. <a href="https://doi.org/10.1006/meth.2001.1262" class="external-link">https://doi.org/10.1006/meth.2001.1262</a>.
 </div>
+<div id="ref-mar2009" class="csl-entry">
+Mar, Jessica C., Yasumasa Kimura, Kate Schroder, Katharine M. Irvine,
+Yoshihide Hayashizaki, Harukazu Suzuki, David Hume, and John
+Quackenbush. 2009. <span>“Data-Driven Normalization Strategies for
+High-Throughput Quantitative RT-PCR.”</span> <em>BMC Bioinformatics</em>
+10 (1): 110. <a href="https://doi.org/10.1186/1471-2105-10-110" class="external-link">https://doi.org/10.1186/1471-2105-10-110</a>.
+</div>
 <div id="ref-pfaffl2012" class="csl-entry">
 Pfaffl, Michael W. 2012. <span>“Quantification Strategies in Real-Time
 Polymerase Chain Reaction.”</span> In, 53–61. Caister Academic Press. <a href="https://www.caister.com/qpcr" class="external-link">https://www.caister.com/qpcr</a>.
@@ -291,6 +556,12 @@ Ruijter, J. M., C. Ramakers, W. M. H. Hoogaars, Y. Karlen, O. Bakker, M.
 J. B. van den Hoff, and A. F. M. Moorman. 2009. <span>“Amplification
 Efficiency: Linking Baseline and Bias in the Analysis of Quantitative
 PCR Data.”</span> <em>Nucleic Acids Research</em> 37 (6): e45. <a href="https://doi.org/10.1093/nar/gkp045" class="external-link">https://doi.org/10.1093/nar/gkp045</a>.
+</div>
+<div id="ref-stolovitzky1996" class="csl-entry">
+Stolovitzky, G., and G. Cecchi. 1996. <span>“Efficiency of DNA
+replication in the polymerase chain reaction.”</span> <em>Proceedings of
+the National Academy of Sciences of the United States of America</em> 93
+(23): 12947–52. <a href="https://doi.org/10.1073/pnas.93.23.12947" class="external-link">https://doi.org/10.1073/pnas.93.23.12947</a>.
 </div>
 <div id="ref-thermofisherscientific2024" class="csl-entry">
 Thermo Fisher Scientific. 2024. <span>“Real-Time PCR (qPCR)

@@ -181,6 +181,21 @@ assays</td>
 </tr>
 </tbody>
 </table>
+<p>And a the plot below shows the temporal distribution of the simulated
+data in the <code>template_es_data</code> object:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">template_es_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">sample_date</span>, y<span class="op">=</span><span class="va">ct_value</span>, color<span class="op">=</span><span class="va">target_name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>alpha<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">location_id</span><span class="op">)</span>, cols<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">target_name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_date.html" class="external-link">scale_x_date</a></span><span class="op">(</span>date_breaks <span class="op">=</span> <span class="st">"3 month"</span>, date_labels <span class="op">=</span> <span class="st">"%b %Y"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">'none'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>          y <span class="op">=</span> <span class="st">"Ct value"</span>,</span>
+<span>          title <span class="op">=</span> <span class="st">"Template of simulated environmental sampling data"</span><span class="op">)</span></span></code></pre></div>
+<center>
+<img src="../reference/figures/plot_template_es_data.png" style="width:100.0%">
+</center>
 </div>
 <div class="section level2">
 <h2 id="template-standard-curve-data">Template standard curve data<a class="anchor" aria-label="anchor" href="#template-standard-curve-data"></a>
@@ -192,21 +207,21 @@ infer the number of gene copies for each of the observed Ct values in a
 data set formatted according to the <code>template_es_data</code>
 object. To view the template standard curve data, see the code
 below:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(es)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">head</span>(template_standard_curve)</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  target_name n_copies ct_value</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="dv">1</span>    target_1    <span class="fl">1e+01</span> <span class="fl">31.29322</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="dv">2</span>    target_1    <span class="fl">1e+02</span> <span class="fl">27.73392</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="dv">3</span>    target_1    <span class="fl">1e+03</span> <span class="fl">23.48097</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="dv">4</span>    target_1    <span class="fl">1e+04</span> <span class="fl">18.91412</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="dv">5</span>    target_1    <span class="fl">1e+05</span> <span class="fl">16.68971</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="dv">6</span>    target_2    <span class="fl">1e+01</span> <span class="fl">32.34237</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="fu">str</span>(template_standard_curve)</span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="st">'data.frame'</span><span class="sc">:</span>   <span class="dv">15</span> obs. of  <span class="dv">3</span> variables<span class="sc">:</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a> <span class="er">$</span> target_name<span class="sc">:</span> chr  <span class="st">"target_1"</span> <span class="st">"target_1"</span> <span class="st">"target_1"</span> <span class="st">"target_1"</span> ...</span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a> <span class="sc">$</span> n_copies   <span class="sc">:</span> num  <span class="fl">1e+01</span> <span class="fl">1e+02</span> <span class="fl">1e+03</span> <span class="fl">1e+04</span> <span class="fl">1e+05</span> <span class="fl">1e+01</span> <span class="fl">1e+02</span> <span class="fl">1e+03</span> <span class="fl">1e+04</span> <span class="fl">1e+05</span> ...</span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a> <span class="sc">$</span> ct_value   <span class="sc">:</span> num  <span class="fl">31.3</span> <span class="fl">27.7</span> <span class="fl">23.5</span> <span class="fl">18.9</span> <span class="fl">16.7</span> ...</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(es)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">head</span>(template_standard_curve)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  target_name n_copies ct_value</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="dv">1</span>    target_1    <span class="fl">1e+01</span> <span class="fl">31.29322</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="dv">2</span>    target_1    <span class="fl">1e+02</span> <span class="fl">27.73392</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="dv">3</span>    target_1    <span class="fl">1e+03</span> <span class="fl">23.48097</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="dv">4</span>    target_1    <span class="fl">1e+04</span> <span class="fl">18.91412</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="dv">5</span>    target_1    <span class="fl">1e+05</span> <span class="fl">16.68971</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="dv">6</span>    target_2    <span class="fl">1e+01</span> <span class="fl">32.34237</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="fu">str</span>(template_standard_curve)</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="st">'data.frame'</span><span class="sc">:</span>   <span class="dv">15</span> obs. of  <span class="dv">3</span> variables<span class="sc">:</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a> <span class="er">$</span> target_name<span class="sc">:</span> chr  <span class="st">"target_1"</span> <span class="st">"target_1"</span> <span class="st">"target_1"</span> <span class="st">"target_1"</span> ...</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a> <span class="sc">$</span> n_copies   <span class="sc">:</span> num  <span class="fl">1e+01</span> <span class="fl">1e+02</span> <span class="fl">1e+03</span> <span class="fl">1e+04</span> <span class="fl">1e+05</span> <span class="fl">1e+01</span> <span class="fl">1e+02</span> <span class="fl">1e+03</span> <span class="fl">1e+04</span> <span class="fl">1e+05</span> ...</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a> <span class="sc">$</span> ct_value   <span class="sc">:</span> num  <span class="fl">31.3</span> <span class="fl">27.7</span> <span class="fl">23.5</span> <span class="fl">18.9</span> <span class="fl">16.7</span> ...</span></code></pre></div>
 <p>More detailed descriptions of each variable in the
 <code>template_standard_curve</code> object are shown in the table
 below:</p>
@@ -241,6 +256,21 @@ assays</td>
 </tr>
 </tbody>
 </table>
+<p>And the plot below shows the simulated standard curve data in the
+<code>template_standard_curve</code> object:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">template_standard_curve</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">ct_value</span>, y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">n_copies</span><span class="op">)</span>, color<span class="op">=</span><span class="va">target_name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>alpha<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span>, size <span class="op">=</span> <span class="fl">0.5</span>, linetype<span class="op">=</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">target_name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">'none'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Ct value"</span>,</span>
+<span>          y <span class="op">=</span> <span class="st">"log(number gene copies)"</span>,</span>
+<span>          title <span class="op">=</span> <span class="st">"Template standard curve data for each target"</span><span class="op">)</span></span></code></pre></div>
+<center>
+<img src="../reference/figures/plot_template_standard_curve.png" style="width:70.0%">
+</center>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
