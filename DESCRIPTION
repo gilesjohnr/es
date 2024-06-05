@@ -1,8 +1,8 @@
 Package: es
 Type: Package
 Title: Tools for analyzing environmental sampling data
-Version: 0.0.1
-Date: 2024-02-22
+Version: 1.0.0
+Date: 2024-06-04
 Author: c(person("John R", "Giles", role=c("aut", "cre"), email="john.giles@gatesfoundation.org"))
 Maintainer: John R Giles <john.giles@gatesfoundation.org>
 Description: Tools for analyzing environmental sampling data.

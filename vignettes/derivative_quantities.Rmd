@@ -26,6 +26,8 @@ Studies utilizing environmental sampling for disease surveillance often employ Q
 
 2.  `calc_delta_delta_ct()` which calculates the relative fold-change in gene target quantity compared to a reference gene target described by @livak2001.
 
+3. `est_amplification_efficiency()` is a method for estimating the percentile amplification efficiency of the qPCR using a standard curve assay (see @yuan2008).
+
 Our hope is that transforming the Ct value into these derivative quantities can help make environmental sampling data more interpretable and to normalize its variance in a manner that is less vulnerable to confounding. The examples below show how to calculate these quantities given that your data match the template data shown in the `template_es_data` and `template_standard_curve` objects.
 
 \

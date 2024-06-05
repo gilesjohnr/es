@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 
 To use the data and methods provided in the `es` R package, input data must match the formatting shown in the `template_es_data` and `standard_curves` data objects. These objects are installed along with the `es` package and provide a starting point to calculate derivative quantities, adding spatial metadata, and launching the visualization application. Both template data sources are described in more detail below:
 
+\
+
 ## Template environmental sampling data
 
 The primary data that is required for the methods in the `es` package is shown in the `template_es_data` object. These data have 6 columns and give the time and location of each observation and a Cycle Threshold (Ct) value from a qPCR assay. The code below shows how to view the data template:
@@ -95,6 +97,8 @@ ggplot(template_es_data, aes(x=sample_date, y=ct_value, color=target_name)) +
 ```
 
 <center>![](../man/figures/plot_template_es_data.png){width="100%"}</center>
+
+\
 
 ## Template standard curve data
 

@@ -28,6 +28,8 @@ To characterize local topography and hydrology of sampling sites, we have includ
 
 See below for an example of how to use the `es` package to calculate these hydrological variables for a set of sampling sites.
 
+\
+
 ### Download spatial data
 ``` {r, eval=FALSE}
 library(es)
@@ -64,6 +66,8 @@ The Digital Elevation Model (DEM) is downloaded to the 'tmp' directory.
 
 ![](../man/figures/dir_download_dem.png){width=70%}
 
+\
+
 ### Calculate hydrological variables
 ``` {r, eval=FALSE}
 # Calculate topographical and hydrological variables for each sampling site
@@ -98,6 +102,8 @@ lon  lat       date location_id target_name ct_value elevation slope aspect  twi
 The intermediate spatial data produced in the calculation of topographical and hydrological variables are also saved to the 'tmp' output directory.
 
 ![](../man/figures/dir_output_hydro.png){width=70%}
+
+\
 
 ### Plot results
 These output data can be used for further analysis and visualization. Below is an example plot of the local population calculations shown above.

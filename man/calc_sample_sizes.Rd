@@ -4,22 +4,24 @@
 \alias{calc_sample_sizes}
 \title{Calculate sample sizes}
 \usage{
-calc_sample_sizes(d)
+calc_sample_sizes(df, cutoff = 40)
 }
 \arguments{
-\item{d}{A data.frame produced by the \code{compile_tac_data} function containing 'target_name' and 'ct_value' columns.}
+\item{df}{A data.frame produced by the \code{compile_tac_data} function containing 'target_name' and 'ct_value' columns.}
+
+\item{cutoff}{Numeric scalar giving the cutoff Ct value over which a gene target is deemed absent from a sample. Default is 40.}
 }
 \value{
 data.frame
 }
 \description{
-This function takes a compiled data.frame from the \code{compile_tac_data} and calculates basic sample sizes for all targets.
+This function takes a compiled data.frame following the format shown in the \code{template_es_data} object
+and calculates basic sample sizes and detection rates for all gene targets.
 }
 \examples{
 \dontrun{
 
-compiled_tac <- read.csv('/Users/tac/compiled_tac.csv')
-calc_sample_sizes(compiled_tac)
+calc_sample_sizes(template_es_data)
 
 }
 }

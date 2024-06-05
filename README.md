@@ -4,59 +4,66 @@
 
 # **es**: an R package for analyzing environmental sampling data <img src="man/figures/logo.png" align="right" height="138" alt="" />
 
-This package provides reproducible functions for parsing and compiling data sets that measure infectious disease burden using Environmental Sampling (ES) methods. The tools here were developed specifically for epidemiological surveillance studies for multiple pathogens in locations such as Dhaka, Bangladesh and Karachi, Pakistan. However, the functions should generalize to other applications provided they use the same data formats. This package is currently in development and maintained by John Giles ([@gilesjohnr](https://github.com/gilesjohnr)), details on data and models below.
+The `es` R package provides reproducible functions for collating and analyzing data from environmental sampling studies. Environmental Sampling (ES) of infectious diseases involves collecting samples from various sources (such as sewage, water, air, soil, or surfaces) to monitor the presence of pathogens in the environment. The tools here are intended to do the heavy-lifting when analyzing ES data and include:
+
+  * establishing standardized data formats,
+  * relative and absolute quantification of qPCR data,
+  * collating spatial data for sampling sites,
+  * and analysis of sample sizes and temporal trends.
+
+We developed the `es` R package primarily for epidemiological surveillance studies for multiple pathogens in Low- and Middle-Income Countries (LMIC) where samples are collected from informal sewer networks. However, the functions should generalize to other applications provided they use the same data formats. Feel free to reach out with comments or questions; the package is currently in development and maintained by John Giles ([@gilesjohnr](https://github.com/gilesjohnr)).
+
+\
+
+## Data standards
+
+To use the data and methods provided in the `es` R package, input data must match the formatting shown in the `template_es_data` and `template_standard_curves` data objects. Both template data sets are described in more detail in following vignette:
+
+<center>[Templates for input data sets](https://gilesjohnr.github.io/es/articles/template_es_data.html)</center>
+
+\
+
+## Derivative qPCR quantities
+
+Studies utilizing environmental sampling for disease surveillance often employ Quantitative Real-Time Polymerase Chain Reaction (qPCR) to detect pathogens in samples. In qPCR, the measurement is given as the cycle threshold (Ct) value which is often used with a cutoff value to render a presence/absence response. The Ct values can also be transformed into absolute or relative quantities of pathogen presence using the methods in the `calc_n_copies()`, `calc_delta_delta_ct()`, and `est_amplification_efficiency()` functions which described in more detail in the following vignettes:
+
+<center>[Absolute quantification of qPCR data]()</center>
+
+<center>[Relative quantification of qPCR data]()</center>
+
+<center>[qPCR Amplification efficiency]()</center>
 
 
-## Required data
+\
 
-The tools here are intended to do the heavy lifting when combining data from multiple sources and calculating relevant quantities. However, the use must start by putting their data into the following standard format:
+## Covariates
 
-  1. A standardized ES data format
+Environmental sampling studies conducted in informal sewer systems are vulnerable to confounding because climate and local geography can impact the substrate available for collection. Therefore, we have included functions that download spatial data (such as climate, hydrology, an local populations) for the times and locations in the ES data. The following vignettes describe the data sources and methods used and to relating these spatial data to ES data observations:
+
+<center>[Sources of spatial data](https://gilesjohnr.github.io/es/articles/metadata_functions.html)</center>
+
+
+<center>[Getting climate data](https://gilesjohnr.github.io/es/articles/get_climate_data.html)</center>
+
+<center>[Calculating hydrological variables](https://gilesjohnr.github.io/es/articles/calc_hydro_variables.html)</center>
+
+<center>[Calculating local population size](https://gilesjohnr.github.io/es/articles/calc_local_population.html)</center>
+
+<center>[Getting administrative data]()</center>
   
-  2. For viral load calculations, information on standard curves are also required.
+\
+  
+## Analysis
 
+Additional analyses are under development and will likely include the calculation of cross correlations among targets, time series models, and models of pathogen presence based on multiple gene targets. Currently, methods for quick tabulation of sampling statistics and overall detection rates are available in the `calc_sample_sizes()` function.
 
-
-## Methods
-
-#### Derivative quantities
-
-  1. Calculate viral load (requires standard curve data)
-  
-  2. Calculate delta delta Ct (requires a reference target)
-  
-#### Adding metadata
-
-  3. Retrieve metadata: 
-  
-     - Precipitation
-     - Temperature
-     - Evaporative Stress Index (ESI)
-     - Elevation
-     - Topography (slope, aspect)
-     - Topographical Wetness Index (TWI)
-     - Flow Accumulation
-     - Discharge of nearest river
-     - Drainage catchments (based on streams or user provided sewer network)
-     - Population sizes (within catchments or a user defined radius around sampling sites)
-     - Administrative units
-  
-  4. Calculate summary sampling statistics
-  
-  5. Estimate cross correlations
-  
-  6. Estimate time series models
-  
-  7. Estimate models of pathogen presence based on multiple gene targets
+\
 
 ## Visualization
 
-  8. Launch Rshiny application
+We are currently developing an RShiny application that will visualize the data and methods in `es` package.
 
-## Examples
-
-For a full demo of the package please see the vignettes located HERE.
-
+\
 
 ## Installation
 
@@ -70,11 +77,13 @@ install.packages('devtools')
 devtools::install_github("gilesjohnr/es", dependencies=TRUE)
 ```
 
+\
 
 ## Troubleshooting
 
 For general questions, contact John Giles (john.giles@gatesfoundation.org) and/or Jillian Gauld (jillian.gauld@gatesfoundation.org). Note that this software is made available under a [Creative Commons 4.0](https://creativecommons.org/licenses/by/4.0/) license and was developed for specific environmental sampling applications and therefore may not generalize perfectly to all settings.
 
+\
 
 ## Funding
 
