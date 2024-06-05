@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="index.html">es</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,65 +91,71 @@
 <strong>es</strong>: an R package for analyzing environmental sampling data <a class="anchor" aria-label="anchor" href="#es-an-r-package-for-analyzing-environmental-sampling-data-"></a>
 </h1>
 </div>
-<p>This package provides reproducible functions for parsing and compiling data sets that measure infectious disease burden using Environmental Sampling (ES) methods. The tools here were developed specifically for epidemiological surveillance studies for multiple pathogens in locations such as Dhaka, Bangladesh and Karachi, Pakistan. However, the functions should generalize to other applications provided they use the same data formats. This package is currently in development and maintained by John Giles (<a href="https://github.com/gilesjohnr" class="external-link">@gilesjohnr</a>), details on data and models below.</p>
-<div class="section level2">
-<h2 id="required-data">Required data<a class="anchor" aria-label="anchor" href="#required-data"></a>
-</h2>
-<p>The tools here are intended to do the heavy lifting when combining data from multiple sources and calculating relevant quantities. However, the use must start by putting their data into the following standard format:</p>
-<ol style="list-style-type: decimal">
-<li><p>A standardized ES data format</p></li>
-<li><p>For viral load calculations, information on standard curves are also required.</p></li>
-</ol>
-</div>
-<div class="section level2">
-<h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a>
-</h2>
-<div class="section level4">
-<h4 id="derivative-quantities">Derivative quantities<a class="anchor" aria-label="anchor" href="#derivative-quantities"></a>
-</h4>
-<ol style="list-style-type: decimal">
-<li><p>Calculate viral load (requires standard curve data)</p></li>
-<li><p>Calculate delta delta Ct (requires a reference target)</p></li>
-</ol>
-</div>
-<div class="section level4">
-<h4 id="adding-metadata">Adding metadata<a class="anchor" aria-label="anchor" href="#adding-metadata"></a>
-</h4>
-<ol start="3" style="list-style-type: decimal">
-<li>
-<p>Retrieve metadata:</p>
+<p>The <code>es</code> R package provides reproducible functions for collating and analyzing data from environmental sampling studies. Environmental Sampling (ES) of infectious diseases involves collecting samples from various sources (such as sewage, water, air, soil, or surfaces) to monitor the presence of pathogens in the environment. The tools here are intended to do the heavy-lifting when analyzing ES data and include:</p>
 <ul>
-<li>Precipitation</li>
-<li>Temperature</li>
-<li>Evaporative Stress Index (ESI)</li>
-<li>Elevation</li>
-<li>Topography (slope, aspect)</li>
-<li>Topographical Wetness Index (TWI)</li>
-<li>Flow Accumulation</li>
-<li>Discharge of nearest river</li>
-<li>Drainage catchments (based on streams or user provided sewer network)</li>
-<li>Population sizes (within catchments or a user defined radius around sampling sites)</li>
-<li>Administrative units</li>
+<li>establishing standardized data formats,</li>
+<li>relative and absolute quantification of qPCR data,</li>
+<li>collating spatial data for sampling sites,</li>
+<li>and analysis of sample sizes and temporal trends.</li>
 </ul>
-</li>
-<li><p>Calculate summary sampling statistics</p></li>
-<li><p>Estimate cross correlations</p></li>
-<li><p>Estimate time series models</p></li>
-<li><p>Estimate models of pathogen presence based on multiple gene targets</p></li>
-</ol>
+<p>We developed the <code>es</code> R package primarily for epidemiological surveillance studies for multiple pathogens in Low- and Middle-Income Countries (LMIC) where samples are collected from informal sewer networks. However, the functions should generalize to other applications provided they use the same data formats. Feel free to reach out with comments or questions; the package is currently in development and maintained by John Giles (<a href="https://github.com/gilesjohnr" class="external-link">@gilesjohnr</a>).</p>
+<p><br></p>
+<div class="section level2">
+<h2 id="data-standards">Data standards<a class="anchor" aria-label="anchor" href="#data-standards"></a>
+</h2>
+<p>To use the data and methods provided in the <code>es</code> R package, input data must match the formatting shown in the <code>template_es_data</code> and <code>template_standard_curves</code> data objects. Both template data sets are described in more detail in following vignette:</p>
+<center>
+<a href="https://gilesjohnr.github.io/es/articles/template_es_data.html">Templates for input data sets</a>
+</center>
+<p><br></p>
 </div>
+<div class="section level2">
+<h2 id="derivative-qpcr-quantities">Derivative qPCR quantities<a class="anchor" aria-label="anchor" href="#derivative-qpcr-quantities"></a>
+</h2>
+<p>Studies utilizing environmental sampling for disease surveillance often employ Quantitative Real-Time Polymerase Chain Reaction (qPCR) to detect pathogens in samples. In qPCR, the measurement is given as the cycle threshold (Ct) value which is often used with a cutoff value to render a presence/absence response. The Ct values can also be transformed into absolute or relative quantities of pathogen presence using the methods in the <code><a href="reference/calc_n_copies.html">calc_n_copies()</a></code>, <code><a href="reference/calc_delta_delta_ct.html">calc_delta_delta_ct()</a></code>, and <code><a href="reference/est_amplification_efficiency.html">est_amplification_efficiency()</a></code> functions which described in more detail in the following vignettes:</p>
+<center>
+<a href="">Absolute quantification of qPCR data</a>
+</center>
+<center>
+<a href="">Relative quantification of qPCR data</a>
+</center>
+<center>
+<a href="">qPCR Amplification efficiency</a>
+</center>
+<p><br></p>
+</div>
+<div class="section level2">
+<h2 id="covariates">Covariates<a class="anchor" aria-label="anchor" href="#covariates"></a>
+</h2>
+<p>Environmental sampling studies conducted in informal sewer systems are vulnerable to confounding because climate and local geography can impact the substrate available for collection. Therefore, we have included functions that download spatial data (such as climate, hydrology, an local populations) for the times and locations in the ES data. The following vignettes describe the data sources and methods used and to relating these spatial data to ES data observations:</p>
+<center>
+<a href="https://gilesjohnr.github.io/es/articles/metadata_functions.html">Sources of spatial data</a>
+</center>
+<center>
+<a href="https://gilesjohnr.github.io/es/articles/get_climate_data.html">Getting climate data</a>
+</center>
+<center>
+<a href="https://gilesjohnr.github.io/es/articles/calc_hydro_variables.html">Calculating hydrological variables</a>
+</center>
+<center>
+<a href="https://gilesjohnr.github.io/es/articles/calc_local_population.html">Calculating local population size</a>
+</center>
+<center>
+<a href="">Getting administrative data</a>
+</center>
+<p><br></p>
+</div>
+<div class="section level2">
+<h2 id="analysis">Analysis<a class="anchor" aria-label="anchor" href="#analysis"></a>
+</h2>
+<p>Additional analyses are under development and will likely include the calculation of cross correlations among targets, time series models, and models of pathogen presence based on multiple gene targets. Currently, methods for quick tabulation of sampling statistics and overall detection rates are available in the <code><a href="reference/calc_sample_sizes.html">calc_sample_sizes()</a></code> function.</p>
+<p><br></p>
 </div>
 <div class="section level2">
 <h2 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
 </h2>
-<ol start="8" style="list-style-type: decimal">
-<li>Launch Rshiny application</li>
-</ol>
-</div>
-<div class="section level2">
-<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
-</h2>
-<p>For a full demo of the package please see the vignettes located HERE.</p>
+<p>We are currently developing an RShiny application that will visualize the data and methods in <code>es</code> package.</p>
+<p><br></p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -162,11 +168,13 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'devtools'</span><span class="op">)</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"gilesjohnr/es"</span>, dependencies<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
 </div>
 <div class="section level2">
 <h2 id="troubleshooting">Troubleshooting<a class="anchor" aria-label="anchor" href="#troubleshooting"></a>
 </h2>
 <p>For general questions, contact John Giles (<a href="mailto:john.giles@gatesfoundation.org" class="email">john.giles@gatesfoundation.org</a>) and/or Jillian Gauld (<a href="mailto:jillian.gauld@gatesfoundation.org" class="email">jillian.gauld@gatesfoundation.org</a>). Note that this software is made available under a <a href="https://creativecommons.org/licenses/by/4.0/" class="external-link">Creative Commons 4.0</a> license and was developed for specific environmental sampling applications and therefore may not generalize perfectly to all settings.</p>
+<p><br></p>
 </div>
 <div class="section level2">
 <h2 id="funding">Funding<a class="anchor" aria-label="anchor" href="#funding"></a>
