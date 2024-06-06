@@ -5,7 +5,7 @@ vignette: >
   %\VignetteIndexEntry{Deriving variables from Ct values}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-bibliography: references.bib
+bibliography: references_derivative_quantities.bib
 citation_package: natbib
 nocite: '@*'
 link-citations: true

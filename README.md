@@ -27,12 +27,11 @@ To use the data and methods provided in the `es` R package, input data must matc
 
 Studies utilizing environmental sampling for disease surveillance often employ Quantitative Real-Time Polymerase Chain Reaction (qPCR) to detect pathogens in samples. In qPCR, the measurement is given as the cycle threshold (Ct) value which is often used with a cutoff value to render a presence/absence response. The Ct values can also be transformed into absolute or relative quantities of pathogen presence using the methods in the `calc_n_copies()`, `calc_delta_delta_ct()`, and `est_amplification_efficiency()` functions which described in more detail in the following vignettes:
 
-<center>[Absolute quantification of qPCR data]()</center>
+<center>[Absolute quantification of qPCR data](https://gilesjohnr.github.io/es/articles/derivative_quantities.html#absolute-quantification-calculating-the-number-of-target-gene-copies)</center>
 
-<center>[Relative quantification of qPCR data]()</center>
+<center>[Relative quantification of qPCR data](https://gilesjohnr.github.io/es/articles/derivative_quantities.html#relative-quantification-calculating-the-fold-change-in-gene-expression)</center>
 
-<center>[qPCR Amplification efficiency]()</center>
-
+<center>[qPCR Amplification efficiency](https://gilesjohnr.github.io/es/articles/amplification_efficiency.html)</center>
 
 \
 
@@ -42,14 +41,13 @@ Environmental sampling studies conducted in informal sewer systems are vulnerabl
 
 <center>[Sources of spatial data](https://gilesjohnr.github.io/es/articles/metadata_functions.html)</center>
 
-
 <center>[Getting climate data](https://gilesjohnr.github.io/es/articles/get_climate_data.html)</center>
 
 <center>[Calculating hydrological variables](https://gilesjohnr.github.io/es/articles/calc_hydro_variables.html)</center>
 
 <center>[Calculating local population size](https://gilesjohnr.github.io/es/articles/calc_local_population.html)</center>
 
-<center>[Getting administrative data]()</center>
+<center>[Getting administrative data](https://gilesjohnr.github.io/es/articles/get_admin_data.html)</center>
   
 \
   

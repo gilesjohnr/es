@@ -98,7 +98,10 @@ download_admin_data <- function(iso3,
      colnames(out)[colnames(out) == 'ADM5'] <- 'admin_5'
      out <- out[,order(colnames(out))]
 
-     path_output_shapefile <- file.path(path_output, paste0(iso3, "_admin_levels.shp"))
+
+     tmp_file_name <- "_admin_levels.shp"
+     if (simplified) tmp_file_name <- "_admin_levels_simplified.shp"
+     path_output_shapefile <- file.path(path_output, paste0(iso3, tmp_file_name))
 
      sf::st_write(out,
                   dsn = path_output_shapefile,

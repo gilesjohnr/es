@@ -27,14 +27,20 @@ navbar:
         href: articles/template_es_data.html
       - text: 2. Metadata
         href: articles/metadata_functions.html
-      - text: 3. Derivative quantities
+      - text: 3. qPCR absolute quantification
         href: articles/derivative_quantities.html
-      - text: 4. Climate data
+      - text: 4. qPCR relative quantification
+        href: articles/derivative_quantities.html
+      - text: 5. qPCR amplification efficiency
+        href: articles/amplification_efficiency.html
+      - text: 6. Climate data
         href: articles/get_climate_data.html
-      - text: 5. Hydrological variables
+      - text: 7. Hydrological variables
         href: articles/calc_hydro_variables.html
-      - text: 6. Local population
+      - text: 8. Local population
         href: articles/calc_local_population.html
+      - text: 9. Administrative boundaries
+        href: articles/get_admin_data.html
   - text: News
     href: news/index.html
   right:
@@ -70,9 +76,11 @@ articles:
   - template_es_data
   - metadata_functions
   - derivative_quantities
+  - amplification_efficiency
   - get_climate_data
   - calc_hydro_variables
   - calc_local_population
+  - get_admin_data
 
 news:
   releases:
