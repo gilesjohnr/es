@@ -2,13 +2,15 @@ pandoc: 3.1.11
 pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
+  amplification_efficiency: amplification_efficiency.html
   calc_hydro_variables: calc_hydro_variables.html
   calc_local_population: calc_local_population.html
   derivative_quantities: derivative_quantities.html
+  get_admin_data: get_admin_data.html
   get_climate_data: get_climate_data.html
   metadata_functions: metadata_functions.html
   template_es_data: template_es_data.html
-last_built: 2024-06-05T04:42Z
+last_built: 2024-06-06T04:59Z
 urls:
   reference: https://gilesjohnr.github.io/es/reference
   article: https://gilesjohnr.github.io/es/articles
