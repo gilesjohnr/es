@@ -84,5 +84,5 @@ articles:
 
 news:
   releases:
-  - text: "Version 0.0.1"
-    href: https://github.com/gilesjohnr/es
+  - text: "Version 1.0.0"
+    href: https://github.com/gilesjohnr/es/releases/tag/v1.0.0
