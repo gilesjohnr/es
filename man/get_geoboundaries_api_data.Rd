@@ -25,7 +25,7 @@ is found or the lowest level is reached.
 \examples{
 
 \dontrun{
-tmp <- .get_geoboundaries_api_data('gbOpen', 'ITA', 2)
+tmp <- get_geoboundaries_api_data('gbOpen', 'ITA', 2)
 print(tmp)
 }
 

@@ -81,8 +81,3 @@ articles:
   - calc_hydro_variables
   - calc_local_population
   - get_admin_data
-
-news:
-  releases:
-  - text: "Version 1.0.0"
-    href: https://github.com/gilesjohnr/es/releases/tag/v1.0.0
