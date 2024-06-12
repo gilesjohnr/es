@@ -20,7 +20,7 @@ comment = "#>"
 )
 ```
 
-Adjusting qPCR data according based on amplification efficiency is an important step for estimating pathogen presence accurately and reliably. Amplification efficiency refers to how effectively a PCR reaction duplicates the target nucleic acid in each each cycle (see Thermo Fisher's [Efficiency of Real-Time PCR](https://www.thermofisher.com/us/en/home/life-science/pcr/real-time-pcr/real-time-pcr-learning-center/real-time-pcr-basics/efficiency-real-time-pcr-qpcr.html)). If an efficiency of 100% is reached, then the quantity of the target will double with each cycle. However, variations in the PCR reactions due to reagents or template quality can degrade efficiency [@stolovitzky1996]. It is also likely that when performing environmental sampling, there will be additional inhibitors for the environment in the sample that may cause further inefficiency of the PCR reaction. Therefore, it is important to quantify and account for these inefficiencies because they can lead to significant inaccuracies in the quantification of gene expression levels and subsequent detection of pathogens.
+Adjusting qPCR data according based on amplification efficiency is an important step for estimating pathogen presence accurately and reliably. Amplification efficiency refers to how effectively a PCR reaction duplicates the target nucleic acid in each cycle (see Thermo Fisher's [Efficiency of Real-Time PCR](https://www.thermofisher.com/us/en/home/life-science/pcr/real-time-pcr/real-time-pcr-learning-center/real-time-pcr-basics/efficiency-real-time-pcr-qpcr.html)). If efficiency of 100% is reached, then the quantity of the target will double with each cycle. However, variations in the PCR reactions due to reagents or template quality can degrade efficiency [@stolovitzky1996]. It is also likely that when performing environmental sampling, there will be additional inhibitors for the environment in the sample that may cause further inefficiency of the PCR reaction. Therefore, it is important to quantify and account for these inefficiencies because they can lead to significant inaccuracies in the quantification of gene expression levels and subsequent detection of pathogens.
 
 ## Estimation of amplification efficiency using the standard curve method
 
@@ -28,7 +28,7 @@ We have included two functions (`est_amplification_efficiency()` and `apply_ampl
 
 $$\text{Ct}_{ij} = \alpha + \beta_{\text{efficiency}} \text{log}_2\big(S_{ij}\big) + \epsilon.$$
 
-Where, $S_{ij}$ is the serial diluted concentration of the target nucleic acid for observation $i$ and gene target $j$, and the percentile amplification efficiency is $\phi = -\beta_{\text{efficiency}}$. Assuming that the standard curve assay contains greater than 5 observations and target concentrations double with each serial dilution, we expect that $\phi = 1$ in the case of perfect efficiency and $\phi < 1$ otherwise.
+Where $S_{ij}$ is the serially diluted concentration of the target nucleic acid for observation $i$ and gene target $j$, and the percentile amplification efficiency is $\phi = -\beta_{\text{efficiency}}$. Assuming that the standard curve assay contains greater than 5 observations and target concentrations double with each serial dilution, we expect that $\phi = 1$ in the case of perfect efficiency and $\phi < 1$ otherwise.
 
 <center>![](../man/figures/plot_efficiency.png){width="50%"}</center>
 

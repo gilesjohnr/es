@@ -18,11 +18,11 @@ Determining the size of the local population that contributes to samples collect
 
 To estimate the contributing population for a sampling site, we have included two methods: 
 
-1) a catchment based method that delineates the upstream drainage catchment for each sampling site and sums the population residing within it, and
+1) a catchment-based method that delineates the upstream drainage catchment for each sampling site and sums the population residing within it, and
 
-2) a simple radius method that draws a user defined radius around each sampling site and sums the population within it. 
+2) a simple radius method that draws a user-defined radius around each sampling site and sums the population within it. 
 
-These methods are a good starting point, however future research will help to identify the best methods for estimating the local population contributing to sampling sites. We will add additional functionality to the package here based on future needs and research. 
+These methods are a good starting point, however, future research will help to identify the best methods for estimating the local population contributing to sampling sites. We will add additional functionality to the package here based on future needs and research. 
 
 See below for an example of how to use the `es` package to calculate the local population size for a set of sampling sites using the methods stated above.
 
