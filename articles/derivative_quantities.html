@@ -138,11 +138,11 @@ estimating the percentile amplification efficiency of the qPCR using a
 standard curve assay (see <span class="citation">Yuan, Wang, and Stewart
 (<a href="#ref-yuan2008">2008</a>)</span>).</p></li>
 </ol>
-<p>Our hope is that transforming the Ct value into these derivative
+<p>We hope that transforming the Ct value into these derivative
 quantities can help make environmental sampling data more interpretable
-and to normalize its variance in a manner that is less vulnerable to
+and normalize its variance in a manner that is less vulnerable to
 confounding. The examples below show how to calculate these quantities
-given that your data match the template data shown in the
+given that your data matches the template data shown in the
 <code>template_es_data</code> and <code>template_standard_curve</code>
 objects.</p>
 <p><br></p>
@@ -154,13 +154,12 @@ copies<a class="anchor" aria-label="anchor" href="#absolute-quantification-calcu
 absolute quantification. While it is still susceptible to external
 confounders that influence the starting amount of nucleic acid and any
 inhibitors to amplification that might be present <span class="citation">(<a href="#ref-bustin2005">Bustin et al.
-2005</a>)</span>, this a count variable that is more interpretable than
-raw Ct values and allows for normalization with additional covariates.
-To calculate the number of target gene copies, a standard curve assay is
-required which relates known concentrations of each gene target to their
-expected Ct values for the specific target, PCR machine, and reagents
-used <span class="citation">(<a href="#ref-pfaffl2012">Pfaffl
-2012</a>)</span>.</p>
+2005</a>)</span>, this is a count variable that is more interpretable
+than raw Ct values and allows for normalization with additional
+covariates. To calculate the number of target gene copies, a standard
+curve assay is required which relates known concentrations of each gene
+target to their expected Ct values for the specific target, PCR machine,
+and reagents used <span class="citation">(<a href="#ref-pfaffl2012">Pfaffl 2012</a>)</span>.</p>
 <p>Assuming the PCR machine’s amplification efficiency is 100%, the
 number of gene copies is expected to double with each cycle <span class="citation">(<a href="#ref-ruijter2009">Ruijter et al.
 2009</a>)</span> resulting in a logarithmic relationship between Ct
@@ -169,9 +168,10 @@ exponentially as the number of PCR cycles increases linearly.</p>
 <center>
 <img src="../reference/figures/plot_ct_n_copies.png" style="width:95.0%">
 </center>
-<p>Due the logarithmic relationship of PCR kinetics we use a log-linear
-model to relate known gene target quantities from the standard curve to
-the Ct values observed in the qPCR performed on our study samples:</p>
+<p>Due to the logarithmic relationship of PCR kinetics, we use a
+log-linear model to relate known gene target quantities from the
+standard curve to the Ct values observed in the qPCR performed on our
+study samples:</p>
 <p><span class="math display">\[
 \log(\text{number gene copies}_i) \sim \alpha + \beta_i \cdot \text{Ct
 value}_i + \epsilon.
@@ -179,10 +179,10 @@ value}_i + \epsilon.
 <center>
 <img src="../reference/figures/plot_n_copies.png" style="width:65.0%">
 </center>
-<p>The code below shows how to how to use the
-<code><a href="../reference/calc_n_copies.html">calc_n_copies()</a></code> function on the
-<code>template_es_data</code> and <code>template_standard_curve</code>
-objects to calculate the number of target gene copies.</p>
+<p>The code below shows how to use the <code><a href="../reference/calc_n_copies.html">calc_n_copies()</a></code>
+function on the <code>template_es_data</code> and
+<code>template_standard_curve</code> objects to calculate the number of
+target gene copies.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> es<span class="sc">::</span>template_es_data</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">head</span>(df)</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
@@ -220,10 +220,10 @@ objects to calculate the number of target gene copies.</p>
 <span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a><span class="dv">5</span> <span class="dv">2020-03-07</span>           <span class="dv">1</span> <span class="fl">23.8</span> <span class="fl">90.37</span>    target_1 <span class="fl">31.60111</span> <span class="fl">32.99040</span></span>
 <span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a><span class="dv">6</span> <span class="dv">2020-03-07</span>           <span class="dv">1</span> <span class="fl">23.8</span> <span class="fl">90.37</span>    target_1 <span class="fl">32.20208</span> <span class="fl">21.93164</span></span></code></pre></div>
 <p>Note the prediction for the number of target gene copies shown below
-is convenient in that it is more interpretable that the Ct value method,
-however it is an absolute quantification method that may need further
+is convenient in that it is more interpretable than the Ct value method,
+however, it is an absolute quantification method that may need further
 normalization to adjust for environmental confounders. An alternative is
-to use a relative quantitification method such as <span class="math inline">\(\Delta \Delta \text{Ct}\)</span> described in the
+to use a relative quantification method such as <span class="math inline">\(\Delta \Delta \text{Ct}\)</span> described in the
 following section.</p>
 <center>
 <img src="../reference/figures/plot_predicted_n_copies.png" style="width:70.0%">
@@ -278,14 +278,11 @@ as:</p>
 \]</span></p>
 <p>A major assumption of the standard method is that the amplification
 efficiency of the qPCR assay is 100% efficient. In practice, the
-efficiency of an assay is likely to be slightly less than 1, where a
-only a proportion of sample nucleic acids are replicated in each cycle
-<span class="citation">(<a href="#ref-stolovitzky1996">Stolovitzky and
-Cecchi 1996</a>)</span>, which can have a non-trivial impact on an
-output variable with an exponential component. Therefore, the adjusted
-<span class="math inline">\(\Delta \Delta \text{Ct}\)</span> method
-accounts for an imperfect efficiency amplification efficiency (noted as
-<span class="math inline">\(\phi\)</span> here).</p>
+efficiency of an assay is likely to be slightly less than 1, where only
+a proportion of sample nucleic acids are replicated in each cycle <span class="citation">(<a href="#ref-stolovitzky1996">Stolovitzky and Cecchi
+1996</a>)</span>, which can have a non-trivial impact on an output
+variable with an exponential component. Therefore, the adjusted <span class="math inline">\(\Delta \Delta \text{Ct}\)</span> method accounts
+for an imperfect efficiency amplification efficiency (noted as <span class="math inline">\(\phi\)</span> here).</p>
 <p><span class="math display">\[
 \begin{align}
 \text{Adjusted method} &amp; = 2^{-\Delta \Delta \text{Ct}} \\
@@ -305,8 +302,8 @@ accounts for an imperfect efficiency amplification efficiency (noted as
 <p>Since environmental sampling data typically do not have a control
 group, we use the temporal method in the <code>es</code> package to
 relate all “treatment” observations at time <span class="math inline">\(t\)</span> to the “control” observations at time
-<span class="math inline">\(t=0\)</span>; see Section 1.4 of <span class="citation">Livak and Schmittgen (<a href="#ref-livak2001">2001</a>)</span>. Which means we can write
-Equation 1 above as:</p>
+<span class="math inline">\(t=0\)</span>; see Section 1.4 of <span class="citation">Livak and Schmittgen (<a href="#ref-livak2001">2001</a>)</span>. This means we can write Equation
+1 above as:</p>
 <p><span class="math display">\[
 \begin{align}
 \text{Standard time-based method} &amp; = 2^{-\Delta \Delta \text{Ct}}
@@ -339,7 +336,7 @@ we get the following:</p>
 \tag{4}
 \end{align}
 \]</span></p>
-<p>where, <span class="math inline">\(\phi_{\text{target}}\)</span> and
+<p>where <span class="math inline">\(\phi_{\text{target}}\)</span> and
 <span class="math inline">\(\phi_{\text{reference}}\)</span> are the
 estimated qPCR amplification efficiency values for the target and
 reference genes respectively. Note that traditionally there would also
@@ -364,8 +361,8 @@ observation.</p>
 <span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">0.08838835</span></span></code></pre></div>
 <p>And adjusted <span class="math inline">\(\Delta \Delta
 \text{Ct}\)</span> (Equation 2) can be calculated by incorporating the
-arguments with prefix <code>pae_*</code> for percentile amplification
-efficiency.</p>
+arguments with the prefix <code>pae_*</code> for percentile
+amplification efficiency.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Adjusted method incorporating amplification efficiency</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">calc_delta_delta_ct</span>(<span class="at">ct_target_treatment =</span> <span class="fl">32.5</span>,</span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>                    <span class="at">ct_reference_treatment =</span> <span class="dv">25</span>,</span>
@@ -398,7 +395,7 @@ function.</p>
 <span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="dv">4</span>           <span class="dv">1</span>  <span class="dv">2020-03-24</span>    target_1      <span class="fl">32.191141</span></span>
 <span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="dv">5</span>           <span class="dv">1</span>  <span class="dv">2020-03-30</span>    target_1       <span class="fl">5.694505</span></span>
 <span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="dv">6</span>           <span class="dv">1</span>  <span class="dv">2020-04-03</span>    target_1       <span class="fl">8.620370</span></span></code></pre></div>
-<p>And the adjusted time-based <span class="math inline">\(\Delta \Delta
+<p>The adjusted time-based <span class="math inline">\(\Delta \Delta
 \text{Ct}\)</span> calculation (Equation 4) can be calculated after
 using the <code><a href="../reference/apply_amplification_efficiency.html">apply_amplification_efficiency()</a></code> function to get
 efficiency estimates from a standard curve data set.</p>

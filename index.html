@@ -100,7 +100,7 @@
 <strong>es</strong>: an R package for analyzing environmental sampling data <a class="anchor" aria-label="anchor" href="#es-an-r-package-for-analyzing-environmental-sampling-data-"></a>
 </h1>
 </div>
-<p>The <code>es</code> R package provides reproducible functions for collating and analyzing data from environmental sampling studies. Environmental Sampling (ES) of infectious diseases involves collecting samples from various sources (such as sewage, water, air, soil, or surfaces) to monitor the presence of pathogens in the environment. The tools here are intended to do the heavy-lifting when analyzing ES data and include:</p>
+<p>The <code>es</code> R package provides reproducible functions for collating and analyzing data from environmental sampling studies. Environmental Sampling (ES) of infectious diseases involves collecting samples from various sources (such as sewage, water, air, soil, or surfaces) to monitor the presence of pathogens in the environment. The tools here are intended to do the heavy lifting when analyzing ES data and include:</p>
 <ul>
 <li>establishing standardized data formats,</li>
 <li>relative and absolute quantification of qPCR data,</li>
@@ -112,7 +112,7 @@
 <div class="section level2">
 <h2 id="data-standards">Data standards<a class="anchor" aria-label="anchor" href="#data-standards"></a>
 </h2>
-<p>To use the data and methods provided in the <code>es</code> R package, input data must match the formatting shown in the <code>template_es_data</code> and <code>template_standard_curves</code> data objects. Both template data sets are described in more detail in following vignette:</p>
+<p>To use the data and methods provided in the <code>es</code> R package, input data must match the formatting shown in the <code>template_es_data</code> and <code>template_standard_curves</code> data objects. Both template data sets are described in more detail in the following vignette:</p>
 <center>
 <a href="https://gilesjohnr.github.io/es/articles/template_es_data.html">Templates for input data sets</a>
 </center>
@@ -121,7 +121,7 @@
 <div class="section level2">
 <h2 id="derivative-qpcr-quantities">Derivative qPCR quantities<a class="anchor" aria-label="anchor" href="#derivative-qpcr-quantities"></a>
 </h2>
-<p>Studies utilizing environmental sampling for disease surveillance often employ Quantitative Real-Time Polymerase Chain Reaction (qPCR) to detect pathogens in samples. In qPCR, the measurement is given as the cycle threshold (Ct) value which is often used with a cutoff value to render a presence/absence response. The Ct values can also be transformed into absolute or relative quantities of pathogen presence using the methods in the <code><a href="reference/calc_n_copies.html">calc_n_copies()</a></code>, <code><a href="reference/calc_delta_delta_ct.html">calc_delta_delta_ct()</a></code>, and <code><a href="reference/est_amplification_efficiency.html">est_amplification_efficiency()</a></code> functions which described in more detail in the following vignettes:</p>
+<p>Studies utilizing environmental sampling for disease surveillance often employ Quantitative Real-Time Polymerase Chain Reaction (qPCR) to detect pathogens in samples. In qPCR, the measurement is given as the cycle threshold (Ct) value which is often used with a cutoff value to render a presence/absence response. The Ct values can also be transformed into absolute or relative quantities of pathogen presence using the methods in the <code><a href="reference/calc_n_copies.html">calc_n_copies()</a></code>, <code><a href="reference/calc_delta_delta_ct.html">calc_delta_delta_ct()</a></code>, and <code><a href="reference/est_amplification_efficiency.html">est_amplification_efficiency()</a></code> functions which are described in more detail in the following vignettes:</p>
 <center>
 <a href="https://gilesjohnr.github.io/es/articles/derivative_quantities.html#absolute-quantification-calculating-the-number-of-target-gene-copies">Absolute quantification of qPCR data</a>
 </center>
@@ -136,7 +136,7 @@
 <div class="section level2">
 <h2 id="covariates">Covariates<a class="anchor" aria-label="anchor" href="#covariates"></a>
 </h2>
-<p>Environmental sampling studies conducted in informal sewer systems are vulnerable to confounding because climate and local geography can impact the substrate available for collection. Therefore, we have included functions that download spatial data (such as climate, hydrology, an local populations) for the times and locations in the ES data. The following vignettes describe the data sources and methods used and to relating these spatial data to ES data observations:</p>
+<p>Environmental sampling studies conducted in informal sewer systems are vulnerable to confounding because the climate and local geography can impact the substrate available for collection. Therefore, we have included functions that download spatial data (such as climate, hydrology, and local populations) for the times and locations in the ES data. The following vignettes describe the data sources and methods used and relate these spatial data to ES data observations:</p>
 <center>
 <a href="https://gilesjohnr.github.io/es/articles/metadata_functions.html">Sources of spatial data</a>
 </center>
@@ -157,13 +157,13 @@
 <div class="section level2">
 <h2 id="analysis">Analysis<a class="anchor" aria-label="anchor" href="#analysis"></a>
 </h2>
-<p>Additional analyses are under development and will likely include the calculation of cross correlations among targets, time series models, and models of pathogen presence based on multiple gene targets. Currently, methods for quick tabulation of sampling statistics and overall detection rates are available in the <code><a href="reference/calc_sample_sizes.html">calc_sample_sizes()</a></code> function.</p>
+<p>Additional analyses are under development and will likely include the calculation of cross-correlations among targets, time series models, and models of pathogen presence based on multiple gene targets. Currently, methods for quick tabulation of sampling statistics and overall detection rates are available in the <code><a href="reference/calc_sample_sizes.html">calc_sample_sizes()</a></code> function.</p>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
 </h2>
-<p>We are currently developing an RShiny application that will visualize the data and methods in <code>es</code> package.</p>
+<p>We are currently developing an RShiny application that will visualize the data and methods in the <code>es</code> package.</p>
 <p><br></p>
 </div>
 <div class="section level2">
