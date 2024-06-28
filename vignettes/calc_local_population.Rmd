@@ -85,6 +85,7 @@ pop_catchment <- es::get_population_catchment(
      lat = df$lat,
      path_pop_raster = file.path(getwd(), 'tmp/bgd_ppp_2020.tif'),
      path_dem_raster = file.path(getwd(), 'tmp/dem.tif'),
+     path_stream_shp = NULL,
      path_output = file.path(getwd(), 'tmp')
 )
 

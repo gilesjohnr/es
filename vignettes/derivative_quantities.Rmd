@@ -233,7 +233,7 @@ library(ggplot2)
 library(cowplot)
 
 # Estimate amplification efficiency
-pae <- apply_amplification_efficiency(template_es_data)
+pae <- apply_amplification_efficiency(template_standard_curve)
 
 # Calculate standard delta delta Ct
 ddct_standard <- apply_delta_delta_ct(df = df_example,
