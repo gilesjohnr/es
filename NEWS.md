@@ -1,5 +1,5 @@
 
-# es v1.0.0
+# es v1.0.0 released June 04, 2024 (deprecated July 03, 2024)
 
 Welcome to the first release of the `es` R package! Version 1.0.0 contains a collection of basic features that aim to make analyzing environmental sampling data easier and more reproducible. The functionality we have included to kick off the package includes:
 
