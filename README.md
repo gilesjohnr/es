@@ -24,11 +24,13 @@
 
 </center>
 
+<p style='text-align: justify;'>
+
 #### To uninstall the `es` package:
 ```r{}
 install.packages("devtools", dependencies = TRUE)
 devtools::uninstall(file.path(.libPaths()[1], 'es'))
 ```
 
-
+</p>
 
